@@ -1,7 +1,7 @@
 <?php
 	$servername = "185.185.40.33";
 	$username = "root";
-	$password = "pass";
+	$password = "root";
 	$database = "esdm_db";
 
 	// Create connection
