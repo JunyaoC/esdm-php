@@ -175,7 +175,7 @@
         </div>
 
   <br> <br>
-       <?php include 'adminfooter.php' ?>
+       <?php include '../adminfooter.php' ?>
     </div>
   </div>
   <!--   Core JS Files   -->
