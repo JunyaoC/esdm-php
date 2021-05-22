@@ -128,7 +128,7 @@
                                                         echo "<td>".$row['section_number']."</td>";
                                                         echo "<td>
                                                                 <a class='btn btn-secondary' href='create_qr.php?id=".$row['subject_id']."'>Create</a><br><br>
-                                                                <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_id']."' onclick='ConfirmDelete()'>Student</a>
+                                                                <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_id']."'>Student</a>
                                                               </td>";
                                                         echo "</tr>";
                                                     }
