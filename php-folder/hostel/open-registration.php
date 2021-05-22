@@ -3,7 +3,7 @@
 	include "../connect.php";
 	$postjson = json_decode(file_get_contents('php://input'), true);
 
-	// if($postjson['action'] == 'list_college') {
+	if($postjson['action'] == 'list_college') {
 		
 		$query = mysqli_query($conn, "SELECT * FROM tb_college");
 		$read_college = array();
@@ -15,10 +15,9 @@
 
 			);
 	            array_push($read_college,$data);
-	            echo $data[0];
 	        }
 
 	        $result = json_encode(array('success'=>true,'msg'=>'success','colleges'=>$read_college));
 
-	    // }
+	    }
 ?>
