@@ -4,11 +4,11 @@
 
     $postjson = json_decode(file_get_contents('php://input'), true);
 
-    
+    $id=$postjson['id'];
     if($postjson['action'] == 'list_procourse') {
 
 
-        $query = mysqli_query($conn, "SELECT * FROM tb_pro_course");
+        $query = mysqli_query($conn, "SELECT * FROM tb_pro_course WHERE procourse_code='$id'");
 
         $read_data = array();
 
