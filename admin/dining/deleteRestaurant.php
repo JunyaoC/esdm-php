@@ -24,5 +24,5 @@
    mysqli_close($con);
 
   // //Redirect
-   header('Location:committee.php');
+   header('Location:restaurant.php');
   ?>

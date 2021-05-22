@@ -2,7 +2,9 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
-  $sql = "SELECT * FROM tb_restaurant";
+  $sql = "SELECT * FROM tb_food
+          LEFT JOIN tb_restaurant 
+          ON tb_restaurant.restaurant_id = tb_food.restaurant_id";
   $result = mysqli_query($con,$sql);
 ?>
 
@@ -36,13 +38,13 @@
               <p>Dining</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="restaurant.php">
               <i class="fa fa-bars"></i>
               <p>Manage Restaurant</p>
             </a>
           </li>
-          <li>
+          <li class="active">
             <a href="menuPage.php">
               <i class="fa fa-bars"></i>
               <p>Manage Menu</p>
@@ -99,19 +101,21 @@
     <div class="container">
     <div class="row ml-1">
       <div>
-        <h3>Restaurant List</h3>
+        <h3>Food List</h3>
       </div>
       <div class="ml-auto mr-3"> 
-        <a href='addRestaurant.php' class='btn btn-primary' style="color:white;"> Add Restaurant &nbsp<i class="fa fa-plus "></i></a>
+        <a href='addMenu.php' class='btn btn-primary' style="color:white;"> Add Food &nbsp<i class="fa fa-plus "></i></a>
       </div>
     </div>
       <table id="program" class="display">
         <thead>
           <tr>
-            <th>Restaurant Name</th>
-            <th>Restaurant Address</th>
-            <th>Restaurant Phone</th>
-            <th>Restaurant Status</th>
+            <th>Restaurant</th>
+            <th>Food Name</th>
+            <th>Availability</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>Image</th>
             <th>Operation</th>
           </tr>
         </thead>
@@ -121,17 +125,27 @@
             {
               echo "<tr>";
               echo"<td>".$row['restaurant_name'] ."</td>";
-              echo"<td>".$row['restaurant_address'] ."</td>";
-              echo"<td>".$row['restaurant_phone'] ."</td>";
-              if($row['restaurant_status'] == 1){
-                echo "<td>"."Active"."</td>";
+              echo"<td>".$row['food_name'] ."</td>";
+
+              if($row['food_availability'] == 1){
+                echo "<td>"."Available"."</td>";
               }
               else{
-                echo "<td>"."Not Active"."</td>";
+                echo "<td>"."Not Available"."</td>";
               }
+
+              echo"<td>"."RM " .$row['food_price'] ."</td>";
+              echo"<td>".$row['food_type'] ."</td>";
+              if($row['food_image'] != NULL){
+                echo "<td>"."Uploaded"."</td>";
+              }
+              else{
+                echo "<td>"."Not Uploaded"."</td>";
+              }
+              // echo"<td>".$row['food_image'] ."</td>";
               echo"<td>";
-                echo "<a href='editRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-warning'>Edit</a> &nbsp";
-                echo "<a href='deleteRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
+                echo "<a href='editMenu.php?id=".$row['food_id']."' class='btn btn-warning'>Edit</a> &nbsp";
+                echo "<a href='deleteMenu.php?id=".$row['food_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
               echo"</td>";
               echo"</tr>";
             }
