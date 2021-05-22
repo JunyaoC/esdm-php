@@ -1,21 +1,33 @@
+<?php 
 
-<?php
- 
-include('../dbconnection.php');
+    include('../dbconnection.php');
+    include('../adminsession.php');
 
-
+    //retrieve info from form and session 
 	$fctitle = $_POST['fctitle'];
 	$fcdetail = $_POST['fcdetail'];
 
-	//SQL insert (create)
+    //SQL INSERT 
 	$sql = "INSERT INTO tb_pro_announcement(an_title, an_detail)
 			VALUES ('$fctitle', '$fcdetail')";
 
-	//Execute SQL
-	mysqli_query($con, $sql);
+    //check SQL output
+    var_dump($sql);
 
-	//Close connection
-	//var_dump($sql);
-	header('Location: announcement.php');
-	
-?>
+    //Execute SQL
+    mysqli_query($con,$sql);
+
+    //Close connection
+    mysqli_close($con);
+
+    //Redirect page
+    header('Location: announcement.php');
+
+?> 
+
+
+
+
+
+
+

@@ -1,10 +1,3 @@
-<?php 
-  //include('../dbconnection.php');
-  //include('../adminsession.php');
-
-  //$sql = "SELECT * FROM tb_pro_announcement";
-  //$result = mysqli_query($con,$sql);
- ?>
 <?php
 
     include('../dbconnection.php');
@@ -19,58 +12,6 @@
   include '../pages-styling.php';
 ?>
 
-<section class="ftco-section ftco-no-pt bg-light">
-    <div class="container">
-        <div class="row">
-            <div><br>
-                <h3>Announcement</h3>    
-            </div>
-        </div>  
-        <div>
-            <br>
-            <a class="btn btn-secondary" href="addannounce.php">Add Announcement</a>
-          </div><br>
-
-        <div class="row">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Tittle</th>
-                        <th>Details</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                         while ($row=mysqli_fetch_array($result))
-                         {
-                             echo "<tr>";
-                             echo "<td>&nbsp&nbsp ".$row['an_title'] ."</td>";
-                             echo "<td>&nbsp&nbsp ".$row['an_detail'] ."</td>";
-                             echo "<td>&nbsp&nbsp  ";
-                             echo "<a href = 'editannounce.php?id=".$row['an_id']."' class ='btn btn-primary '>Edit</a>";
-                             echo "</td>";
-                             echo "<td>&nbsp&nbsp  ";
-                             echo "<a href = 'deleteannounce.php?id=".$row['an_id']."' class ='btn btn-danger' onclick='ConfirmDelete()'>Delete</a>";
-                             echo "</td>";
-                             echo "</tr>";
-                         }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
-
-
-
-<?php include '../adminfooter.php' ?>
-
-<!--   Pingendo  -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <body>
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-active-color="danger">
@@ -150,7 +91,6 @@
                 </div>
             </div>
         </nav>
-
         <div class="py-3">
             <div class="container">
                 <div class="row">
@@ -161,9 +101,43 @@
         <div class="py-5">
             <div class="container">
                 <div class="row ml-1">
+                    <div>
+                        <h3> Announcement</h3>
+                    </div>
+                    <div class="ml-auto mr-3"> 
+                        <a href='addannounce.php' class='btn btn-primary' style="color:white;"> ADD ANNOUNCEMENT &nbsp<i class="fa fa-plus "></i></a>
+                    </div>
+                </div>
+                <div class="py-3 col bg-light border">
+                    <table id="program" class="display">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Details</th>
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                                $sql = "SELECT * FROM tb_pro_announcement";
+                                $result = mysqli_query($con,$sql);
+                                while($row=mysqli_fetch_array($result))
+                                {
+                                    echo "<tr>";
+                                        echo "<td>".$row['an_title']."</td>";
+                                        echo "<td>".$row['an_detail']."</td>";
+                                        echo "<td>
+                                                <a class='btn btn-secondary' href='editannounce.php?id=".$row['an_id']."'>UPDATE</a> <a class='btn btn-danger' href='deleteannounce.php?id=".$row['an_id']."' onclick='ConfirmDelete()'>DELETE</a>
+                                             </td>";
+                                    echo "</tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
 
         <!-- Logout Modal-->                           
         <div class="modal fade" id="logout" role="dialog">
@@ -214,6 +188,11 @@ function ConfirmDelete()
     return false;
 }
 </script>
+<script>
+    $(document).ready( function () {
+        $('#program').DataTable();
+    } );
+  </script>
 </html>
 
 
