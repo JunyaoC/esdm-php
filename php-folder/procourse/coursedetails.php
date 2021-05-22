@@ -32,8 +32,9 @@
     if($postjson['action'] == 'list_section') {
 
 
-        $query = mysqli_query($conn, "SELECT c.*,sc.* FROM tb_pro_course c 
+        $query = mysqli_query($conn, "SELECT c.*,sc.*,f.* FROM tb_pro_course c 
         LEFT JOIN tb_procourse_section sc  ON sc.courseSec_courseID=c.procourse_code
+        LEFT JOIN tb_procourse_fac f ON sc.courseSec_fac=f.fac_id
         WHERE sc.courseSec_courseID='$id'");
 
         $read_data = array();
@@ -43,6 +44,9 @@
                 'courseSec_id' => $read['courseSec_id'],
                 'courseSec_seat' => $read['courseSec_seat'],
                 'courseSec_maxseat' => $read['courseSec_maxseat'],
+                'courseSec_date' => $read['courseSec_date'],
+                'courseSec_loc' => $read['courseSec_loc'],
+                'fac_name' => $read['fac_name'],
             );
             array_push($read_data,$data);
              }
