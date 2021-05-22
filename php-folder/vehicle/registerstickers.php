@@ -8,6 +8,7 @@
  $stickerDate = $postjson['stickerDate'];
  $stickerStatus = $postjson['stickerStatus'];
  $stickerFee = $postjson['stickerFee'];
+ $today = date('Y-m-d');
 
  if($postjson['action'] == 'addsticker'){
 
@@ -23,7 +24,7 @@
     //     $result = json_encode(array('success'=>false, 'msg'=>'Car plate exist'));
     //     echo $result;
     // }else{
-        $insert = mysqli_query($conn, "INSERT INTO tb_sticker SET stickerID = '$stickerID', vehiclePlateNo = '$vehiclePlateNo', stickerCollege = '$stickerCollege', stickerDate = '$stickerDate', stickerStatus = '$stickerStatus', stickerFee='$stickerFee'");
+        $insert = mysqli_query($conn, "INSERT INTO tb_sticker SET vehiclePlateNo = '$vehiclePlateNo', stickerCollege = '$stickerCollege', stickerDate = '$today', stickerStatus = '$stickerStatus', stickerFee='$stickerFee'");
 
         if($insert) {
             $result = json_encode(array('success'=>true, 'msg'=>'success'));

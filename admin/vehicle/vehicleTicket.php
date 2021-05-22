@@ -116,7 +116,7 @@
         <thead>
             <tr>
               <th>Ticket ID</th>
-              <th>Student ID</th>              
+              <th>Student Matric</th>              
               <th>Vehicle No Plate</th>
               <th>Ticket Amount</th>
               <th>Tisket Description</th>

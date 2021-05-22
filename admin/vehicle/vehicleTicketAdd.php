@@ -116,8 +116,8 @@
         <div class="form-group">
           <div>
             
-              <label for="matric">Student ID</label>
-              <input type="text" id="id" name="id" placeholder="Student ID"><br>
+              <label for="matric">Student Matric</label>
+              <input type="text" id="id" name="id" placeholder="Matric No"><br>
 
               <label for="plate">Vehicle Plate</label>
               <input type="text" id="plate" name="plate" placeholder="Vehicle Plate"><br>
