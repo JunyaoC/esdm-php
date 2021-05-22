@@ -189,9 +189,9 @@ $resultn=mysqli_query($con,$sqln);
         
         <select class="form-control" id="status" name="status">
                
-               <option value= 'Activate'>Activate</option>
+               <option value= 'Approve'>Approve</option>
                <option value= 'Rejected'>Rejected</option>
-               <option value= 'Payment Pending'>Payment Pending</option>
+               <option value= 'Received'>Received</option>
         
                 </div>
 
