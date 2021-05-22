@@ -130,8 +130,8 @@
                         <label for="pclearningoutcome">Pro Course Learning Outcome</label>
                         <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary" onclick="myFunction()">Add</button>
-                      <button onclick='goBack()' class="btn btn-danger">Go Back</button>
+                      <button type="submit" class="btn btn-primary" onclick="myFunction()">ADD</button>
+                      <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
                     </form>
                   </div>
                 </div>

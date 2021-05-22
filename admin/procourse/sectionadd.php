@@ -12,12 +12,12 @@
 
 <body>
   <div class="wrapper ">
-    <div class="sidebar" data-color="blue" data-active-color="danger">
+  <div class="sidebar" data-color="blue" data-active-color="danger">
       <div class="logo">
         <a href="dashboard.php" class="simple-text logo-mini">
-          <div class="logo-image-small">
-            <img src="../img/logo.png">
-          </div>
+        <div class="logo-image-small">
+          <img src="../img/logo.png">
+        </div>
         </a>
         <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
@@ -25,13 +25,37 @@
         <ul class="nav">
           <li class="active">
             <a>
-              <p>Dining</p>
+              <p>Pro Course</p>
             </a>
           </li>
           <li>
-            <a href="../dining/restaurant.php">
+            <a href="../procourse/procourse.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
+              <p>Manage Pro Course</p>
+             </a>
+          </li>
+          <li>
+            <a href="../procourse/sectionlist.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Section</p>
+            </a>
+          </li>
+          <li>
+            <a href="../procourse/studentlist.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Student</p>
+            </a>
+          </li>
+          <li>
+            <a href="../procourse/issue.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Issue</p>
+            </a>
+          </li>
+          <li>
+            <a href="../procourse/announcement.php">
+                <i class="fa fa-bars"></i>
+                <p>Manage Announcement</p>
             </a>
           </li>
         </ul>
@@ -76,7 +100,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header bg-secondary text-white"> Add Section</div>
+            <div class="card-header bg-secondary text-white"><h3>Add Section</h3></div>
             <div class="card-body">
             <div class="col-md-12 p-4 border rounded">
                 <form class="" method="post" action="sectionaddprocess.php">
@@ -129,6 +153,7 @@
                     <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat">
                   </div>
                   <button type="submit" class="btn btn-primary">Add</button>
+                  <button onclick='goBack()' class="btn btn-danger">Go Back</button>
                 </form>
               </div>
             </div>
@@ -164,14 +189,15 @@
 
   <script>
     function myFunction() {
-      alert("Pro Course successfully added");
+      alert("Pro Course Section successfully added");
     }
   </script>
 
-  <!--   Pingendo  -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+    function goBack() {
+        window.history.back();
+    }
+  </script>
 
   <!--   Core JS Files   -->
   <script src="../js/core/popper.min.js"></script>
