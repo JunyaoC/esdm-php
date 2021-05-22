@@ -109,6 +109,7 @@ else if($error){?>
                                                             <th>Date</th>
                                                             <th>File</th>
                                                             <th>Update</th>
+                                                            <th>View</th>
                        
 
                                                         </tr>
@@ -123,34 +124,37 @@ else if($error){?>
                                                             <th>Date</th>
                                                             <th>File</th>
                                                             <th>Update</th>
+                                                            <th>View</th>
                                                     
 
                                                     </tfoot>
                                                     <tbody>
-<?php $sql = "SELECT * from tb_resource";
-$query = $dbh->prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{   ?>
-<tr>
- <td><?php echo htmlentities($cnt);?></td>
-                                                            <td><?php echo htmlentities($result->r_category);?></td>
-                                                            <td><?php echo htmlentities($result->r_title);?></td>
-                                                            <td><?php echo htmlentities($result->r_author);?></td>
-                                                            <td><?php echo htmlentities($result->r_date);?></td>
-                                                            <td><?php echo htmlentities($result->r_file);?></td>
-   
-<td>
+                                                        <?php $sql = "SELECT * from tb_resource";
+                                                        $query = $dbh->prepare($sql);
+                                                        $query->execute();
+                                                        $results=$query->fetchAll(PDO::FETCH_OBJ);
+                                                        $cnt=1;
+                                                        if($query->rowCount() > 0)
+                                                        {
+                                                        foreach($results as $result)
+                                                        {   ?>
+                                                        <tr>
+                                                        <td><?php echo htmlentities($cnt);?></td>
+                                                        <td><?php echo htmlentities($result->r_category);?></td>
+                                                        <td><?php echo htmlentities($result->r_title);?></td>
+                                                        <td><?php echo htmlentities($result->r_author);?></td>
+                                                        <td><?php echo htmlentities($result->r_date);?></td>
+                                                        <td><?php echo htmlentities($result->r_file);?></td>
 
-<button><a href="edit-resource.php?r_id=<?php echo htmlentities($result->r_id);?>"><i class="fa fa-edit" title="Edit Record"></i> </a> 
-
-</td>
-</tr>
-<?php $cnt=$cnt+1;}} ?>
+                                                        <td>
+                                                            <button><a href="edit-resource.php?r_id=<?php echo htmlentities($result->r_id);?>"><i class="fa fa-edit" title="Edit Record"></i> </a> 
+                                                        </td>
+                                                        <td>
+                                                            <button><a href="<?php echo htmlentities($result->r_file);?>" target="_blank"><i class="fa fa-eye" title="View Record"></i> </a> 
+                                                        </td>
+                                                        
+                                                        </tr>
+                                                        <?php $cnt=$cnt+1;}} ?>
                                                        
                                                     
                                                     </tbody>
