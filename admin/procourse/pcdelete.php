@@ -19,7 +19,7 @@
     mysqli_close($con);
 
     //Redirect
-    header('Location: pclist.php');
+    header('Location: procourse.php');
 
 
 ?>
