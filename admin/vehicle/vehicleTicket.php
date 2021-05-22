@@ -131,8 +131,9 @@
         <?php
             while ($rown=mysqli_fetch_array($resultn))
             {
+              $a = $rown['ticketID'];
               echo "<tr>";
-              echo "<td>".$rown['ticketID']."</td>";
+              echo "<td>".$a."</td>";
               echo "<td>".$rown['ticket_uID']."</td>";
               echo "<td>".$rown['vehiclePlateNo']."</td>";
               echo "<td>".$rown['ticketAmount']."</td>";
@@ -149,7 +150,9 @@
 
    
       </table>
-      <a href = 'vehicleTicketAdd.php' class = 'btn btn-primary btn-sm pull-left'>Add Ticket</a>
+      <div class="float-right">
+        <a href = 'vehicleTicketAdd.php' class = 'btn btn-primary btn-sm pull-left'>Add Ticket</a>
+      </div>
      <!--  <button class="btn btn-primary btn-sm pull-right" id="submit_comment">Add Ticket</button> --> 
     </div>
 
@@ -170,8 +173,8 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-primary btn-labeled" data-dismiss="modal">No <i class="fa fa-times"></i></button>
 
-            <a href="vehicleTicketDeleteProcess.php"><button type="submit" name="submit" class="btn btn-warning btn-labeled">Yes <span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button></a>
-            <input type="hidden" name="id" value="<?php echo $ticketID; ?>">
+            <a href="vehicleTicketDeleteProcess.php?id=<?php echo $a; ?> "><button type="submit" name="submit" class="btn btn-warning btn-labeled">Yes <span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button></a>
+            <input type="hidden" name="id" value="<?php echo $a; ?>">
 
           </div>
         </div>                                                
