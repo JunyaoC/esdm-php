@@ -47,6 +47,7 @@
                 'courseSec_date' => $read['courseSec_date'],
                 'courseSec_loc' => $read['courseSec_loc'],
                 'fac_name' => $read['fac_name'],
+                'courseSec_courseID' => $read['courseSec_courseID'],
                 'section_no' => $read['section_no'],
             );
             array_push($read_data,$data);
