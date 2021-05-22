@@ -13,7 +13,7 @@ if (isset($_POST['Delete'])) {
     $msg = " Deleted!";
 }
 if (isset($_POST['update'])) {
-    $r_file = $_POST['r_file'];
+    $r_file = $_POST['r_file_url'];
     $r_title = $_POST['r_title'];
     $r_category = $_POST['r_category'];
     $r_author = $_POST['r_author'];
@@ -47,6 +47,26 @@ if (isset($_POST['update'])) {
     <link rel="stylesheet" href="css/prism/prism.css" media="screen"> <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
     <link rel="stylesheet" href="css/main.css" media="screen">
     <script src="js/modernizr/modernizr.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBn6msKCQR6gstFDTjSUy7-WPSSxWUzUD0",
+            authDomain: "esdm-d16a4.firebaseapp.com",
+            projectId: "esdm-d16a4",
+            storageBucket: "esdm-d16a4.appspot.com",
+            messagingSenderId: "315333777495",
+            appId: "1:315333777495:web:a90401f4982ddf67f12b12"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        console.log(firebase)
+    </script>
+    <script type="text/javascript" src="uploadPdf.js"></script>
+
+
 </head>
 
 <body class="top-navbar-fixed">
@@ -126,7 +146,7 @@ if (isset($_POST['update'])) {
 
 
                                                     <div class="form-group has-success">
-                                                        <label for="success" class="control-label">Current Category is: <?php echo htmlentities($result->r_category); ?></label>
+                                                        <!-- <label for="success" class="control-label">Current Category is: <?php echo htmlentities($result->r_category); ?></label> -->
 
                                                         <div class="">
                                                             <label for="success" class="control-label">Select Updated Category: </label>
@@ -184,21 +204,32 @@ if (isset($_POST['update'])) {
                                                         <div class="custom-file">
 
 
+                                                            <label for="file-upload">Select PDF
+                                                                <input type="file" id="r_file" name="r_file" accept="application/pdf" onchange="upload()"></label>
+                                                            <input type="hidden" id="r_file_url" name="r_file_url" value="<?php echo htmlentities($result->r_file); ?>">
+                                                            <div>
+                                                                <!-- <input type="button" runat="server" value="upload" id="button2"  onclick="upload()" style="visibility:hidden" /> -->
+                                                                <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
 
-                                                            <label for="file-upload">Reupload Updated Resource<input type="file" id="r_file" name="r_file"></label>
-                                                        </div><br><br>
+                                                                <br>
+                                                                <!-- <button type="button" class="btn btn-info btn-labeled" onclick="upload()">Upload</button> -->
+                                                                <!-- <asp:FileUpload ID="fileupload1" runat="server"  /> -->
+                                                            </div>
 
 
-                                                <?php }
+                                                    <?php }
                                             } ?>
-                                                <div class="form-group has-success">
+                                                    <div class="form-group has-success">
 
-                                                    <div class="">
-                                                        <button type="submit" name="update" class="btn btn-success btn-labeled">Update<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
-                                                        <a href="manage-resource.php"><button type="button" class="btn btn-secondary btn-labeled ">Back</button></a>
-                                                    </div>
-                                                    <!-- Modal content-->
-                                                   
+                                                        <div class="">
+                                                        <a href="manage-resource.php"><button type="button" class="btn btn-primary btn-labeled ">Back<span class="btn-label btn-label-right"><i class="fa fa-backward"></i></span></button></a>
+                                                            <button id="submit-button" type="submit" name="update" class="btn btn-success btn-labeled">Update<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+                                                            
+                                   
+                                                        </div>
+                                                        <!-- Modal content-->
+
+
 
 
                                         </form>
