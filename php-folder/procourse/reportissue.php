@@ -45,10 +45,10 @@
 
         echo $result;
 
-    }elseif($postjson['action'] == 'issue_edit') {
+    }elseif($postjson['action'] == 'issue_detail') {
+    	$id=$postjson['id'];
 
-
-        $query = mysqli_query($conn, "SELECT * FROM tb_procourse_issue WHERE issue_id='$postjson[id]'");
+        $query = mysqli_query($conn, "SELECT * FROM tb_procourse_issue WHERE issue_id='$id'");
 
         $read_data = array();
 
