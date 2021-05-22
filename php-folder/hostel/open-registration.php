@@ -17,19 +17,21 @@
 	            array_push($read_college,$data);
 	        }
 
-	        $result = json_encode(array('success'=>true,'msg'=>'success','colleges'=>$read_college));
-	        echo $result;
-	    }
+	    $result = json_encode(array('success'=>true,'msg'=>'success','colleges'=>$read_college));
+	    echo $result;
+	}
 
 	    if($postjson['action'] == 'select_college'){
-	    	$insert = $mysqli_query ($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]'");
+			
+	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]'");
 	    	
 	    	if($insert){
 	    		$result = json_encode(array('success'=>true,'msg'=>'success'));
 	    	}else{
 				$result = json_encode(array('success'=>false,'msg'=>'fail'));
 	    	}
-	    echo $result;
+	    	
+			echo $result;
 
 	    }
 ?>
