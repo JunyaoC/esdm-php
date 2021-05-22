@@ -10,6 +10,22 @@
   include '../pages-styling.php';
 ?>
 
+<?php
+    
+    if(isset($_GET['id']))
+    {
+        $id = $_GET['id'];
+    }
+  
+    $sql = "SELECT * FROM tb_procourse_section
+            WHERE courseSec_id = '$id'";
+
+    $result = mysqli_query($con,$sql);
+
+    $row = mysqli_fetch_array($result);
+
+?>
+
 
 <body>
   <div class="wrapper ">
@@ -72,48 +88,72 @@
         </div>
       </div>
     </div>
-    <div class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header bg-secondary text-white"> Add Pro Course</div>
-              <div class="card-body">
-                <div class="col-md-12 p-4 border rounded">
-                  <form class="" method="post" action="pcaddprocess.php">
-                    <div class="form-group"> 
-                      <label for="pccode">Pro Course Code</label> 
-                      <input type="text" class="form-control" id="pccode" name="pccode" required="required"> 
-                    </div>
-                    <div class="form-group"> 
-                      <label for="pcname">Pro Course Name</label> 
-                      <input type="text" class="form-control" id="pcname" name="pcname" required="required"> 
-                    </div>
-                    <div class="form-group">
-                      <label>Pro Course Type</label>
-                      <select class="custom-select" id="pctype" name="pctype" required="required">
-                        <option disabled="" selected="">Select Pro Course Type</option>
-                        <option value="Compulsory">Compulsory</option>
-                        <option value="Elective">Elective</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="pcobjective">Pro Course Objective</label>
-                      <textarea class="form-control" id="pcobjective" name="pcobjective" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="pclearningoutcome">Pro Course Learning Outcome</label>
-                      <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" onclick="myFunction()">Add</button>
-                  </form>
-                </div>
+   <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header bg-secondary text-white"> Add Section</div>
+            <div class="card-body">
+            <div class="col-md-12 p-4 border rounded">
+            <?php echo '<form class="" method="post" action="sectionupdateprocess.php?id='.$id.'">'; ?>
+                  <div class="form-group"> 
+                    <label for="secdate">Date</label> 
+                    <input type="date" class="form-control" required="required" id="secdate" name="secdate" value="<?php echo $row['courseSec_date'];?>"> 
+                  </div>
+                  <div class="form-group"> 
+                    <label for="seclocation">Location</label> 
+                    <input type="text" class="form-control" required="required" id="seclocation" name="seclocation" value="<?php echo $row['courseSec_loc'];?>"> 
+                  </div>
+                  <div class="form-group">
+                    <label for="secprocourse">Pro Course</label>
+                    <?php
+                      $sql2 = "SELECT * FROM tb_pro_course";
+                      $result2 = mysqli_query($con,$sql2);
+                      $result2a = mysqli_query($con,$sql2);
+                      $row2a=mysqli_fetch_array($result2a);
+                      echo '<select class="custom-select" required="required" id="secprocourse" name="secprocourse">';
+                        echo '<option selected="selected" >'; echo $row2a['procourse_name']; echo '</option>';
+                        while($row2=mysqli_fetch_array($result2))
+                        {
+                          echo "<option value= '".$row2['procourse_code']."'>".$row2['procourse_name']. "</option> ";
+                        }
+                      echo '</select>';
+                    ?>
+                  </div>
+                  <div class="form-group">
+                    <label for="secfacilitator">Facilitator</label>
+                    <?php
+                      $sql3 = "SELECT * FROM tb_procourse_fac";
+                      $result3 = mysqli_query($con,$sql3);
+                      $result3a = mysqli_query($con,$sql3);
+                      $row3a=mysqli_fetch_array($result3a);
+                      echo '<select class="custom-select" required="required" id="secfacilitator" name="secfacilitator">';
+                      echo '<option selected="selected" >'; echo $row3a['fac_name']; echo '</option>';
+                        while($row3=mysqli_fetch_array($result3))
+                        {
+                          echo "<option value= '".$row3['fac_id']."'>".$row3['fac_name']. "</option> ";
+                        }
+                      echo '</select>';
+                    ?>
+                  </div>
+                  <div class="form-group">
+                    <label for="secseat">Seat</label>
+                    <input type="number" class="form-control" id="secseat" required="required" name="secseat" value="<?php echo $row['courseSec_seat'];?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Maximum Seat</label>
+                    <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat" value="<?php echo $row['courseSec_maxseat'];?>">
+                  </div>
+                  <button type="submit" class="btn btn-primary">UPDATE</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <div class="modal fade" id="logout" role="dialog">
