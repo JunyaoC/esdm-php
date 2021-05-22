@@ -5,7 +5,7 @@
 
 	if($postjson['action'] == 'list_college') {
 
-		$query = mysqli_query($conn, "SELECT * FROM tb_college");
+		$query = mysqli_query($conn, "SELECT * FROM tb_hos_college");
 		$read_college = array();
 
 		while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
@@ -23,7 +23,7 @@
 
 	    if($postjson['action'] == 'select_college'){
 			
-	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]'");
+	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET reg_phase=2, reg_status=0, hostel_id = '$postjson[kolej_id]'");
 	    	
 	    	if($insert){
 	    		$result = json_encode(array('success'=>true,'msg'=>'success'));
