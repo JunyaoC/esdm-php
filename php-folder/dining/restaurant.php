@@ -16,7 +16,8 @@
             $data = array(
                 'restaurant_name' => $read['restaurant_name'],
                 'restaurant_address' => $read['restaurant_address'],
-                'restaurant_status' => $read['restaurant_status'],          
+                'restaurant_status' => $read['restaurant_status'],
+                'restaurant_id' => $read['restaurant_id'],               
             );
             array_push($read_data,$data);
         }
