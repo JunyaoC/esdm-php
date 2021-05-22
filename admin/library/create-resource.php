@@ -92,7 +92,7 @@ include('includes/config.php');
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                                    <li><a href="#">Resource</a></li>
+                                    <li><a href="manage-resource.php">Resource</a></li>
                                     <li class="active">Create Resource</li>
                                 </ul>
                             </div>
@@ -130,7 +130,7 @@ include('includes/config.php');
 
                                             <form method="post" action="create-resourceprocess.php">
                                                 <div class="form-group has-success">
-                                                    <label for="success" class="control-label" >Select Category</label>
+                                                    <label for="success" class="control-label">Select Category</label>
                                                     <div class="">
                                                         <select name="r_category" class="form-control" id="r_category" required>
                                                             <option value="r_category" disabled>Select Category</option>

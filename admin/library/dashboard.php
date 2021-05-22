@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 
-        ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +27,11 @@ include('includes/config.php');
 
 <body class="top-navbar-fixed">
     <div class="main-wrapper">
-        <?php include('includes/topbar.php');?>
+        <?php include('includes/topbar.php'); ?>
         <div class="content-wrapper">
             <div class="content-container">
 
-                <?php include('includes/leftbar.php');?>
+                <?php include('includes/leftbar.php'); ?>
 
                 <div class="main-page">
                     <div class="container-fluid">
@@ -51,16 +51,16 @@ include('includes/config.php');
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <a class="dashboard-stat bg-primary" href="">
-                                        <?php 
-$sql1 ="SELECT r_id from tb_resource";
-$query1 = $dbh -> prepare($sql1);
-$query1->execute();
-$results1=$query1->fetchAll(PDO::FETCH_OBJ);
-$totalprogram=$query1->rowCount();
-?>
+                                    <a class="dashboard-stat bg-primary" href="manage-resource.php">
+                                        <?php
+                                        $sql1 = "SELECT r_id from tb_resource";
+                                        $query1 = $dbh->prepare($sql1);
+                                        $query1->execute();
+                                        $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                        $totalprogram = $query1->rowCount();
+                                        ?>
 
-                                        <span class="number counter"><?php echo htmlentities($totalprogram);?></span>
+                                        <span class="number counter"><?php echo htmlentities($totalprogram); ?></span>
                                         <span class="name">Total Resource</span>
                                         <span class="bg-icon"><i class="fa fa-users"></i></span>
                                     </a>
@@ -69,15 +69,15 @@ $totalprogram=$query1->rowCount();
                                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <a class="dashboard-stat bg-danger" href="">
-                                        <?php 
-$sql ="SELECT category_id from  tb_category ";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$totallecturer=$query->rowCount();
-?>
-                                        <span class="number counter"><?php echo htmlentities($totallecturer);?></span>
+                                    <a class="dashboard-stat bg-danger" href="manage-category.php">
+                                        <?php
+                                        $sql = "SELECT category_id from  tb_category ";
+                                        $query = $dbh->prepare($sql);
+                                        $query->execute();
+                                        $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                        $totallecturer = $query->rowCount();
+                                        ?>
+                                        <span class="number counter"><?php echo htmlentities($totallecturer); ?></span>
                                         <span class="name">Total Category</span>
                                         <span class="bg-icon"><i class="fa fa-ticket"></i></span>
                                     </a>
@@ -136,35 +136,35 @@ $totallecturer=$query->rowCount();
     <script src="js/traffic-chart.js"></script>
     <script src="js/task-list.js"></script>
     <script>
-    $(function() {
+        $(function() {
 
-        // Counter for dashboard stats
-        $('.counter').counterUp({
-            delay: 10,
-            time: 1000
+            // Counter for dashboard stats
+            $('.counter').counterUp({
+                delay: 10,
+                time: 1000
+            });
+
+            // Welcome notification
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            toastr["success"]("Welcome admin!");
+
         });
-
-        // Welcome notification
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-        toastr["success"]("Welcome admin!");
-
-    });
     </script>
 </body>
 

@@ -96,7 +96,7 @@ if (isset($_POST['update'])) {
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                                    <li><a href="#">Update Resource</a></li>
+                                    <li><a href="manage-resource.php">Update Resource</a></li>
                                     <li class="active">Update Resource</li>
                                 </ul>
                             </div>
@@ -129,6 +129,7 @@ if (isset($_POST['update'])) {
                                                 <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
+                                        <div class="panel-body">
 
                                         <form method="post">
                                             <?php
@@ -146,12 +147,13 @@ if (isset($_POST['update'])) {
 
 
                                                     <div class="form-group has-success">
-                                                        <!-- <label for="success" class="control-label">Current Category is: <?php echo htmlentities($result->r_category); ?></label> -->
+                                                        <!-- <label for="success" class="control-label">Current Category is: <?php #echo htmlentities($result->r_category); ?></label> -->
 
                                                         <div class="">
                                                             <label for="success" class="control-label">Select Updated Category: </label>
                                                             <select name="r_category" class="form-control" id="r_category" required="required">
-                                                                <option value="r_category">Select Category</option>
+                                                                <option value="r_category" disabled>Select Category</option>
+                                                                
                                                                 <?php $sql1 = "SELECT * from tb_category";
                                                                 $query1 = $dbh->prepare($sql1);
                                                                 $query1->execute();
@@ -233,6 +235,7 @@ if (isset($_POST['update'])) {
 
 
                                         </form>
+                                        </div>
 
 
                                     </div>
@@ -285,3 +288,4 @@ if (isset($_POST['update'])) {
 
 </html>
 <?php   ?>
+
