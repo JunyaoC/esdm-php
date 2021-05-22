@@ -8,13 +8,12 @@
   $r_file=$_POST['r_file_url'];
   $r_date=$_POST['r_date']; 
 
+  
+
   //SQL INSERT new booking
   $sql = "INSERT INTO  tb_resource (r_category,r_title,r_author,r_file, r_date)
           VALUES ('$r_category','$r_title','$r_author','$r_file','$r_date')";
 
-
-
-  
 
   //Check SQL output
   var_dump($sql);

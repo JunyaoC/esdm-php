@@ -1,6 +1,5 @@
 function upload() {
-
-  document.getElementById('submit-button').disabled = true;
+  document.getElementById("submit-button").disabled = true;
 
   //get your select pdf
   var pdf = document.getElementById("r_file").files[0];
@@ -13,6 +12,7 @@ function upload() {
 
   var uploadTask = storageRef.put(pdf);
 
+
   uploadTask.on(
     "state_changed",
     function (snapshot) {
@@ -21,6 +21,8 @@ function upload() {
       //number of bytes
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log("upload is " + progress + " done");
+      // document.querySelector("#progressBar").value = progress;
+      document.getElementById("progressBar").value = progress;
     },
     function (error) {
       //handle error here
@@ -32,9 +34,14 @@ function upload() {
       uploadTask.snapshot.ref.getDownloadURL().then(function (downlaodURL) {
         //get your upload pdf url here...
         console.log(downlaodURL);
-        document.getElementById('r_file_url').value = downlaodURL;
-        document.getElementById('submit-button').disabled = false;
+        document.getElementById("r_file_url").value = downlaodURL;
+        document.getElementById("submit-button").disabled = false;
       });
     }
   );
 }
+function showButton()
+{
+document.getElementById ("button2").style .visibility ="visible";
+}
+
