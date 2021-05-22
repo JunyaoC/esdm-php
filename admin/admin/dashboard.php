@@ -90,7 +90,7 @@
             </a>
           </li> 
           <li>
-            <a href="../library/library.php">
+            <a href="../library/dashboard.php">
               <i class="fa fa-bars"></i>
               <p>Manage Library</p>
             </a>
