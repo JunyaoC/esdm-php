@@ -26,7 +26,7 @@
         <ul class="nav">
           <li class="active">
             <a>
-              <p>Vehicle</p>
+              <p>Attendance</p>
             </a>
           </li>
           <li>
@@ -113,9 +113,9 @@
                                             <tbody>
                                                 <?php
                                                     $sql = "SELECT * FROM tb_subject
-                                                            LEFT JOIN tb_class ON tb_attendance.class_id = tb_class.class_id
-                                                            LEFT JOIN tb_section ON tb_section.section_id = tb_class.section_id
-                                                            LEFT JOIN tb_subject ON tb_subject.subject_id = tb_section.subject_id 
+                                                            LEFT JOIN tb_class ON tb_subject.subject_id = tb_class.class_id
+                                                            LEFT JOIN tb_section ON tb_subject.subject_id = tb_section.section_id
+                                                            LEFT JOIN tb_attendance ON tb_subject.subject_id = tb_attendance.attendance_id 
                                                             ";
                                                     $result = mysqli_query($con,$sql);
                                                     while($row=mysqli_fetch_array($result))
@@ -127,8 +127,8 @@
                                                         echo "<td>".$row['class_time']."</td>";
                                                         echo "<td>".$row['section_number']."</td>";
                                                         echo "<td>
-                                                                <a class='btn btn-secondary' href='attendanceupdate.php?id=".$row['procourse_code']."'>Update</a><br><br>
-                                                                <a class='btn btn-danger' href='attendancedelete.php?id=".$row['procourse_code']."' onclick='ConfirmDelete()'>Delete</a>
+                                                                <a class='btn btn-secondary' href='attendanceupdate.php?id=".$row['subject_id']."'>Update</a><br><br>
+                                                                <a class='btn btn-danger' href='attendancedelete.php?id=".$row['subject_id']."' onclick='ConfirmDelete()'>Delete</a>
                                                               </td>";
                                                         echo "</tr>";
                                                     }
