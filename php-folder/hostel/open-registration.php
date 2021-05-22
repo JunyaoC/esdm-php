@@ -22,8 +22,9 @@
 	}
 
 	    if($postjson['action'] == 'select_college'){
+	    	$today = date('Y-m-d');
 
-	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]',student_id = '$postjson[matric]'");
+	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]',student_id = '$postjson[matric]',reg_date = '$today',reg_status ='Pending',reg_phase= 2");
 
 	    	
 	    	if($insert){
