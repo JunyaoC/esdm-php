@@ -2,10 +2,11 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
-  $sqln = "SELECT * FROM tb_sticker
+$sqln = "SELECT * FROM tb_sticker
          LEFT JOIN tb_vehicle ON tb_vehicle.vehicleID = tb_sticker.vehiclePlateNo
          ";
 $resultn=mysqli_query($con,$sqln);
+
 
 ?>
 
@@ -21,12 +22,12 @@ $resultn=mysqli_query($con,$sqln);
   <div class="wrapper ">
     <div class="sidebar" data-color="blue" data-active-color="danger">
       <div class="logo">
-        <a href="dashboard.php" class="simple-text logo-mini">
+        <a href="../admin/dashboard.php" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">Sticker Applicant</a>
+        <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -39,6 +40,10 @@ $resultn=mysqli_query($con,$sqln);
             <a href="../vehicle/vehicle.php">
               <i class="fa fa-bars"></i>
               <p>Manage Application</p>
+            </a>
+             <a href="../vehicle/vehicleTicket.php">
+              <i class="fa fa-bars"></i>
+              <p>Summon Ticket</p>
             </a>
           </li>
 
@@ -66,10 +71,6 @@ $resultn=mysqli_query($con,$sqln);
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-
-
-
-
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
               <li class="nav-item">
@@ -79,39 +80,76 @@ $resultn=mysqli_query($con,$sqln);
             </ul>
           </div>
         </div>
+      </nav>
 
-           <div class="py-3">asdasd
-      <div class="container">asdasd
-        <div class="row">asdasd
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+    </div>
+        <div class="py-3">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+    </div>
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
         </div>
       </div>
     </div>
 
-      </nav>
+       <div class="container-fluid">
+        <div class="row">
+        </div>
+      <div class="table-responsive">         
+      <table class="table table-hover">
+ 
+        <thead>
+            <tr>
+              <th>Student Matric</th>              
+              <th>Vehicle Plate</th>
+              <th>Sticker Date</th>
+              <th>Status</th>
+              <th>Operation</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <?php
+            while ($rown=mysqli_fetch_array($resultn))
+            {
+              $date = $rown['stickerDate'] ;
+              $timestamp = strtotime($date);
+              $ddate =  date('d/m/Y', $timestamp);
 
 
-
-
-    <div class="row">
-      <div class="column"> 
-         <div id="chartContainer" style="height: 370px; width: 90%; margin-left: 40px;"></div>
-      </div>
-      <div class="column">
-         <div id="chartContainer1" style="height: 370px; width: 90%;margin-right: 10px;">
-           
-         </div>
-      </div>
+              $a = $rown['stickerID'];
+              echo "<tr>";
+              echo "<td>".$rown['stuACID']."</td>";
+              echo "<td>".$rown['vehiclePlateNo']."</td>";
+              echo "<td>" .$ddate. "</td>";
+              echo "<td>".$rown['stickerStatus']."</td>";
+              echo "<td>";
+                          echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                  Update
+                                </button>';
+                          echo "</td>";             
+              echo "</tr>";
+            }
+        ?>          
+        </tbody>
+      </table>
     </div>
+  </div>
 
+ 
 
 
 
       </div>
-
-    </div>
-
-
-
         <div class="modal fade" id="logout" role="dialog">
         <div class="modal-dialog">
                                                         
@@ -131,6 +169,48 @@ $resultn=mysqli_query($con,$sqln);
         </div>                                                
         </div>
         </div>
+
+<!--   MODAL for Register -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 style="align-self: "> Update Application </h4>
+          <button type="button btn-primary" class="close" data-dismiss="modal">×</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+        <form method="POST" action="stickerprocess.php">
+
+
+        <div class="form-group">
+        <label for="Role">Role</label> <br>
+        
+        <select class="form-control" id="status" name="status">
+               
+               <option value= 'Activate'>Activate</option>
+               <option value= 'Rejected'>Rejected</option>
+               <option value= 'Payment Pending'>Payment Pending</option>
+        
+                </div>
+
+        <input type="hidden"  id="sid" name="sid" value= "<?php echo $a; ?>'">
+        <br><br>
+        
+        </div>
+           <!-- Modal footer -->
+        <div class="modal-footer">
+        <button type="submit" class="button btn-info">Update</button>
+        </form>
+        </select>
+
+        <button type="button" class="button btn-danger" data-dismiss="modal">Close</button>
+        </div>         
+            </div>
+            </div>
+        </div>
+       </select></div> 
 
   <br> <br>
        <?php include 'adminfooter.php' ?>
