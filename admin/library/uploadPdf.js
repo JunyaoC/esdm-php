@@ -34,6 +34,7 @@ function upload() {
       uploadTask.snapshot.ref.getDownloadURL().then(function (downlaodURL) {
         //get your upload pdf url here...
         console.log(downlaodURL);
+        // document.getElementById("r_file_update_url").value = downlaodURL;
         document.getElementById("r_file_url").value = downlaodURL;
         document.getElementById("submit-button").disabled = false;
       });

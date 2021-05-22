@@ -130,10 +130,10 @@ include('includes/config.php');
 
                                             <form method="post" action="create-resourceprocess.php">
                                                 <div class="form-group has-success">
-                                                    <label for="success" class="control-label">Select Category</label>
+                                                    <label for="success" class="control-label" >Select Category</label>
                                                     <div class="">
-                                                        <select name="r_category" class="form-control" id="r_category" required="required">
-                                                            <option value="r_category">Select Category</option>
+                                                        <select name="r_category" class="form-control" id="r_category" required>
+                                                            <option value="r_category" disabled>Select Category</option>
                                                             <?php $sql = "SELECT * from tb_category";
                                                             $query = $dbh->prepare($sql);
                                                             $query->execute();
@@ -174,13 +174,13 @@ include('includes/config.php');
                                                         <input type="file" id="r_file" name="r_file" accept="application/pdf" required="required" onchange="upload()"></label>
                                                     <input type="hidden" id="r_file_url" name="r_file_url">
                                                     <div>
-                                                    <!-- <input type="button" runat="server" value="upload" id="button2"  onclick="upload()" style="visibility:hidden" /> -->
+                                                        <!-- <input type="button" runat="server" value="upload" id="button2"  onclick="upload()" style="visibility:hidden" /> -->
                                                         <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
 
                                                         <br>
                                                         <!-- <button type="button" class="btn btn-info btn-labeled" onclick="upload()">Upload</button> -->
                                                         <!-- <asp:FileUpload ID="fileupload1" runat="server"  /> -->
-                                                       
+
                                                     </div>
 
 
