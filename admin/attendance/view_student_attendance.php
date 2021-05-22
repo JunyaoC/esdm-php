@@ -34,11 +34,11 @@
             </a>
           </li>
           <li>
-            <a href="../vehicle/attendance.php">
+            <a href="../attendance/attendance.php">
               <i class="fa fa-bars"></i>
               <p>Manage Attendance Wizard Session</p>
             </a>
-             <a href="../vehicle/attendance.php">
+             <a href="../attendance/attendance.php">
               <i class="fa fa-bars"></i>
               <p>Upcoming</p>
             </a>

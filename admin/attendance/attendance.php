@@ -106,6 +106,7 @@
         <tr>
           <th class="">Subject Code</th>
           <th>Subject Name</th>
+
           <th>Section number</th>
           <th>Operation</th>
         </tr>
@@ -124,10 +125,11 @@
           echo "<tr>";
           echo "<td>".$row['subject_code']."</td>";
           echo "<td>".$row['subject_name']."</td>";
+
           echo "<td>".$row['section_number']."</td>";
           echo "<td>
-             <a class='btn btn-secondary' href='create_qr.php?id=".$row['section_id']."'>Add Class</a><br><br>
-             <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['section_id']."'>Student</a>
+             <a class='btn btn-secondary' href='create_class.php?id=".$row['subject_code']."'>Create</a><br><br>
+             <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_code']."'>Student</a>
               </td>";
           echo "</tr>";
         }
