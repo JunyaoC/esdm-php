@@ -22,8 +22,9 @@
 	}
 
 	    if($postjson['action'] == 'select_college'){
-			
+
 	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]',student_id = '$postjson[matric]'");
+
 	    	
 	    	if($insert){
 	    		$result = json_encode(array('success'=>true,'msg'=>'success'));
