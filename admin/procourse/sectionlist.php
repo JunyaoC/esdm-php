@@ -113,17 +113,17 @@
                 </div>
                 <div class="py-3 col bg-light border">
                     <table id="program" class="display">
-                        <thead class="thead-dark">
+                        <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Pro Course</th>
+                                <th>ProCourse</th>
                                 <th>Section</th>
                                 <th>Date</th>
                                 <th>Facilitator</th>
                                 <th>Location</th>
                                 <th>Seat</th>
                                 <th>Status</th>
-                                <th>Button</th>
+                                <th>Operation</th>
                             </tr>
                         </thead>
                         <tbody>
