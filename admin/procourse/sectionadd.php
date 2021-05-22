@@ -80,14 +80,6 @@
             <div class="card-body">
             <div class="col-md-12 p-4 border rounded">
                 <form class="" method="post" action="sectionaddprocess.php">
-                  <div class="form-group"> 
-                    <label for="secdate">Date</label> 
-                    <input type="date" class="form-control" required="required" id="secdate" name="secdate"> 
-                  </div>
-                  <div class="form-group"> 
-                    <label for="seclocation">Location</label> 
-                    <input type="text" class="form-control" required="required" id="seclocation" name="seclocation"> 
-                  </div>
                   <div class="form-group">
                     <label for="secprocourse">Pro Course</label>
                     <?php
@@ -103,6 +95,14 @@
                     ?>
                   </div>
                   <div class="form-group">
+                    <label for="secno">Section Number</label>
+                    <input type="number" class="form-control" id="secno" required="required" name="secno">
+                  </div>
+                  <div class="form-group"> 
+                    <label for="secdate">Date</label> 
+                    <input type="date" class="form-control" required="required" id="secdate" name="secdate"> 
+                  </div>
+                  <div class="form-group">
                     <label for="secfacilitator">Facilitator</label>
                     <?php
                       $sql = "SELECT * FROM tb_procourse_fac";
@@ -116,12 +116,16 @@
                       echo '</select>';
                     ?>
                   </div>
+                  <div class="form-group"> 
+                    <label for="seclocation">Location</label> 
+                    <input type="text" class="form-control" required="required" id="seclocation" name="seclocation"> 
+                  </div>
                   <div class="form-group">
                     <label for="secseat">Seat</label>
                     <input type="number" class="form-control" id="secseat" required="required" name="secseat">
                   </div>
                   <div class="form-group">
-                    <label>Maximum Seat</label>
+                    <label for="secmaxseat">Maximum Seat</label>
                     <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat">
                   </div>
                   <button type="submit" class="btn btn-primary">Add</button>
@@ -156,7 +160,7 @@
 
   <br><br>
 
-  <?php include 'adminfooter.php' ?>
+  <?php include '../adminfooter.php' ?>
 
   <script>
     function myFunction() {

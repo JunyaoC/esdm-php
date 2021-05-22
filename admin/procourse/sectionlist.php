@@ -84,32 +84,43 @@
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Date</th>
-                                                    <th>Location</th>
                                                     <th>Pro Course</th>
+                                                    <th>Section No</th>
+                                                    <th>Date</th>
                                                     <th>Facilitator</th>
+                                                    <th>Location</th>
                                                     <th>Seat</th>
-                                                    <th>Max Seat</th>
+                                                    <th>Status</th>
                                                     <th>Operation</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                     $sql = "SELECT * FROM tb_procourse_section
-                                                            ";
+                                                            LEFT JOIN tb_procourse_fac ON tb_procourse_section.courseSec_fac = tb_procourse_fac.fac_id";
                                                     $result = mysqli_query($con,$sql);
                                                     while($row=mysqli_fetch_array($result))
                                                     {
                                                         echo "<tr>";
                                                         echo "<td>".$row['courseSec_id']."</td>";
-                                                        echo "<td>".$row['courseSec_date']."</td>";
-                                                        echo "<td>".$row['courseSec_loc']."</td>";
                                                         echo "<td>".$row['courseSec_courseID']."</td>";
-                                                        echo "<td>".$row['courseSec_fac']."</td>";
-                                                        echo "<td>".$row['courseSec_seat']."</td>";
-                                                        echo "<td>".$row['courseSec_maxseat']."</td>";
+                                                        echo "<td>".$row['section_no']."</td>";
+                                                        echo "<td>".$row['courseSec_date']."</td>";
+                                                        echo "<td>".$row['fac_name']."</td>";
+                                                        echo "<td>".$row['courseSec_loc']."</td>";
+                                                        echo "<td>".$row['courseSec_seat']."/".$row['courseSec_maxseat']."</td>";
+                                                        if($row['courseSec_seat'] == $row['courseSec_maxseat'])
+                                                        {
+                                                            echo "<td>FULL</td>";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo "<td>AVAILABLE</td>";
+                                                        }
+
                                                         echo "<td>
-                                                                <a class='btn btn-secondary' href='sectionupdate.php?id=".$row['courseSec_id']."'>Update</a> <a class='btn btn-danger' href='sectiondelete.php?id=".$row['courseSec_id']."' onclick='ConfirmDelete()'>Delete</a>
+                                                                <a class='btn btn-secondary' href='sectionupdate.php?id=".$row['courseSec_id']."'>Update</a> <br><br>
+                                                                <a class='btn btn-danger' href='sectiondelete.php?id=".$row['courseSec_id']."' onclick='ConfirmDelete()'>Delete</a>
                                                               </td>";
                                                         echo "</tr>";
                                                     }
@@ -149,7 +160,7 @@
 
   <br><br>
 
-  <?php include 'adminfooter.php' ?>
+  <?php include '../adminfooter.php' ?>
 
   <script type="text/javascript">
     function ConfirmDelete() {
