@@ -2,6 +2,8 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
+  $sql = "SELECT * FROM tb_restaurant";
+  $result = mysqli_query($con,$sql);
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +12,11 @@
 <?php 
   include '../pages-styling.php';
 ?>
-
+  <script>
+    $(document).ready( function () {
+    $('#program').DataTable();
+} );
+  </script>
 
 <body class="">
   <div class="wrapper ">
@@ -87,13 +93,46 @@
           </div>
         </div>
       </nav>
-    <div class="row">
-      <div class="column">
-         <div id="chartContainer" style="height: 370px; width: 90%; margin-left: 40px;"></div>
+
+
+  <br> <br> <br> <br> <br>
+    <div class="container">
+    <div class="row ml-1">
+      <div>
+        <h3>Restaurant List</h3>
       </div>
-      <div class="column">
-         <div id="chartContainer1" style="height: 370px; width: 90%;margin-right: 10px;"></div>
+      <div class="ml-auto mr-3"> 
+        <a href='addRestaurant.php' class='btn btn-primary' style="color:white;"> Add Restaurant &nbsp<i class="fa fa-plus "></i></a>
       </div>
+    </div>
+      <table id="program" class="display">
+        <thead>
+          <tr>
+            <th>Restaurant Name</th>
+            <th>Restaurant Address</th>
+            <th>Restaurant Phone</th>
+            <th>Restaurant Status</th>
+            <th>Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+            while($row=mysqli_fetch_array($result))
+            {
+              echo "<tr>";
+              echo"<td>".$row['restaurant_name'] ."</td>";
+              echo"<td>".$row['restaurant_address'] ."</td>";
+              echo"<td>".$row['restaurant_phone'] ."</td>";
+              echo"<td>".$row['restaurant_status'] ."</td>";
+              echo"<td>";
+                echo "<a href='editRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-warning'>Edit</a> &nbsp";
+                echo "<a href='deleteRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
+              echo"</td>";
+              echo"</tr>";
+            }
+          ?>
+        </tbody>
+      </table>
     </div>
 
       </div>
