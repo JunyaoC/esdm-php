@@ -1,6 +1,12 @@
 <?php
   include('../dbconnection.php');
   include('../adminsession.php');
+
+  if(isset($_GET['id']))
+  {
+      $id = $_GET['id'];
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -9,8 +15,6 @@
 <?php 
   include '../pages-styling.php';
 ?>
-
-
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="blue" data-active-color="danger">
@@ -102,32 +106,27 @@
  
       <thead class="thead-dark">
                                                 <tr>
-                                                    <th class="">Subject Code</th>
-                                                    <th>Subject Name</th>
-                                                    <th>Class Time</th>
-                                                    <th>Section number</th>
-                                                    <th>Operation</th>
+                                                    <th class="">Student ID</th>
+                                                    <th>Student Name</th>
+                                                    <th>Student Matric</th>
+                                                    <th>Attendance</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM tb_subject
-                                                            LEFT JOIN tb_class ON tb_subject.subject_id = tb_class.class_id
-                                                            LEFT JOIN tb_section ON tb_subject.subject_id = tb_section.section_id
-                                                            LEFT JOIN tb_attendance ON tb_subject.subject_id = tb_attendance.attendance_id 
-                                                            ";
+                                                    $sql = "SELECT * FROM tb_attendance 
+                                                            LEFT JOIN tb_user ON tb_attendance.student_id = tb_user.u_id
+                                                            LEFT JOIN tb_student ON tb_attendance.student_id = tb_student.u_id
+                                                            WHERE class_id='$id'";
+                                                            
                                                     $result = mysqli_query($con,$sql);
                                                     while($row=mysqli_fetch_array($result))
                                                     {
                                                         echo "<tr>";
-                                                        echo "<td>".$row['subject_code']."</td>";
-                                                        echo "<td>".$row['subject_name']."</td>";
-                                                        echo "<td>".$row['class_time']."</td>";
-                                                        echo "<td>".$row['section_number']."</td>";
-                                                        echo "<td>
-                                                                <a class='btn btn-secondary' href='create_qr.php?id=".$row['subject_id']."'>Create</a><br><br>
-                                                                <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_id']."'>Student</a>
-                                                              </td>";
+                                                        echo "<td>".$row['u_id']."</td>";
+                                                        echo "<td>".$row['student_name']."</td>";
+                                                        echo "<td>".$row['student_matric']."</td>";
+                                                        echo "<td>".$row['attendance_timestamp']."</td>";
                                                         echo "</tr>";
                                                     }
                                                 ?>
