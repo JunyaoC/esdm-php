@@ -106,7 +106,6 @@
         <tr>
           <th class="">Subject Code</th>
           <th>Subject Name</th>
-          <th>Class Time</th>
           <th>Section number</th>
           <th>Operation</th>
         </tr>
@@ -114,7 +113,7 @@
       <tbody>
       <?php
         $sql = "SELECT * FROM tb_section
-                LEFT JOIN tb_class ON tb_section.section_id = tb_class.section_id
+                -- LEFT JOIN tb_class ON tb_section.section_id = tb_class.section_id
                 LEFT JOIN tb_subject ON tb_section.subject_id = tb_subject.subject_id
                 LEFT JOIN tb_user ON tb_section.lecturer_id =  tb_user.u_id
                 WHERE lecturer_id='$fcid'
@@ -125,11 +124,10 @@
           echo "<tr>";
           echo "<td>".$row['subject_code']."</td>";
           echo "<td>".$row['subject_name']."</td>";
-          echo "<td>".$row['class_time']."</td>";
           echo "<td>".$row['section_number']."</td>";
           echo "<td>
-             <a class='btn btn-secondary' href='create_qr.php?id=".$row['subject_id']."'>Create</a><br><br>
-             <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_code']."'>Student</a>
+             <a class='btn btn-secondary' href='create_qr.php?id=".$row['section_id']."'>Add Class</a><br><br>
+             <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['section_id']."'>Student</a>
               </td>";
           echo "</tr>";
         }
