@@ -34,7 +34,7 @@
             'order_date' => $read['order_date'],
             // 'order_status' => $read['order_status'],
             'item_quantity' => $read['item_quantity'],
-            'food_totalprice' => $read['totalprice'],  
+            'food_totalprice' => number_format((float)$read['totalprice'], 2, '.', ''),  
              'food_name' => $read['food_name'],       
         );
 
