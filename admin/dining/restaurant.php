@@ -1,14 +1,16 @@
 <?php
   include('../dbconnection.php');
-  include('adminsession.php');
+  include('../adminsession.php');
 
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 <?php 
   include '../pages-styling.php';
 ?>
+
 
 <body class="">
   <div class="wrapper ">
@@ -69,12 +71,6 @@
           </div>
         </div>
       </nav>
-    <br> <br> <br> <br> <br>
-      <div class="container">
-          <div class="row">
-    
-        </div>
-    <br><br>
     <div class="row">
       <div class="column">
          <div id="chartContainer" style="height: 370px; width: 90%; margin-left: 40px;"></div>

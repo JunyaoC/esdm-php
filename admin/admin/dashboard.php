@@ -138,22 +138,16 @@
           </div>
         </div>
       </nav>
-    <br> <br> <br> <br> <br>
-      <div class="container">
-          <div class="row">
-    
-        </div>
-    <br><br>
-    <div class="row">
-      <div class="column">
-         <div id="chartContainer" style="height: 370px; width: 90%; margin-left: 40px;"></div>
-      </div>
-      <div class="column">
-         <div id="chartContainer1" style="height: 370px; width: 90%;margin-right: 10px;"></div>
-      </div>
-    </div>
 
-      </div>
+
+
+
+
+
+
+
+
+
         <div class="modal fade" id="logout" role="dialog">
         <div class="modal-dialog">
                                                         
