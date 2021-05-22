@@ -144,7 +144,7 @@
                       <label for="pclearningoutcome">Pro Course Learning Outcome</label>
                       <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"><?php echo $row['procourse_learningOut'];?></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="myFunction()">UPDATE</button>
+                    <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
                     <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
                   </form>
                 </div>
@@ -179,9 +179,13 @@
 
   <?php include '../adminfooter.php' ?>
 
-  <script>
-    function myFunction() {
-      alert("Pro Course successfully added");
+  <script type="text/javascript">
+    function ConfirmUpdate() {
+        var x = confirm("Are you sure you want to update procourse details?");
+        if (x)
+            return true;
+        else
+            return false;
     }
   </script>
 

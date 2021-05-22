@@ -103,6 +103,8 @@
                     <div>
                         <h3> Student Registered List</h3>
                     </div>
+                    <div class="ml-auto mr-3"> 
+                    </div>
                 </div>
                 <div class="py-3 col bg-light border">
                     <table id="program" class="display">

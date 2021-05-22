@@ -131,7 +131,7 @@
                           $result2a = mysqli_query($con,$sql2);
                           $row2a=mysqli_fetch_array($result2a);
                           echo '<select class="custom-select" required="required" id="secprocourse" name="secprocourse">';
-                            echo '<option selected="selected" >'; echo $row2a['procourse_name']; echo '</option>';
+                            echo '<option selected="selected" value="'.$row2a['procourse_code'].'" >'; echo $row2a['procourse_name']; echo '</option>';
                             while($row2=mysqli_fetch_array($result2))
                             {
                               echo "<option value= '".$row2['procourse_code']."'>".$row2['procourse_name']. "</option> ";
@@ -159,7 +159,7 @@
                           $result3a = mysqli_query($con,$sql3);
                           $row3a=mysqli_fetch_array($result3a);
                           echo '<select class="custom-select" required="required" id="secfacilitator" name="secfacilitator">';
-                          echo '<option selected="selected" >'; echo $row3a['fac_name']; echo '</option>';
+                          echo '<option selected="selected" value="'.$row3a['fac_id'].'" >'; echo $row3a['fac_name']; echo '</option>';
                             while($row3=mysqli_fetch_array($result3))
                             {
                               echo "<option value= '".$row3['fac_id']."'>".$row3['fac_name']. "</option> ";
@@ -175,7 +175,7 @@
                         <label>Maximum Seat</label>
                         <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat" value="<?php echo $row['courseSec_maxseat'];?>">
                       </div>
-                      <button type="submit" class="btn btn-primary">UPDATE</button>
+                      <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
                       <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
                     </form>
                   </div>
@@ -210,9 +210,13 @@
 
   <?php include '../adminfooter.php' ?>
 
-  <script>
-    function myFunction() {
-      alert("Pro Course successfully added");
+  <script type="text/javascript">
+    function ConfirmUpdate() {
+        var x = confirm("Are you sure you want to update procourse section details?");
+        if (x)
+            return true;
+        else
+            return false;
     }
   </script>
 
