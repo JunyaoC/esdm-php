@@ -25,19 +25,35 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="active">
+          <li>
             <a>
               <p>Dining</p>
             </a>
           </li>
-          <li>
-            <a href="../dining/restaurant.php">
+          <li class="active">
+            <a href="restaurantPage.php">
               <i class="fa fa-bars"></i>
               <p>Manage Restaurant</p>
             </a>
           </li>
-
-
+          <li>
+            <a href="menuPage.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Menu</p>
+            </a>
+          </li>
+          <li>
+            <a href="orderPage.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Order</p>
+            </a>
+          </li>
+          <li>
+            <a href="salesPage.php">
+              <i class="fa fa-bars"></i>
+              <p>View Sales</p>
+            </a>
+          </li>
 
         </ul>
       </div>
