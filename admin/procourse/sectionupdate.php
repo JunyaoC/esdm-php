@@ -10,9 +10,26 @@
   include '../pages-styling.php';
 ?>
 
+<?php
+    
+    if(isset($_GET['id']))
+    {
+        $id = $_GET['id'];
+    }
+  
+    $sql = "SELECT * FROM tb_procourse_section
+            WHERE courseSec_id = '$id'";
+
+    $result = mysqli_query($con,$sql);
+
+    $row = mysqli_fetch_array($result);
+
+?>
+
+
 <body>
   <div class="wrapper ">
-    <div class="sidebar" data-color="blue" data-active-color="danger">
+  <div class="sidebar" data-color="blue" data-active-color="danger">
       <div class="logo">
         <a href="dashboard.php" class="simple-text logo-mini">
         <div class="logo-image-small">
@@ -102,35 +119,63 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header bg-secondary text-white"><h2>Add Pro Course</h2></div>
+                <div class="card-header bg-secondary text-white"><h2>Update Pro Course Section</h2></div>
                 <div class="card-body">
-                  <div class="col-md-12 p-4 border rounded">
-                    <form class="" method="post" action="pcaddprocess.php">
+                <div class="col-md-12 p-4 border rounded">
+                <?php echo '<form class="" method="post" action="sectionupdateprocess.php?id='.$id.'">'; ?>
+                      <div class="form-group">
+                        <label for="secprocourse">Pro Course</label>
+                        <?php
+                          $sql2 = "SELECT * FROM tb_pro_course";
+                          $result2 = mysqli_query($con,$sql2);
+                          $result2a = mysqli_query($con,$sql2);
+                          $row2a=mysqli_fetch_array($result2a);
+                          echo '<select class="custom-select" required="required" id="secprocourse" name="secprocourse">';
+                            echo '<option selected="selected" value="'.$row2a['procourse_code'].'" >'; echo $row2a['procourse_name']; echo '</option>';
+                            while($row2=mysqli_fetch_array($result2))
+                            {
+                              echo "<option value= '".$row2['procourse_code']."'>".$row2['procourse_name']. "</option> ";
+                            }
+                          echo '</select>';
+                        ?>
+                      </div>
+                      <div class="form-group">
+                        <label for="secno">Section Number</label>
+                        <input type="number" class="form-control" id="secno" required="required" name="secno" value="<?php echo $row['section_no'];?>">
+                      </div>
                       <div class="form-group"> 
-                        <label for="pccode">Pro Course Code</label> 
-                        <input type="text" class="form-control" id="pccode" name="pccode" required="required"> 
+                        <label for="secdate">Date</label> 
+                        <input type="date" class="form-control" required="required" id="secdate" name="secdate" value="<?php echo $row['courseSec_date'];?>"> 
                       </div>
                       <div class="form-group"> 
-                        <label for="pcname">Pro Course Name</label> 
-                        <input type="text" class="form-control" id="pcname" name="pcname" required="required"> 
+                        <label for="seclocation">Location</label> 
+                        <input type="text" class="form-control" required="required" id="seclocation" name="seclocation" value="<?php echo $row['courseSec_loc'];?>"> 
                       </div>
                       <div class="form-group">
-                        <label>Pro Course Type</label>
-                        <select class="custom-select" id="pctype" name="pctype" required="required">
-                          <option disabled="" selected="">Select Pro Course Type</option>
-                          <option value="Compulsory">Compulsory</option>
-                          <option value="Elective">Elective</option>
-                        </select>
+                        <label for="secfacilitator">Facilitator</label>
+                        <?php
+                          $sql3 = "SELECT * FROM tb_procourse_fac";
+                          $result3 = mysqli_query($con,$sql3);
+                          $result3a = mysqli_query($con,$sql3);
+                          $row3a=mysqli_fetch_array($result3a);
+                          echo '<select class="custom-select" required="required" id="secfacilitator" name="secfacilitator">';
+                          echo '<option selected="selected" value="'.$row3a['fac_id'].'" >'; echo $row3a['fac_name']; echo '</option>';
+                            while($row3=mysqli_fetch_array($result3))
+                            {
+                              echo "<option value= '".$row3['fac_id']."'>".$row3['fac_name']. "</option> ";
+                            }
+                          echo '</select>';
+                        ?>
                       </div>
                       <div class="form-group">
-                        <label for="pcobjective">Pro Course Objective</label>
-                        <textarea class="form-control" id="pcobjective" name="pcobjective" rows="3"></textarea>
+                        <label for="secseat">Seat</label>
+                        <input type="number" class="form-control" id="secseat" required="required" name="secseat" value="<?php echo $row['courseSec_seat'];?>">
                       </div>
                       <div class="form-group">
-                        <label for="pclearningoutcome">Pro Course Learning Outcome</label>
-                        <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"></textarea>
+                        <label>Maximum Seat</label>
+                        <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat" value="<?php echo $row['courseSec_maxseat'];?>">
                       </div>
-                      <button type="submit" class="btn btn-primary" onclick="myFunction()">ADD</button>
+                      <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
                       <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
                     </form>
                   </div>
@@ -139,7 +184,7 @@
             </div>
           </div>
         </div>
-      </div>
+  </div>
   </div>
 
   <div class="modal fade" id="logout" role="dialog">
@@ -165,9 +210,13 @@
 
   <?php include '../adminfooter.php' ?>
 
-  <script>
-    function myFunction() {
-      alert("Pro Course successfully added");
+  <script type="text/javascript">
+    function ConfirmUpdate() {
+        var x = confirm("Are you sure you want to update procourse section details?");
+        if (x)
+            return true;
+        else
+            return false;
     }
   </script>
 
@@ -176,6 +225,11 @@
         window.history.back();
     }
   </script>
+
+  <!--   Pingendo  -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
   <!--   Core JS Files   -->
   <script src="../js/core/popper.min.js"></script>

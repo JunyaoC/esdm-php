@@ -10,7 +10,7 @@
     }
 
     //SQL Delete operation
-    $sql = "DELETE FROM tb_pro_course WHERE procourse_code='$id'";
+    $sql = "DELETE FROM tb_procourse_section  WHERE courseSec_id='$id'";
 
     //Execute SQL
     $result = mysqli_query($con,$sql);
@@ -19,7 +19,7 @@
     mysqli_close($con);
 
     //Redirect
-    header('Location: procourse.php');
+    header('Location: sectionlist.php');
 
 
 ?>

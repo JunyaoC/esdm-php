@@ -20,7 +20,9 @@
             $data = array(
                 'procourse_name' => $read['procourse_name'],
                 'procourse_code' => $read['procourse_code'],
-                'courseSec_date' => $read['courseSec_date'],          
+                'courseSec_date' => $read['courseSec_date'],
+                'procourse_sec' => $read['procourse_sec'],
+                'regHis_id' => $read['regHis_id'],          
             );
             array_push($read_data,$data);
         }

@@ -24,7 +24,7 @@
     mysqli_close($con);
 
     //Redirect page
-    header('Location: pcadd.php');
+    header('Location: procourse.php');
 
 ?> 
 

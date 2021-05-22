@@ -12,7 +12,7 @@
 
 <body>
   <div class="wrapper ">
-    <div class="sidebar" data-color="blue" data-active-color="danger">
+  <div class="sidebar" data-color="blue" data-active-color="danger">
       <div class="logo">
         <a href="dashboard.php" class="simple-text logo-mini">
         <div class="logo-image-small">
@@ -89,57 +89,79 @@
           </div>
         </div>
       </nav>
-
-      <div class="py-3">
-        <div class="container">
-          <div class="row">
-          </div>
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
         </div>
       </div>
-
-      <div class="py-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header bg-secondary text-white"><h2>Add Pro Course</h2></div>
-                <div class="card-body">
-                  <div class="col-md-12 p-4 border rounded">
-                    <form class="" method="post" action="pcaddprocess.php">
-                      <div class="form-group"> 
-                        <label for="pccode">Pro Course Code</label> 
-                        <input type="text" class="form-control" id="pccode" name="pccode" required="required"> 
-                      </div>
-                      <div class="form-group"> 
-                        <label for="pcname">Pro Course Name</label> 
-                        <input type="text" class="form-control" id="pcname" name="pcname" required="required"> 
-                      </div>
-                      <div class="form-group">
-                        <label>Pro Course Type</label>
-                        <select class="custom-select" id="pctype" name="pctype" required="required">
-                          <option disabled="" selected="">Select Pro Course Type</option>
-                          <option value="Compulsory">Compulsory</option>
-                          <option value="Elective">Elective</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="pcobjective">Pro Course Objective</label>
-                        <textarea class="form-control" id="pcobjective" name="pcobjective" rows="3"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="pclearningoutcome">Pro Course Learning Outcome</label>
-                        <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-primary" onclick="myFunction()">ADD</button>
-                      <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
-                    </form>
+    </div>
+   <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header bg-secondary text-white"><h3>Add Section</h3></div>
+            <div class="card-body">
+            <div class="col-md-12 p-4 border rounded">
+                <form class="" method="post" action="sectionaddprocess.php">
+                  <div class="form-group">
+                    <label for="secprocourse">Pro Course</label>
+                    <?php
+                      $sql = "SELECT * FROM tb_pro_course";
+                      $result = mysqli_query($con,$sql);
+                      echo '<select class="custom-select" required="required" id="secprocourse" name="secprocourse">';
+                        echo '<option disabled="" selected="" >Select Pro Course</option>';
+                        while($row=mysqli_fetch_array($result))
+                        {
+                          echo "<option value= '".$row['procourse_code']."'>".$row['procourse_name']. "</option> ";
+                        }
+                      echo '</select>';
+                    ?>
                   </div>
-                </div>
+                  <div class="form-group">
+                    <label for="secno">Section Number</label>
+                    <input type="number" class="form-control" id="secno" required="required" name="secno">
+                  </div>
+                  <div class="form-group"> 
+                    <label for="secdate">Date</label> 
+                    <input type="date" class="form-control" required="required" id="secdate" name="secdate"> 
+                  </div>
+                  <div class="form-group">
+                    <label for="secfacilitator">Facilitator</label>
+                    <?php
+                      $sql = "SELECT * FROM tb_procourse_fac";
+                      $result = mysqli_query($con,$sql);
+                      echo '<select class="custom-select" required="required" id="secfacilitator" name="secfacilitator">';
+                        echo '<option disabled="" selected="" >Select Facilitator</option>';
+                        while($row=mysqli_fetch_array($result))
+                        {
+                          echo "<option value= '".$row['fac_id']."'>".$row['fac_name']. "</option> ";
+                        }
+                      echo '</select>';
+                    ?>
+                  </div>
+                  <div class="form-group"> 
+                    <label for="seclocation">Location</label> 
+                    <input type="text" class="form-control" required="required" id="seclocation" name="seclocation"> 
+                  </div>
+                  <div class="form-group">
+                    <label for="secseat">Seat</label>
+                    <input type="number" class="form-control" id="secseat" required="required" name="secseat">
+                  </div>
+                  <div class="form-group">
+                    <label for="secmaxseat">Maximum Seat</label>
+                    <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add</button>
+                  <button onclick='goBack()' class="btn btn-danger">Go Back</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
   </div>
 
   <div class="modal fade" id="logout" role="dialog">
@@ -167,7 +189,7 @@
 
   <script>
     function myFunction() {
-      alert("Pro Course successfully added");
+      alert("Pro Course Section successfully added");
     }
   </script>
 
