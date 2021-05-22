@@ -13,7 +13,7 @@
 
 	if($postjson['action'] == 'create_issue') {
 
-		$insert = mysqli_query($conn, "INSERT INTO tb_procourse_issue SET stu_matric = '$postjson[r_matric]', issue_title = '$postjson[r_title]', issue_details = '$postjson[r_detail]', issue_date = '$today'");
+		$insert = mysqli_query($conn, "INSERT INTO tb_procourse_issue SET stu_matric = '$postjson[matric]', issue_title = '$postjson[title]', issue_details = '$postjson[content]', issue_date = '$today'");
 
 		if($insert) {
 			$result = json_encode(array('success'=>true, 'msg'=>'success'));

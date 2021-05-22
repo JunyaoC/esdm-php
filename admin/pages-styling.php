@@ -22,5 +22,7 @@
   <!-- Procourse -->
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="pcadd.css">
+  <link rel="stylesheet" href="css/pcadd.css">
+  <link rel="stylesheet" href="css/pclist.css">
+
 </head>
