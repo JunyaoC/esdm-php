@@ -2,7 +2,13 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-
+if (isset($_GET['delete'])) {
+    $cid = intval($_GET['r_id']);
+    $count = $dbh->prepare("DELETE FROM tb_resource WHERE r_id=:cid");
+    $count->bindParam(":cid", $cid, PDO::PARAM_INT);
+    $count->execute();
+    $msg = " Deleted!";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,9 +113,10 @@ else if($error){?>
                                                     
                                                             <th>Author</th>
                                                             <th>Date</th>
-                                                            <th>File</th>
+                                                           
                                                             <th>Update</th>
                                                             <th>View</th>
+                                                            <th>Delete</th>
                        
 
                                                         </tr>
@@ -122,14 +129,17 @@ else if($error){?>
                                                     
                                                             <th>Author</th>
                                                             <th>Date</th>
-                                                            <th>File</th>
+                                              
                                                             <th>Update</th>
                                                             <th>View</th>
+                                                            <th>Delete</th>
                                                     
 
                                                     </tfoot>
                                                     <tbody>
                                                         <?php $sql = "SELECT * from tb_resource";
+                                                        $cid = intval($_GET['r_id']);
+                                    
                                                         $query = $dbh->prepare($sql);
                                                         $query->execute();
                                                         $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -144,7 +154,7 @@ else if($error){?>
                                                         <td><?php echo htmlentities($result->r_title);?></td>
                                                         <td><?php echo htmlentities($result->r_author);?></td>
                                                         <td><?php echo htmlentities($result->r_date);?></td>
-                                                        <td><?php echo htmlentities($result->r_file);?></td>
+                                               
 
                                                         <td>
                                                             <button><a href="edit-resource.php?r_id=<?php echo htmlentities($result->r_id);?>"><i class="fa fa-edit" title="Edit Record"></i> </a> 
@@ -152,14 +162,37 @@ else if($error){?>
                                                         <td>
                                                             <button><a href="<?php echo htmlentities($result->r_file);?>" target="_blank"><i class="fa fa-eye" title="View Record"></i> </a> 
                                                         </td>
-                                                        
+                                                        <td>
+                                                        <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#modal">Delete</button>
+                                                        </td>
                                                         </tr>
+                                                     
                                                         <?php $cnt=$cnt+1;}} ?>
+                                                       
                                                        
                                                     
                                                     </tbody>
                                                 </table>
+                                                <div class="modal fade" id="modal" role="dialog">
+                                                        <div class="modal-dialog">
 
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title">Delete</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want to delete?</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                 <button type="submit" name="delete" class="btn btn-danger btn-labeled">Delete<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                          
                                                 <!-- /.col-md-12 -->
                                             </div>
