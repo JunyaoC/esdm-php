@@ -87,8 +87,11 @@ if (isset($_POST['update'])) {
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel">
+                                    <div class="panel-body">
                                         <div class="panel-heading">
+                                     
                                             <div class="panel-title">
+
                                                 <h5>Update Category</h5>
                                             </div>
                                         </div>
@@ -100,7 +103,7 @@ if (isset($_POST['update'])) {
                                                 <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
-                                        <div class="panel-body">
+                                      
 
                                             <form method="post">
                                                 <?php
