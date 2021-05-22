@@ -117,7 +117,8 @@
                                                     $sql = "SELECT * FROM tb_attendance 
                                                             LEFT JOIN tb_user ON tb_attendance.student_id = tb_user.u_id
                                                             LEFT JOIN tb_student ON tb_attendance.student_id = tb_student.u_id
-                                                            WHERE class_id='$id'";
+                                                            LEFT JOIN tb_subject ON tb_attendance.class_id = tb_subject.subject_id
+                                                            WHERE subject_code='$id'";
                                                             
                                                     $result = mysqli_query($con,$sql);
                                                     while($row=mysqli_fetch_array($result))

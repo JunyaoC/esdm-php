@@ -1,6 +1,12 @@
 <?php
   include('../dbconnection.php');
   include('../adminsession.php');
+
+  if(isset($_GET['id']))
+  {
+      $id = $_GET['id'];
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -101,37 +107,37 @@
       <table class="table table-hover">
  
       <thead class="thead-dark">
-                                                <tr>
-                                                    <th class="">Subject Code</th>
-                                                    <th>Subject Name</th>
-                                                    <th>Class Time</th>
-                                                    <th>Section number</th>
-                                                    <th>Operation</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                    $sql = "SELECT * FROM tb_subject
-                                                            LEFT JOIN tb_class ON tb_subject.subject_id = tb_class.class_id
-                                                            LEFT JOIN tb_section ON tb_subject.subject_id = tb_section.section_id
-                                                            LEFT JOIN tb_attendance ON tb_subject.subject_id = tb_attendance.attendance_id 
-                                                            ";
-                                                    $result = mysqli_query($con,$sql);
-                                                    while($row=mysqli_fetch_array($result))
-                                                    {
-                                                        echo "<tr>";
-                                                        echo "<td>".$row['subject_code']."</td>";
-                                                        echo "<td>".$row['subject_name']."</td>";
-                                                        echo "<td>".$row['class_time']."</td>";
-                                                        echo "<td>".$row['section_number']."</td>";
-                                                        echo "<td>
-                                                                <a class='btn btn-secondary' href='create_qr.php?id=".$row['subject_id']."'>Create</a><br><br>
-                                                                <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_id']."'>Student</a>
-                                                              </td>";
-                                                        echo "</tr>";
-                                                    }
-                                                ?>
-                                            </tbody>
+        <tr>
+          <th class="">Subject Code</th>
+          <th>Subject Name</th>
+          <th>Class Time</th>
+          <th>Section number</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+        $sql = "SELECT * FROM tb_subject
+                LEFT JOIN tb_class ON tb_subject.subject_id = tb_class.class_id
+                LEFT JOIN tb_section ON tb_subject.subject_id = tb_section.section_id
+                LEFT JOIN tb_attendance ON tb_subject.subject_id = tb_attendance.attendance_id 
+               ";
+        $result = mysqli_query($con,$sql);
+        while($row=mysqli_fetch_array($result))
+        {
+          echo "<tr>";
+          echo "<td>".$row['subject_code']."</td>";
+          echo "<td>".$row['subject_name']."</td>";
+          echo "<td>".$row['class_time']."</td>";
+          echo "<td>".$row['section_number']."</td>";
+          echo "<td>
+             <a class='btn btn-secondary' href='create_qr.php?id=".$row['subject_id']."'>Create</a><br><br>
+             <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_code']."'>Student</a>
+              </td>";
+          echo "</tr>";
+        }
+        ?>
+      </tbody>
       </table>
     </div>
   </div>
