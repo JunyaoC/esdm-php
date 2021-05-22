@@ -2,11 +2,7 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
-  if(isset($_GET['id']))
-  {
-      $id = $_GET['id'];
-  }
-
+  $fcid = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -117,10 +113,11 @@
       </thead>
       <tbody>
       <?php
-        $sql = "SELECT * FROM tb_subject
-                LEFT JOIN tb_class ON tb_subject.subject_id = tb_class.class_id
-                LEFT JOIN tb_section ON tb_subject.subject_id = tb_section.section_id
-                LEFT JOIN tb_attendance ON tb_subject.subject_id = tb_attendance.attendance_id 
+        $sql = "SELECT * FROM tb_section
+                LEFT JOIN tb_class ON tb_section.section_id = tb_class.section_id
+                LEFT JOIN tb_subject ON tb_section.subject_id = tb_subject.subject_id
+                LEFT JOIN tb_user ON tb_section.lecturer_id =  tb_user.u_id
+                WHERE lecturer_id='$fcid'
                ";
         $result = mysqli_query($con,$sql);
         while($row=mysqli_fetch_array($result))
