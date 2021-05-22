@@ -10,7 +10,7 @@
 
         $query = mysqli_query($conn, "SELECT * FROM tb_order 
                                         LEFT JOIN tb_restaurant ON tb_order.restaurant_id = tb_restaurant.restaurant_id
-                                        WHERE user_id = 2
+                                        WHERE user_id = 2 ORDER BY order_status DESC
                                         ");
 
         $read_data = array();
