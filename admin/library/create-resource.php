@@ -21,6 +21,28 @@ include('includes/config.php');
         <link rel="stylesheet" href="css/prism/prism.css" media="screen" > 
         <link rel="stylesheet" href="css/main.css" media="screen" >
         <script src="js/modernizr/modernizr.min.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
+        <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBn6msKCQR6gstFDTjSUy7-WPSSxWUzUD0",
+    authDomain: "esdm-d16a4.firebaseapp.com",
+    projectId: "esdm-d16a4",
+    storageBucket: "esdm-d16a4.appspot.com",
+    messagingSenderId: "315333777495",
+    appId: "1:315333777495:web:a90401f4982ddf67f12b12"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  console.log(firebase)
+</script>
+<script type="text/javascript" src="uploadPdf.js"></script>
+
+
+
+
          <style>
         .errorWrap {
     padding: 10px;
@@ -147,8 +169,16 @@ foreach($results as $result)
                                                         
                                                     <div class="custom-file">
                                                       
-                                                         <label for="file-upload">Upload<input type="file" id="r_file" name="r_file"></label>
+                                                         <label for="file-upload">Select PDF
+                                                        <input type="file" id="r_file" name="r_file" accept="application/pdf"></label>
+                                                        <input type="hidden" id="r_file_url" name="r_file_url">
+                                                        <br>
+                                                        <button type="button" onclick="upload()">Upload</button>
                                                      </div>
+
+
+
+
                                                      <div class="form-group has-success">
                                                         <label for="success" class="control-label">Date</label>
                                                         <div class="">
@@ -160,7 +190,7 @@ foreach($results as $result)
   <div class="form-group has-success">
 
                                                         <div class="">
-                                                           <button type="submit" name="submit" class="btn btn-success btn-labeled">Submit<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+                                                           <button id="submit-button" type="submit" name="submit" class="btn btn-success btn-labeled">Submit<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
                                                     </div>
 
 

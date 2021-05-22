@@ -5,7 +5,7 @@
   $r_category=$_POST['r_category'];
   $r_title=$_POST['r_title'];
   $r_author=$_POST['r_author']; 
-  $r_file=$_POST['r_file'];
+  $r_file=$_POST['r_file_url'];
   $r_date=$_POST['r_date']; 
 
   //SQL INSERT new booking

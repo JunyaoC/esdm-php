@@ -1,6 +1,9 @@
 function upload() {
+
+  document.getElementById('submit-button').disabled = true;
+
   //get your select pdf
-  var pdf = document.getElementById("pdf").files[0];
+  var pdf = document.getElementById("r_file").files[0];
   //now get your pdf name
   var pdfName = pdf.name;
   //firebase  storage reference
@@ -29,6 +32,8 @@ function upload() {
       uploadTask.snapshot.ref.getDownloadURL().then(function (downlaodURL) {
         //get your upload pdf url here...
         console.log(downlaodURL);
+        document.getElementById('r_file_url').value = downlaodURL;
+        document.getElementById('submit-button').disabled = false;
       });
     }
   );
