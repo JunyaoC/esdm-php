@@ -5,7 +5,7 @@
     $postjson = json_decode(file_get_contents('php://input'), true);
     $restaurant_id = $postjson['id'];
 
-    
+    // echo $restaurant_id;
     if($postjson['action'] == 'list_food') {
 
         //read item order

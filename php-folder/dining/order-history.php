@@ -19,7 +19,9 @@
             $data = array(
                 'restaurant_name' => $read['restaurant_name'],
                 'order_date' => $read['order_date'],
-                'order_status' => $read['order_status'],          
+                'order_status' => $read['order_status'],
+                'order_price' => $read['order_price'],
+                'order_id' => $read['order_id']          
             );
             array_push($read_data,$data);
         }
