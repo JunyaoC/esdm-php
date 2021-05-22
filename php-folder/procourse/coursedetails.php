@@ -3,7 +3,7 @@
     include "../connect.php";
 
     $postjson = json_decode(file_get_contents('php://input'), true);
-
+    $today = date('Y-m-d');
     $id=$postjson['id'];
     if($postjson['action'] == 'list_procourse') {
 
@@ -47,6 +47,7 @@
                 'courseSec_date' => $read['courseSec_date'],
                 'courseSec_loc' => $read['courseSec_loc'],
                 'fac_name' => $read['fac_name'],
+                'section_no' => $read['section_no'],
             );
             array_push($read_data,$data);
              }
@@ -59,6 +60,29 @@
         
 
     }
+
+    if($postjson['action'] == 'register') {
+        $seat=$postjson['seat'];
+        $sec_id=$postjson['course_section'];
+
+		$insert = mysqli_query($conn, "INSERT INTO tb_procourse_regHistory SET stu_id = '$postjson[student]', procourse_sec = '$postjson[course_section]', reg_date = '$today'");
+        $update = mysqli_query($conn, "UPDATE tb_procourse_section SET courseSec_seat = $seat WHERE courseSec_id =$sec_id");
+
+		if($insert) {
+			$result = json_encode(array('success'=>true, 'msg'=>'Success to register'));
+		} else {
+			$result = json_encode(array('success'=>false, 'msg'=>'Fail to register'));
+		}
+
+        if($update) {
+			$result1 = json_encode(array('success'=>true, 'msg'=>'Success to key in'));
+		} else {
+			$result1 = json_encode(array('success'=>false, 'msg'=>'Fail to key in'));
+		}
+
+		echo $result;
+        echo $result1;
+	}
 
 
 

@@ -76,36 +76,51 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header bg-success text-white"> Pro Course List</div>
+                            <div class="card-header bg-success text-white"> Section List</div>
                             <div class="card-body">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
                                         <table class="table table-bordered ">
                                             <thead class="thead-dark">
                                                 <tr>
-                                                    <th class="">Code</th>
-                                                    <th>Name</th>
-                                                    <th>Type</th>
-                                                    <th>Objective</th>
-                                                    <th>Learning Outcome</th>
+                                                    <th>ID</th>
+                                                    <th>Pro Course</th>
+                                                    <th>Section No</th>
+                                                    <th>Date</th>
+                                                    <th>Facilitator</th>
+                                                    <th>Location</th>
+                                                    <th>Seat</th>
+                                                    <th>Status</th>
                                                     <th>Operation</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM tb_pro_course";
+                                                    $sql = "SELECT * FROM tb_procourse_section
+                                                            LEFT JOIN tb_procourse_fac ON tb_procourse_section.courseSec_fac = tb_procourse_fac.fac_id";
                                                     $result = mysqli_query($con,$sql);
                                                     while($row=mysqli_fetch_array($result))
                                                     {
                                                         echo "<tr>";
-                                                        echo "<td>".$row['procourse_code']."</td>";
-                                                        echo "<td>".$row['procourse_name']."</td>";
-                                                        echo "<td>".$row['procourse_type']."</td>";
-                                                        echo "<td>".$row['procourse_objective']."</td>";
-                                                        echo "<td>".$row['procourse_learningOut']."</td>";
+                                                        echo "<td>".$row['courseSec_id']."</td>";
+                                                        echo "<td>".$row['courseSec_courseID']."</td>";
+                                                        echo "<td>".$row['section_no']."</td>";
+                                                        echo "<td>".$row['courseSec_date']."</td>";
+                                                        echo "<td>".$row['fac_name']."</td>";
+                                                        echo "<td>".$row['courseSec_loc']."</td>";
+                                                        echo "<td>".$row['courseSec_seat']."/".$row['courseSec_maxseat']."</td>";
+                                                        if($row['courseSec_seat'] == $row['courseSec_maxseat'])
+                                                        {
+                                                            echo "<td>FULL</td>";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo "<td>AVAILABLE</td>";
+                                                        }
+
                                                         echo "<td>
-                                                                <a class='btn btn-secondary' href='pcupdate.php?id=".$row['procourse_code']."'>Update</a><br><br>
-                                                                <a class='btn btn-danger' href='pcdelete.php?id=".$row['procourse_code']."' onclick='ConfirmDelete()'>Delete</a>
+                                                                <a class='btn btn-secondary' href='sectionupdate.php?id=".$row['courseSec_id']."'>Update</a> <br><br>
+                                                                <a class='btn btn-danger' href='sectiondelete.php?id=".$row['courseSec_id']."' onclick='ConfirmDelete()'>Delete</a>
                                                               </td>";
                                                         echo "</tr>";
                                                     }
