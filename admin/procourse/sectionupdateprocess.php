@@ -9,6 +9,7 @@
     }
 
     //retrieve info from form and session 
+    $secno = $_POST['secno']; 
     $secdate = $_POST['secdate']; 
     $seclocation = $_POST['seclocation']; 
     $secprocourse = $_POST['secprocourse']; 
@@ -18,7 +19,7 @@
 
     //SQL INSERT 
     $sql = "UPDATE tb_procourse_section 
-            SET courseSec_date='$secdate', courseSec_loc='$seclocation', courseSec_courseID='$secprocourse', courseSec_fac='$secfacilitator', courseSec_seat='$secseat', courseSec_maxseat='$secmaxseat'
+            SET section_no='$secno', courseSec_date='$secdate', courseSec_loc='$seclocation', courseSec_courseID='$secprocourse', courseSec_fac='$secfacilitator', courseSec_seat='$secseat', courseSec_maxseat='$secmaxseat'
             WHERE courseSec_id = '$id'";
 
     //check SQL output

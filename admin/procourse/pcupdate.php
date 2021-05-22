@@ -152,7 +152,7 @@
 
   <br><br>
 
-  <?php include 'adminfooter.php' ?>
+  <?php include '../adminfooter.php' ?>
 
   <script>
     function myFunction() {

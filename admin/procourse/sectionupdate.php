@@ -97,14 +97,6 @@
             <div class="card-body">
             <div class="col-md-12 p-4 border rounded">
             <?php echo '<form class="" method="post" action="sectionupdateprocess.php?id='.$id.'">'; ?>
-                  <div class="form-group"> 
-                    <label for="secdate">Date</label> 
-                    <input type="date" class="form-control" required="required" id="secdate" name="secdate" value="<?php echo $row['courseSec_date'];?>"> 
-                  </div>
-                  <div class="form-group"> 
-                    <label for="seclocation">Location</label> 
-                    <input type="text" class="form-control" required="required" id="seclocation" name="seclocation" value="<?php echo $row['courseSec_loc'];?>"> 
-                  </div>
                   <div class="form-group">
                     <label for="secprocourse">Pro Course</label>
                     <?php
@@ -120,6 +112,18 @@
                         }
                       echo '</select>';
                     ?>
+                  </div>
+                  <div class="form-group">
+                    <label for="secno">Section Number</label>
+                    <input type="number" class="form-control" id="secno" required="required" name="secno" value="<?php echo $row['section_no'];?>">
+                  </div>
+                  <div class="form-group"> 
+                    <label for="secdate">Date</label> 
+                    <input type="date" class="form-control" required="required" id="secdate" name="secdate" value="<?php echo $row['courseSec_date'];?>"> 
+                  </div>
+                  <div class="form-group"> 
+                    <label for="seclocation">Location</label> 
+                    <input type="text" class="form-control" required="required" id="seclocation" name="seclocation" value="<?php echo $row['courseSec_loc'];?>"> 
                   </div>
                   <div class="form-group">
                     <label for="secfacilitator">Facilitator</label>
@@ -177,7 +181,7 @@
 
   <br><br>
 
-  <?php include 'adminfooter.php' ?>
+  <?php include '../adminfooter.php' ?>
 
   <script>
     function myFunction() {
