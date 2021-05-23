@@ -11,9 +11,9 @@
 	$postjson = json_decode(file_get_contents('php://input'), true);
 	$today = date('Y-m-d H:i:s');
 
-	if($postjson['action'] == 'create_resource') {
+	if($postjson['action'] == 'create_wishlist') {
 
-		$insert = mysqli_query($conn, "INSERT INTO tb_resource SET r_id = '$postjson[r_id]', r_title = '$postjson[r_title]', r_category = '$postjson[r_category]', r_file = '$postjson[r_file]', r_author = '$postjson[r_author]', r_date = '$postjson[r_date]', r_status=1 ");
+		$insert = mysqli_query($conn, "INSERT INTO tb_wishlist SET u_id = '$postjson[u_id]', r_id = '$postjson[r_id]' ");
 
 		if($insert) {
 			$result = json_encode(array('success'=>true, 'msg'=>'success'));
@@ -24,9 +24,9 @@
 		echo $result;
 	}
 
-	if($postjson['action'] == 'count_resource') {
+	if($postjson['action'] == 'count_wishlist') {
 
-		$fetch = mysqli_query($conn, "SELECT COUNT(*) FROM tb_resource");
+		$fetch = mysqli_query($conn, "SELECT COUNT(*) FROM tb_wishlist");
 		$count = mysqli_fetch_array($fetch)[0];
 
 		if($count) {
@@ -40,20 +40,18 @@
 	}
 
 
-	if($postjson['action'] == 'read_resource') {
+	if($postjson['action'] == 'read_wishlist') {
 
-		$fetch = mysqli_query($conn, "SELECT * FROM tb_resource");
+		$fetch = mysqli_query($conn, "SELECT * FROM tb_wishlist");
 
 		$read_data = array();
 
 		while($read = mysqli_fetch_array($fetch, MYSQLI_ASSOC)) {
 			$data = array(
 				'r_id' => $read['r_id'],
-				'r_title' => $read['r_title'],
-				'r_category' => $read['r_category'],
-				'r_file' => $read['r_file'],
-				'r_author' => $read['r_author'],
-				'r_date' => $read['r_date']
+				'u_id' => $read['u_id'],
+				'w_id' => $read['w_id']
+
 			);
 			array_push($read_data,$data);
 		}
@@ -69,25 +67,9 @@
 	}
 
 
-	if($postjson['action'] == 'edit_resource') {
+	if($postjson['action'] == 'delete_wishlist') {
 
-		$update = mysqli_query($conn, "UPDATE tb_resource SET r_title = '$postjson[r_title]', r_category = '$postjson[r_category]', r_author = '$postjson[r_author]', r_date = '$postjson[r_date]' WHERE r_id = '$postjson[r_id]' ");
-
-		if($update) {
-			$result = json_encode(array('success'=>true, 'msg'=>'success'));
-		} else {
-			$result = json_encode(array('success'=>false, 'msg'=>'fail'));
-		}
-
-		echo $result;
-
-	}
-
-
-
-	if($postjson['action'] == 'delete_resource') {
-
-		$delete = mysqli_query($conn, "UPDATE tb_resource SET r_status = 0 WHERE r_id = '$postjson[r_id]' ");
+		$delete = mysqli_query($conn, "DELETE FROM tb_wishlist WHERE u_id = '$postjson[u_id]' AND r_id = '$postjson[r_id]' ");
 
 		if($delete) {
 			$result = json_encode(array('success'=>true, 'msg'=>'success'));
