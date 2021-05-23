@@ -1,21 +1,27 @@
 <?php 
   include('../dbconnection.php');
   include('../adminsession.php');
-?>
 
-<?php
+  $user_id = $_SESSION['user_id'];
 
-  if(isset($_GET['id']))
-  {
-      $id = $_GET['id'];
-  }
-
-  $sql = "SELECT * FROM tb_procourse_issue
-          WHERE issue_id = '$id'";
+  $sql = "SELECT * FROM tb_user
+          WHERE u_id='$user_id'";
 
   $result = mysqli_query($con,$sql);
 
   $row=mysqli_fetch_array($result);
+
+  if(isset($_GET['id']))
+  {
+    $id = $_GET['id'];
+  }
+
+  $sqls = "SELECT * FROM tb_pro_announcement
+           WHERE an_id='$id'";
+
+  $results = mysqli_query($con,$sqls);
+
+  $rows = mysqli_fetch_array($results);
 
 ?>
 
@@ -25,9 +31,9 @@
 <?php 
   include '../pages-styling.php';
 ?>
-   
+
 <body>
-<div class="wrapper ">
+  <div class="wrapper ">
     <div class="sidebar" data-color="blue" data-active-color="danger">
       <div class="logo">
         <a href="dashboard.php" class="simple-text logo-mini">
@@ -39,7 +45,7 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li>
+          <li class="active">
             <a>
               <p>Pro Course</p>
             </a>
@@ -59,10 +65,10 @@
           <li>
             <a href="../procourse/studentlist.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Appointment</p>
+              <p>Manage Student</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="../procourse/issue.php">
               <i class="fa fa-bars"></i>
               <p>Manage Issue</p>
@@ -105,7 +111,7 @@
           </div>
         </div>
       </nav>
-      
+
       <div class="py-3">
         <div class="container">
           <div class="row">
@@ -118,32 +124,28 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header bg-secondary text-white"><h2>Reply Issue</h2></div>
+                <div class="card-header bg-secondary text-white"><h2>Update Announcement</h2></div>
                 <div class="card-body">
                   <div class="col-md-12 p-4 border rounded">
-                  <?php echo '<form class="" method="post" action="issuereplyprocess.php?id='.$id.'">'; ?>
+                  <?php echo '<form class="" method="post" action="announcementaddprocess.php?id='.$user_id.'">'; ?>
                       <div class="form-group">
-                        <label for="issueid">Issue ID</label>
-                        <input class="form-control" type="text" id="replyid" name="replyid" value="<?php echo $row['issue_id']; ?>" readonly></input>                  
+                        <label for="userid">Admin</label>
+                        <input class="form-control" type="text" id="userid" name="userid" value="<?php echo $row['u_name']; ?>" readonly></input>                  
                       </div>
                       <div class="form-group">
-                        <label for="replystudent">Student Matric</label>
-                        <input class="form-control" type="text" id="replystudent" name="replystudent" value="<?php echo $row['stu_matric']; ?>" readonly></input>                  
+                        <label for="aid">Announcement ID</label>
+                        <input class="form-control" type="text" id="aid" name="aid" value="<?php echo $rows['an_id']; ?>" readonly></input>                  
+                      </div>
+                      <div class="form-group"> 
+                        <label for="atitle">Title</label> 
+                        <input type="text" class="form-control" id="atitle" name="atitle" required="required" value="<?php echo $rows['an_title']; ?>"> 
                       </div>
                       <div class="form-group">
-                        <label for="issuetitle">Issue Title</label>
-                        <input class="form-control" type="text" id="issuetitle" name="issuetitle" value="<?php echo $row['issue_title']; ?>" readonly></input>                  
+                        <label for="adetail">Detail</label>
+                        <textarea class="form-control" id="adetail" name="adetail" rows="10" required="required"><?php echo $rows['an_detail']; ?></textarea>
                       </div>
-                      <div class="form-group">
-                        <label for="issuedetails">Issue Details</label>
-                        <input class="form-control" type="text" id="issuedetails" name="issuedetails" value="<?php echo $row['issue_details']; ?>" readonly></input>                  
-                      </div>
-                      <div class="form-group">
-                        <label for="issuereply">Reply</label>
-                        <textarea class="form-control" id="issuereply" name="issuereply" rows="4" placeholder="Enter you reply.."></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-primary" onclick="myFunction()">Send</button>
-                      <button href="issue.php" class="btn btn-danger">Cancel</button>
+                      <button type="submit" class="btn btn-primary" onclick="myFunction()">UPDATE</button>
+                      <button onclick='goBack()' class="btn btn-danger">CANCEL</button>
                     </form>
                   </div>
                 </div>
@@ -173,20 +175,21 @@
     </div>
   </div>
 
-</br></br>
+  <br><br>
 
-<?php include '../adminfooter.php' ?>
+  <?php include '../adminfooter.php' ?>
 
-<script>
+  <script>
     function myFunction() {
-      alert("Successfully send reply");
+      alert("Announcement successfully updated");
     }
-</script>
+  </script>
 
-<!--   Pingendo  -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+    function goBack() {
+        window.history.back();
+    }
+  </script>
 
   <!--   Core JS Files   -->
   <script src="../js/core/popper.min.js"></script>

@@ -45,7 +45,7 @@
                 <li>
                     <a href="../procourse/studentlist.php">
                     <i class="fa fa-bars"></i>
-                    <p>Manage Student</p>
+                    <p>Manage Appointment</p>
                     </a>
                 </li>
                 <li class="active">
