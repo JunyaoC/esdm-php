@@ -117,7 +117,6 @@ $row=mysqli_fetch_array($result);
 <?php include('container.php');?>
 	<div class="container">		
 		<div class="row">
-		<h2>Example: Build QR Code Generator with PHP and Ajax</div>
 			<div class="col-md-3">
 		        <form class="form-horizontal" method="post" id="codeForm" onsubmit="return false">
 		            <div class="form-group">
