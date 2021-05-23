@@ -18,7 +18,7 @@
   $food_type = $_POST['foodType'];
   $pres = $_FILES['fileToUpload']['name'];
   $tname = $_FILES['fileToUpload']['tmp_name'];
-  $target = "../../../../esdm-student_mobile/esdm-student_mobile/src/".$pres;
+  $target = "../../../esdm-student-mobile/esdm-student-mobile/src/assets/food-image/".$food_name.".png";
   $fid = $_POST['id'];
 
 
