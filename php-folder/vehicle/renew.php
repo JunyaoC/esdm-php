@@ -8,7 +8,7 @@ $vehicleID=$postjson['vehicleID'];
 $paymentAmount = $postjson['paymentAmount'];
 $paymentProve = $postjson['paymentProve'];
 $paymentStatus = $postjson['paymentStatus'];
-$today = date_format(date_create("+1 year"), 'Y-m-d');
+$today = date('Y-m-d');
 
 if($postjson['action']=='renew_sticker'){
     //Check if the sticker exist
