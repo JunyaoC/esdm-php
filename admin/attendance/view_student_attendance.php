@@ -1,20 +1,21 @@
 <?php
-  include('../dbconnection.php');
-  include('../adminsession.php');
+include('../dbconnection.php');
+include('../adminsession.php');
 
-  if(isset($_GET['id']))
-  {
-      $id = $_GET['id'];
-  }
+if (isset($_GET['id']) & ($_GET['section'])) {
+  $id = $_GET['id'];
+  $section = $_GET['section'];
+}
 
 ?>
 
 <!DOCTYPE html>
 
 <html lang="en">
-<?php 
-  include '../pages-styling.php';
+<?php
+include '../pages-styling.php';
 ?>
+
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="blue" data-active-color="danger">
@@ -38,7 +39,7 @@
               <i class="fa fa-bars"></i>
               <p>Manage Attendance Wizard Session</p>
             </a>
-             <a href="../attendance/attendance.php">
+            <a href="../attendance/attendance.php">
               <i class="fa fa-bars"></i>
               <p>Upcoming</p>
             </a>
@@ -72,108 +73,108 @@
             <ul class="navbar-nav">
               <li class="nav-item">
                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#logout" style="color:white;"> Log out &nbsp <i class="fa fa-sign-out "></i></button>
-              
+
               </li>
             </ul>
           </div>
         </div>
       </nav>
 
-    <div class="py-3">
-      <div class="container">
-        <div class="row">
+      <div class="py-3">
+        <div class="container">
+          <div class="row">
+          </div>
         </div>
       </div>
-    </div>
-        <div class="py-3">
-      <div class="container">
-        <div class="row">
+      <div class="py-3">
+        <div class="container">
+          <div class="row">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="py-3">
-      <div class="container">
-        <div class="row">
+      <div class="py-3">
+        <div class="container">
+          <div class="row">
+          </div>
         </div>
       </div>
-    </div>
 
-       <div class="container-fluid">
+      <div class="container-fluid">
         <div class="row">
         </div>
-      <div class="table-responsive">         
-      <table class="table table-hover">
- 
-      <thead class="thead-dark">
-                                                <tr>
-                                                    <th class="">Student ID</th>
-                                                    <th>Student Name</th>
-                                                    <th>Student Matric</th>
-                                                    <th>Attendance</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                    $sql = "SELECT * FROM tb_attendance 
-                                                            LEFT JOIN tb_user ON tb_attendance.student_id = tb_user.u_id
-                                                            LEFT JOIN tb_student ON tb_attendance.student_id = tb_student.u_id
-                                                            LEFT JOIN tb_subject ON tb_attendance.class_id = tb_subject.subject_id
-                                                            WHERE subject_code='$id'";
-                                                            
-                                                    $result = mysqli_query($con,$sql);
-                                                    while($row=mysqli_fetch_array($result))
-                                                    {
-                                                        echo "<tr>";
-                                                        echo "<td>".$row['u_id']."</td>";
-                                                        echo "<td>".$row['student_name']."</td>";
-                                                        echo "<td>".$row['student_matric']."</td>";
-                                                        echo "<td>".$row['attendance_timestamp']."</td>";
-                                                        echo "</tr>";
-                                                    }
-                                                ?>
-                                            </tbody>
-      </table>
-    </div>
-  </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
 
- 
+            <thead class="thead-dark">
+              <tr>
+                <th class="">Student ID</th>
+                <th>Student Name</th>
+                <th>Student Matric</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $sql = "SELECT * FROM tb_attendance 
+                      LEFT JOIN tb_user ON tb_attendance.student_id = tb_user.u_id
+                      LEFT JOIN tb_student ON tb_attendance.student_id = tb_student.u_id
+                      LEFT JOIN tb_subject ON tb_attendance.class_id = tb_subject.subject_id
+                      -- LEFT JOIN tb_class ON tb_attendance.class_id = tb_class.section_id
+                      WHERE subject_code='$id' AND class_id='$section'";
 
-
-
+              $result = mysqli_query($con, $sql) or  die('Error:'.mysqli_error($con));
+              while ($row = mysqli_fetch_array($result)) {
+                echo "<tr>";
+                echo "<td>" . $row['u_id'] . "</td>";
+                echo "<td>" . $row['student_name'] . "</td>";
+                echo "<td>" . $row['student_matric'] . "</td>";
+                echo "<td>" . $row['attendance_timestamp'] . "</td>";
+                echo "</tr>";
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
-        <div class="modal fade" id="logout" role="dialog">
-        <div class="modal-dialog">
-                                                        
-            <!-- Modal content-->
+
+
+
+
+
+    </div>
+    <div class="modal fade" id="logout" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
         <div class="modal-content">
-        <div class="modal-header">
-        <h4 class="modal-title">Confirmation on Logout</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <div class="modal-header">
+            <h4 class="modal-title">Confirmation on Logout</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to log out from the system?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-labeled" data-dismiss="modal">No <i class="fa fa-times"></i></button>
+            <a href="../logout.php"><button type="submit" name="submit" class="btn btn-warning btn-labeled">Yes <span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button></a>
+          </div>
         </div>
-        <div class="modal-body">
-        <p>Are you sure you want to log out from the system?</p>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-labeled" data-dismiss="modal">No <i class="fa fa-times"></i></button>
-        <a href="../logout.php"><button type="submit" name="submit" class="btn btn-warning btn-labeled">Yes <span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button></a>
-        </div>
-        </div>                                                
-        </div>
-        </div>
-
-
-  <br> <br>
-       <?php include 'adminfooter.php' ?>
+      </div>
     </div>
+
+
+    <br> <br>
+    <?php include 'adminfooter.php' ?>
+  </div>
   </div>
 
   <script type="text/javascript">
     function ConfirmDelete() {
-        var x = confirm("Are you sure you want to delete?");
-        if (x)
-            return true;
-        else
-            return false;
+      var x = confirm("Are you sure you want to delete?");
+      if (x)
+        return true;
+      else
+        return false;
     }
   </script>
   <!--   Core JS Files   -->
