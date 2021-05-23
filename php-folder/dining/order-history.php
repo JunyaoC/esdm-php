@@ -8,16 +8,19 @@
     if($postjson['action'] == 'list_orderhistory') {
 
 
-        $query = mysqli_query($conn, "SELECT * FROM tb_order 
-                                        LEFT JOIN tb_restaurant ON tb_order.restaurant_id = tb_restaurant.restaurant_id
-                                        WHERE user_id = 2 ORDER BY order_status DESC
+        $query = mysqli_query($conn, "SELECT * FROM tb_order AS ord
+                -- LEFT JOIN tb_item_order AS iord ON iord.order_id=ord.order_id
+                -- LEFT JOIN tb_food ON tb_food.food_id=iord.food_id
+                -- LEFT JOIN tb_restaurant ON tb_food.restaurant_id=tb_restaurant.restaurant_id
+                WHERE ord.order_price!= '' 
+                ORDER BY order_status DESC
                                         ");
 
         $read_data = array();
 
         while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
             $data = array(
-                'restaurant_name' => $read['restaurant_name'],
+                // 'restaurant_name' => $read['restaurant_name'],
                 'order_date' => $read['order_date'],
                 'order_status' => $read['order_status'],
                 'order_price' => $read['order_price'],

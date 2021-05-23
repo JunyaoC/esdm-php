@@ -14,10 +14,12 @@
                 LEFT JOIN tb_food ON tb_food.food_id=tb_item_order.food_id
                 WHERE order_id='$order_id'";
 
-        $sql2 = "SELECT * FROM tb_order 
-                LEFT JOIN tb_restaurant ON tb_order.restaurant_id=tb_restaurant.restaurant_id
-                LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id
-                WHERE order_id='$order_id'";
+        $sql2 = "SELECT * FROM tb_order AS ord
+                LEFT JOIN tb_item_order ON tb_item_order.order_id=ord.order_id
+                LEFT JOIN tb_food ON tb_food.food_id=tb_item_order.food_id
+                LEFT JOIN tb_restaurant ON tb_food.restaurant_id=tb_restaurant.restaurant_id
+                LEFT JOIN tb_student ON tb_student.u_id = ord.user_id
+                WHERE ord.order_id='$order_id'";
 
         $query = mysqli_query($conn, $sql);
         $query2= mysqli_query($conn, $sql2);
