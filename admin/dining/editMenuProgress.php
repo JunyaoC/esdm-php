@@ -10,6 +10,7 @@
 
 
   //RETRIEVE INFO FROM POST
+  $food_id = $_POST['id'];
   $food_name = $_POST['foodName'];
   $food_restaurant = $_POST['foodRes'];
   $food_desc = $_POST['foodDesc'];
@@ -18,7 +19,7 @@
   $food_type = $_POST['foodType'];
   $pres = $_FILES['fileToUpload']['name'];
   $tname = $_FILES['fileToUpload']['tmp_name'];
-  $target = "../../../esdm-student-mobile/esdm-student-mobile/src/assets/food-image/".$food_name.".png";
+  $target = "../../../esdm-student-mobile/esdm-student-mobile/src/assets/food-image/".$food_id.".png";
   $fid = $_POST['id'];
 
 
