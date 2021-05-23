@@ -2,9 +2,9 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
-  if(isset($_GET['id']))
-  {
-      $id = $_GET['id'];
+  if (isset($_GET['id']) & ($_GET['section'])) {
+    $id = $_GET['id'];
+    $section = $_GET['section'];
   }
 
   $sql = "SELECT * FROM tb_section
@@ -132,18 +132,9 @@ $row=mysqli_fetch_array($result);
                       <label for="">Subject Name</label> 
                       <input type="text" class="form-control"  value="<?php echo $row['subject_name'];?>" readonly> 
                     </div>
-                    <div class="form-group">
-                    <label for="email">Select Section Id</label>
-                          <?php  
-                          $sqls="SELECT * FROM tb_class";
-                          $results = mysqli_query($con,$sqls);
-
-                          echo'<select class="form-control" id="sid" name="sid">';
-                          while($rows=mysqli_fetch_array($results)){
-                          echo"<option value='".$rows['section_id']."'>".$rows['section_id']."</option>";
-                          }
-                          echo'</select>';
-                          ?>
+                    <div class="form-group"> 
+                      <label for="">Section</label> 
+                      <input type="text" class="form-control"  value="<?php echo $section;?>" readonly> 
                     </div>
                     <div class="form-group"> 
                       <label for="pcname">Class Time</label> 
