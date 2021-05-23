@@ -114,16 +114,23 @@ $row=mysqli_fetch_array($result);
         </div>
         <link rel="stylesheet" href="css/style.css">
 <script src="script/ajax_generate_code.js"></script>
-<?php include('container.php');?>
 	<div class="container">		
 		<div class="row">
 			<div class="col-md-3">
 		        <form class="form-horizontal" method="post" id="codeForm" onsubmit="return false">
 		            <div class="form-group">
-		            	<label class="control-label">Code Content : </label>
-		            	<input class="form-control col-xs-1" id="content" type="text" required="required">
+		            	<label class="control-label">Subject Name: </label>
+                  <input type="hidden" class="form-control" id='content' 
+                  value=
+                  "<?php 
+                  echo $row['subject_name'];
+                  echo $row['class_id'];
+                  echo $row['subject_code'];
+                  echo $row['class_time'];
+                  echo $row['section_number'];
+                  ?>" readonly>
 		            </div>
-		            <div class="form-group">
+                <div class="form-group">
 		            	<label class="control-label">Code Level (ECC) : </label>
 		            	<select class="form-control col-xs-10" id="ecc">
 		            		<option value="H">H - best</option>
