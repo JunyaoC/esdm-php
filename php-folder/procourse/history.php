@@ -11,7 +11,8 @@
         $query = mysqli_query($conn, "SELECT rh.*,sc.*,c.*,s.* FROM tb_procourse_regHistory rh
         LEFT JOIN tb_procourse_section sc ON sc.courseSec_id=rh.procourse_sec
         LEFT JOIN tb_pro_course c ON sc.courseSec_courseID=c.procourse_code
-        WHERE rh.stu_id='$stu_matric'
+        INNER JOIN tb_student s on rh.stu_id=s.student_matric
+        WHERE s.student_matric='$stu_matric'
         ");
 
         $read_data = array();
