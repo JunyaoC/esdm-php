@@ -4,6 +4,7 @@
 
 $sqln = "SELECT * FROM tb_sticker
          LEFT JOIN tb_vehicle ON tb_vehicle.vehicleID = tb_sticker.vehiclePlateNo
+         LEFT JOIN tb_payment ON tb_payment.stickerID = tb_sticker.stickerID
          ";
 $resultn=mysqli_query($con,$sqln);
 
@@ -112,6 +113,7 @@ $resultn=mysqli_query($con,$sqln);
               <th>Student Matric</th>              
               <th>Vehicle Plate</th>
               <th>Sticker Date</th>
+              <th>Payment Proof</th>
               <th>Status</th>
               <th>Operation</th>
             </tr>
@@ -131,6 +133,7 @@ $resultn=mysqli_query($con,$sqln);
               echo "<td>".$rown['stuACID']."</td>";
               echo "<td>".$rown['vehiclePlateNo']."</td>";
               echo "<td>" .$ddate. "</td>";
+              echo "<td><a href='".$rown['paymentProve']."' target='_blank'> Download </a></td>";
               echo "<td>".$rown['stickerStatus']."</td>";
               echo "<td>";
                           echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
