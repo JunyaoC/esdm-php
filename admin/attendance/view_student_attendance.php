@@ -3,8 +3,6 @@ include('../dbconnection.php');
 include('../adminsession.php');
 
   $id = $_GET['id'];
-  $section = $_GET['section'];
-
 ?>
 
 <!DOCTYPE html>
@@ -116,14 +114,12 @@ include '../pages-styling.php';
               $sql = "SELECT * FROM tb_attendance 
                       LEFT JOIN tb_user ON tb_attendance.student_id = tb_user.u_id
                       LEFT JOIN tb_student ON tb_attendance.student_id = tb_student.u_id
-                      LEFT JOIN tb_subject ON tb_attendance.class_id = tb_subject.subject_id
-                      -- LEFT JOIN tb_class ON tb_attendance.class_id = tb_class.section_id
-                      WHERE subject_code='$id' AND class_id='$section'";
+                      WHERE class_id='$id'";
 
               $result = mysqli_query($con, $sql) or  die('Error:'.mysqli_error($con));
               while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>";
-                echo "<td>" . $row['u_id'] . "</td>";
+                echo "<td>" . $row['student_id'] . "</td>";
                 echo "<td>" . $row['student_name'] . "</td>";
                 echo "<td>" . $row['student_matric'] . "</td>";
                 echo "<td>" . $row['attendance_timestamp'] . "</td>";

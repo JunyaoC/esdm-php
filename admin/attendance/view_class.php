@@ -107,6 +107,8 @@ include '../pages-styling.php';
               <tr>
                 <th class="">Class ID</th>
                 <th>Class Time</th>
+                <th>Attendance Status</th>
+                <th>Generation</th>
                 <th>Operation</th>
                 <th>Attendance</th>
               </tr>
@@ -117,19 +119,29 @@ include '../pages-styling.php';
                       LEFT JOIN tb_subject ON tb_class.section_id = tb_subject.subject_id
                       LEFT JOIN tb_section ON tb_class.section_id = tb_section.section_id
                       WHERE  tb_class.section_id='$section'";
-
               
               $result = mysqli_query($con, $sql) or  die('Error:'.mysqli_error($con));
               while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>";
                 echo "<td>" . $row['class_id'] . "</td>";
                 echo "<td>" . $row['class_time'] . "</td>";
+                echo "<td>"; 
+                if ($row['class_attendance_open']=='1') {
+                  echo"open";          
+                }
+                else{
+                  echo"close";
+                }
+                 "</td>";
                 echo "<td>
-                    <a class='btn btn-primary' href='create_qr.php?id=".$row['class_id']."'>Generate</a>
+                    <a class='btn btn-info' href='create_qr.php?id=".$row['class_id']."'>Generate</a>
                     </td>";
                     echo "<td>
                     <a class='btn btn-primary' href='attendance_open.php?id=".$row['class_id']."&section=".$row['section_number']."'>Open</a>
                     <a class='btn btn-warning' href='attendance_close.php?id=".$row['class_id']."&section=".$row['section_number']."'>Close</a>
+                     </td>";
+                     echo "<td>
+                     <a class='btn btn-success' href='view_student_attendance.php?id=".$row['class_id']."'>View</a>
                      </td>";
                 echo "</tr>";
               }
