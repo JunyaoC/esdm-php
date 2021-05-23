@@ -23,7 +23,7 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="active">
+          <li >
             <a>
               <p>Pro Course</p>
             </a>
@@ -34,7 +34,7 @@
               <p>Manage Pro Course</p>
              </a>
           </li>
-          <li>
+          <li class="active">
             <a href="../procourse/sectionlist.php">
               <i class="fa fa-bars"></i>
               <p>Manage Section</p>
@@ -43,7 +43,7 @@
           <li>
             <a href="../procourse/studentlist.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Student</p>
+              <p>Manage Appointment</p>
             </a>
           </li>
           <li>
