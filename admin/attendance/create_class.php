@@ -132,15 +132,11 @@ $row=mysqli_fetch_array($result);
                       <input type="text" class="form-control"  value="<?php echo $row['subject_name'];?>" readonly> 
                     </div>
                     <div class="form-group"> 
-                      <label for="">Section</label> 
-                      <input type="text" class="form-control"  value="<?php echo $section;?>" readonly> 
-                    </div>
-                    <div class="form-group"> 
-                      <label for="">Section Number</label> 
-                      <input type="text" class="form-control" id="sid" name="section number" value="<?php echo $row['section_number'];?>" > 
+                       
+                      <input type="hidden" class="form-control" id="sid" name="sid" value="<?php echo $row['section_id'];?>" readonly > 
                     </div>
                     <div class="form-group" id="confirmationForm">
-                      <label for="fpdate">Pickup date</label>
+                      <label for="fpdate">Class Time</label>
                       <input type="datetime-local" class="form-control" id="ctime"  name="ctime" min="<?= date('Y-m-d'); ?>" required>
                     </div>
 
