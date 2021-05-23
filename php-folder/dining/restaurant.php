@@ -8,7 +8,7 @@
     if($postjson['action'] == 'list_restaurant') {
 
 
-        $query = mysqli_query($conn, "SELECT * FROM tb_restaurant");
+        $query = mysqli_query($conn, "SELECT * FROM tb_restaurant WHERE restaurant_status = '1'");
 
         $read_data = array();
 

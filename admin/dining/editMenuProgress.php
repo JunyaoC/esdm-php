@@ -37,7 +37,13 @@
 
   }
   else{
-    echo 'Error';
+      $sql = "UPDATE tb_food SET food_name = '$food_name', restaurant_id = '$food_restaurant', food_description = '$food_desc', 
+          food_availability = '$food_availability', food_price = '$food_price', food_type = '$food_type' WHERE food_id = '$fid'";
+
+        mysqli_query($con, $sql);
+        mysqli_close($con);
+        
+        header("Location:menuPage.php");
   }
 
 

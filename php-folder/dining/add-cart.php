@@ -7,12 +7,12 @@
     $total_price = $postjson['total'];
     $item_quantity = $postjson['item_quantity'];
     $status = 'In Cart';
-    $user_id = '2';
+    $student_id = $postjson['student_id'];
 
     if($postjson['action'] == 'add_cart') {
 
         //read item order
-        $sql = "INSERT INTO tb_item_order(food_id,user_id,item_quantity,totalprice,status)VALUES ('$food_id','$user_id','$item_quantity','$total_price','$status')";
+        $sql = "INSERT INTO tb_item_order(food_id,user_id,item_quantity,totalprice,status)VALUES ('$food_id','$student_id','$item_quantity','$total_price','$status')";
 
         mysqli_query($conn, $sql);
 
