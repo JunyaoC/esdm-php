@@ -67,6 +67,32 @@
 
         echo $result;
 
+    }elseif($postjson['action'] == 'issue_delete') {
+    	$id=$postjson['id'];
+
+        $delete = mysqli_query($conn, "DELETE FROM `tb_procourse_issue` WHERE `tb_procourse_issue`.`issue_id` = '$id'");
+
+        if($delete) {
+			$result = json_encode(array('success'=>true, 'msg'=>'success'));
+		} else {
+			$result = json_encode(array('success'=>false, 'msg'=>'fail'));
+		}
+
+		echo $result;
+
+    }elseif($postjson['action'] == 'edit_issue') {
+    	$sid=$postjson['sid'];
+
+        $update = mysqli_query($conn, "UPDATE tb_procourse_issue SET stu_matric = '$postjson[matric]', issue_title = '$postjson[title]', issue_details = '$postjson[content]', issue_date = '$today', issue_status = '0' WHERE `tb_procourse_issue`.`issue_id` = '$sid'");
+
+        if($update) {
+			$result = json_encode(array('success'=>true, 'msg'=>'success'));
+		} else {
+			$result = json_encode(array('success'=>false, 'msg'=>'fail'));
+		}
+
+		echo $result;
+
     }
 
 ?>
