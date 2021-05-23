@@ -172,7 +172,7 @@ include '../pages-styling.php';
       <div class="modal-content">
       <!-- Modal Header -->
         <div class="modal-header">
-          <h4 style="align-self: "> Open Attendance </h4>
+          <h4> Open Attendance</h4>
           <button type="button btn-primary" class="close" data-dismiss="modal">×</button>
         </div>
         <!-- Modal body -->
@@ -197,7 +197,6 @@ include '../pages-styling.php';
         <button type="submit" class="button btn-info">Update</button>
         </form>
         </select>
-
         <button type="button" class="button btn-danger" data-dismiss="modal">Close</button>
         </div>         
             </div>
