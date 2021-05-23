@@ -8,6 +8,10 @@
 
 <?php 
   include '../pages-styling.php';
+  if(isset($_GET['id']))
+  {
+      $id=$_GET['id'];
+  }
 ?>
 
 <body>
@@ -103,30 +107,29 @@
                     <div>
                         <h3> Student Registered List</h3>
                     </div>
-                    <div class="ml-auto mr-3"> 
+                    <div class="ml-auto mr-3">
+                    <a href='studentlist.php'><button class='btn btn-info' >Back</button></a> 
                     </div>
                 </div>
                 <div class="py-3 col bg-light border">
                     <table id="program" class="display">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
-                                <th>ID</th>
-                                <th>ProCourse</th>
-                                <th>Section</th>
-                                <th>Date</th>
-                                <th>Facilitator</th>
-                                <th>Location</th>
-                                <th>Seat</th>
-                                <th>Status</th>
+                                <th>No.</th>
+                                <th>Matric</th>
+                                <th>Name</th>
+                                <th>Registration Date</th>
                                 <th>Operation</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT cs.*,f.*,c.* FROM tb_procourse_section cs
-                                        LEFT JOIN tb_procourse_fac f ON cs.courseSec_fac = f.fac_id
-                                        LEFT JOIN tb_pro_course c ON c.procourse_code=cs.courseSec_courseID 
-                                        ORDER BY c.procourse_code,cs.section_no";
+                            $today=date('Y-m-d');
+                                $sql = "SELECT * FROM tb_procourse_regHistory
+                                        LEFT JOIN tb_student ON tb_procourse_regHistory.stu_id = tb_student.student_matric
+                                        LEFT JOIN tb_procourse_section ON tb_procourse_regHistory.procourse_sec=tb_procourse_section.courseSec_id
+                                        LEFT JOIN tb_pro_course ON tb_procourse_section.courseSec_courseID=tb_pro_course.procourse_code
+                                        WHERE tb_procourse_section.courseSec_id=$id ORDER BY tb_procourse_regHistory.reg_date";
                                 
                                 $result = mysqli_query($con,$sql);
                                 $count=0;
@@ -134,25 +137,20 @@
                                 {
                                     $count=$count+1;
                                     echo "<tr>";
-                                        echo "<td>".$count.".</td>";
-                                        echo "<td><span style='color:#5C001E;'>".$row['courseSec_courseID']."</span><br>".$row['procourse_name']."</td>";
-                                        echo "<td>".$row['section_no']."</td>";
-                                        echo "<td>".$row['courseSec_date']."</td>";
-                                        echo "<td>".$row['fac_name']."</td>";
-                                        echo "<td>".$row['courseSec_loc']."</td>";
-                                        echo "<td>".$row['courseSec_seat']."/".$row['courseSec_maxseat']."</td>";
-                                        if($row['courseSec_seat'] == $row['courseSec_maxseat'])
-                                        {
-                                            echo "<td>FULL</td>";
-                                        }
-                                        else
-                                        {
-                                            echo "<td>AVAILABLE</td>";
-                                        }
-
+                                    echo "<td>".$count.".</td>";
+                                    echo "<td>".$row['stu_id']."</td>";
+                                    echo "<td>".$row['student_name']."</td>";
+                                    echo "<td>".$row['reg_date']."</td>";
+                                   if($row['courseSec_date']>$today)
+                                   {
                                         echo "<td>
-                                                <a class='btn btn-secondary' href='viewstulist.php?id=".$row['courseSec_id']."'>View</a>
-                                            </td>";
+                                            <a onclick='return confirm(\"Are you sure you want to cancel booking?\")' class='btn btn-danger' href='studentdelete.php?id=".$row['regHis_id']."'>Delete</a>
+                                          </td>";
+                                   }
+                                   else{
+                                    echo "<td>None</td>";
+                                   }
+                                   
                                     echo "</tr>";
                                 }
                             ?>
@@ -162,7 +160,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
     <!-- Logout Modal-->                                
@@ -190,13 +187,13 @@
     <?php include '../adminfooter.php' ?>
 
     <script type="text/javascript">
-        function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete?");
-            if (x)
-                return true;
-            else
-                return false;
-        }
+        // function ConfirmDelete() {
+        //     var x = confirm("Are you sure you want to delete?");
+        //     if (x)
+        //         return true;
+        //     else
+        //         return false;
+        // }
     </script>
 
     <script>
