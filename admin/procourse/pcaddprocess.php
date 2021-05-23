@@ -10,8 +10,8 @@
     $pcobjective = $_POST['pcobjective']; 
     $pclearningoutcome = $_POST['pclearningoutcome']; 
 
-    $pcobjective=ucfirst(strtolower($pcobjective));
-    $pclearningoutcome=ucfirst(strtolower($pclearningoutcome));
+    $pcobjective=ucfirst($pcobjective);
+    $pclearningoutcome=ucfirst($pclearningoutcome);
     $pcname=strtoupper($pcname);
     $pccode=strtoupper($pccode);
     
