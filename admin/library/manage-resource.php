@@ -112,15 +112,15 @@ if (isset($_POST['Delete'])) {
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Category</th>
-                                                        <th>Title</th>
+                                                        <th style="text-align: center;">Category</th>
+                                                        <th style="text-align: center;">Title</th>
 
-                                                        <th>Author</th>
-                                                        <th>Date</th>
+                                                        <th style="text-align: center;">Author</th>
+                                                        <th style="text-align: center;">Date</th>
 
-                                                        <th>Update</th>
-                                                        <th>View</th>
-                                                        <th>Delete</th>
+                                                        <th style="text-align: center;">Update</th>
+                                                        <th style="text-align: center;">View</th>
+                                                        <th style="text-align: center;">Delete</th>
 
 
                                                     </tr>

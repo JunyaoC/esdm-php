@@ -206,13 +206,6 @@ if (isset($_POST['update'])) {
                                                     </div>
 
 
-                                                    <div class="form-group has-success">
-                                                        <label for="success" class="control-label">Resource uploaded Previously:</label>
-                                                        <div class="">
-                                                            <?php echo htmlentities($result->r_file); ?>
-
-                                                        </div>
-                                                    </div>
 
                                                     <div class="form-group has-success">
                                                         <div class="custom-file">
