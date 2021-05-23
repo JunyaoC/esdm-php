@@ -109,8 +109,8 @@
                     <?php
                       $sql = "SELECT * FROM tb_pro_course";
                       $result = mysqli_query($con,$sql);
-                      echo '<select class="custom-select" required="required" id="secprocourse" name="secprocourse">';
-                        echo '<option disabled="" selected="" >Select Pro Course</option>';
+                      echo '<select class="custom-select" id="secprocourse" name="secprocourse" required>';
+                        echo '<option disabled selected hidden>Select Pro Course</option>';
                         while($row=mysqli_fetch_array($result))
                         {
                           echo "<option value= '".$row['procourse_code']."'>".$row['procourse_name']. "</option> ";
@@ -118,21 +118,17 @@
                       echo '</select>';
                     ?>
                   </div>
-                  <div class="form-group">
-                    <label for="secno">Section Number</label>
-                    <input type="number" class="form-control" id="secno" required="required" name="secno">
-                  </div>
                   <div class="form-group"> 
                     <label for="secdate">Date</label> 
-                    <input type="date" class="form-control" required="required" id="secdate" name="secdate"> 
+                    <input type="date" class="form-control" required="required" min="<?php echo date('Y-m-d'); ?>" id="secdate" name="secdate"> 
                   </div>
                   <div class="form-group">
                     <label for="secfacilitator">Facilitator</label>
                     <?php
                       $sql = "SELECT * FROM tb_procourse_fac";
                       $result = mysqli_query($con,$sql);
-                      echo '<select class="custom-select" required="required" id="secfacilitator" name="secfacilitator">';
-                        echo '<option disabled="" selected="" >Select Facilitator</option>';
+                      echo '<select class="custom-select"  id="secfacilitator" name="secfacilitator" required>';
+                        echo '<option disabled="" selected="" hidden>Select Facilitator</option>';
                         while($row=mysqli_fetch_array($result))
                         {
                           echo "<option value= '".$row['fac_id']."'>".$row['fac_name']. "</option> ";
@@ -145,12 +141,8 @@
                     <input type="text" class="form-control" required="required" id="seclocation" name="seclocation"> 
                   </div>
                   <div class="form-group">
-                    <label for="secseat">Seat</label>
-                    <input type="number" class="form-control" id="secseat" required="required" name="secseat">
-                  </div>
-                  <div class="form-group">
                     <label for="secmaxseat">Maximum Seat</label>
-                    <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat">
+                    <input type="number" class="form-control" id="secmaxseat" min="1" name="secmaxseat" required>
                   </div>
                   <button type="submit" class="btn btn-primary">Add</button>
                   <button onclick='goBack()' class="btn btn-danger">Go Back</button>

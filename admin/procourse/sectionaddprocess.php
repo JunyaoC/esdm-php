@@ -4,17 +4,34 @@
     include('../adminsession.php');
 
     //retrieve info from form and session 
-    $secno = $_POST['secno']; 
+    // $secno = $_POST['secno']; 
     $secdate = $_POST['secdate']; 
     $seclocation = $_POST['seclocation']; 
     $secprocourse = $_POST['secprocourse']; 
     $secfacilitator = $_POST['secfacilitator']; 
-    $secseat = $_POST['secseat']; 
+    $secseat = 0; 
     $secmaxseat = $_POST['secmaxseat']; 
+    
+    $sqlseat="SELECT * FROM tb_procourse_section WHERE courseSec_courseID='$secprocourse'";
+    $result=mysqli_query($con,$sqlseat);
+    $row=mysqli_num_rows($result);
+    if($row>0)
+    {
+        $sqls="SELECT MAX(section_no) as sec_max FROM tb_procourse_section WHERE courseSec_courseID='$secprocourse'";
+        $results=mysqli_query($con,$sqls);
+        while($rows=mysqli_fetch_array($results))
+        {
+            $secno=$rows['sec_max']+1;
+        }
+        
+    }
+    else if($row==0){
+        $secno=1;
+    }
 
-    //SQL INSERT 
+    // SQL INSERT 
     $sql = "INSERT INTO tb_procourse_section (section_no, courseSec_date, courseSec_loc, courseSec_courseID, courseSec_fac, courseSec_seat, courseSec_maxseat)
-            VALUES ('$secno','$secdate','$seclocation','$secprocourse','$secfacilitator','$secseat','$secmaxseat')";
+            VALUES ($secno,'$secdate','$seclocation','$secprocourse','$secfacilitator',$secseat,$secmaxseat)";
 
     //check SQL output
     var_dump($sql);
