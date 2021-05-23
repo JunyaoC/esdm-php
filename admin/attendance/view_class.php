@@ -2,10 +2,8 @@
 include('../dbconnection.php');
 include('../adminsession.php');
 
-if (isset($_GET['id']) & ($_GET['section'])) {
   $id = $_GET['id'];
   $section = $_GET['section'];
-}
 
 ?>
 

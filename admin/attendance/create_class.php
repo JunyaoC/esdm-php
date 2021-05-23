@@ -2,16 +2,15 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
-  if (isset($_GET['id']) & ($_GET['section'])) {
     $id = $_GET['id'];
     $section = $_GET['section'];
-  }
+
 
   $sql = "SELECT * FROM tb_section
   -- LEFT JOIN tb_class ON tb_section.section_id = tb_class.section_id
   LEFT JOIN tb_subject ON tb_section.subject_id = tb_subject.subject_id
   LEFT JOIN tb_user ON tb_section.lecturer_id =  tb_user.u_id
-  WHERE subject_code = '$id' 
+  WHERE subject_code = '$id' AND section_id='$section'
  ";
 $result = mysqli_query($con,$sql);
 
@@ -132,14 +131,14 @@ $row=mysqli_fetch_array($result);
                       <input type="text" class="form-control"  value="<?php echo $row['subject_name'];?>" readonly> 
                     </div>
                     <div class="form-group"> 
-                       
-                      <input type="text" class="form-control" id="sid" name="sid" value="<?php echo $row['section_id'];?>" readonly > 
+                    <label for="">Section Number</label> 
+                      <input type="text" class="form-control" value="<?php echo $row['section_number'];?>" readonly > 
                     </div>
                     <div class="form-group" id="confirmationForm">
                       <label for="fpdate">Class Time</label>
                       <input type="datetime-local" class="form-control" id="ctime"  name="ctime" required>
                     </div>
-
+                    <input hidden type="text" class="form-control" id="sid" name="sid" value="<?php echo $row['section_id'];?>" readonly > 
                     <button type="submit" class="btn btn-primary" onclick="myFunction()">CREATE</button>
                     <!-- <a class='btn btn-secondary' href='create_qr.php'>Generate QR Code</a> -->
                   </form>
