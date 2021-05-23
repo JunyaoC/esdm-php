@@ -122,7 +122,7 @@
                   <?php echo '<form class="" method="post" action="pcupdateprocess.php?id='.$id.'">'; ?>
                     <div class="form-group"> 
                       <label for="pccode">Pro Course Code</label> 
-                      <input type="text" class="form-control" id="pccode" name="pccode" required="required" value="<?php echo $row['procourse_code'];?>"> 
+                      <input type="text" class="form-control" id="pccode" name="pccode" disabled="" value="<?php echo $row['procourse_code'];?>"> 
                     </div>
                     <div class="form-group"> 
                       <label for="pcname">Pro Course Name</label> 
@@ -131,9 +131,19 @@
                     <div class="form-group">
                       <label>Pro Course Type</label>
                       <select class="custom-select" id="pctype" name="pctype" required="required">
-                        <option selected="selected"><?php echo $row['procourse_type'];?></option>
-                        <option value="Compulsory">Compulsory</option>
-                        <option value="Elective">Elective</option>
+                        <?php
+                          if($row['procourse_type']=='Compulsory'){
+                            ?>
+                            <option selected="selected" value="<?php echo $row['procourse_type'];?>"><?php echo $row['procourse_type'];?></option>
+                            <option value="Elective">Elective</option>
+                            <?php
+                          }else{
+                            ?>
+                            <option selected="selected" value="<?php echo $row['procourse_type'];?>"><?php echo $row['procourse_type'];?></option>
+                            <option value="Compulsory">Compulsory</option>
+                            <?php
+                          }
+                        ?>
                       </select>
                     </div>
                     <div class="form-group">
@@ -144,6 +154,7 @@
                       <label for="pclearningoutcome">Pro Course Learning Outcome</label>
                       <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"><?php echo $row['procourse_learningOut'];?></textarea>
                     </div>
+                    <input type="hidden"  id="pccode" name="pccode" value="<?php echo $row['procourse_code'];?>"> 
                     <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
                     <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
                   </form>

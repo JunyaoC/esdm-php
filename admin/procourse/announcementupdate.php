@@ -45,7 +45,7 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="active">
+          <li >
             <a>
               <p>Pro Course</p>
             </a>
@@ -65,7 +65,7 @@
           <li>
             <a href="../procourse/studentlist.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Student</p>
+              <p>Manage Appointment</p>
             </a>
           </li>
           <li>
@@ -74,7 +74,7 @@
               <p>Manage Issue</p>
             </a>
           </li>
-          <li>
+          <li class="active">
             <a href="../procourse/announcement.php">
                 <i class="fa fa-bars"></i>
                 <p>Manage Announcement</p>
@@ -127,7 +127,7 @@
                 <div class="card-header bg-secondary text-white"><h2>Update Announcement</h2></div>
                 <div class="card-body">
                   <div class="col-md-12 p-4 border rounded">
-                  <?php echo '<form class="" method="post" action="announcementaddprocess.php?id='.$user_id.'">'; ?>
+                  <?php echo '<form class="" method="post" action="announcementupdateprocess.php?id='.$user_id.'">'; ?>
                       <div class="form-group">
                         <label for="userid">Admin</label>
                         <input class="form-control" type="text" id="userid" name="userid" value="<?php echo $row['u_name']; ?>" readonly></input>                  

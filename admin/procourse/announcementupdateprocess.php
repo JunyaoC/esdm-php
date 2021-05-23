@@ -10,9 +10,7 @@
     $adetail = $_POST['adetail']; 
 
     //SQL INSERT 
-    $sql = "UPDATE tb_pro_announcement 
-            SET an_title='$atitle', an_detail='$adetail'
-            WHERE an_id = '$aid'";
+    $sql = "UPDATE `tb_pro_announcement` SET `an_title` = '$atitle', `an_detail` = '$adetail'  WHERE `tb_pro_announcement`.`an_id` = '$aid'";
 
     //check SQL output
     //var_dump($sql);

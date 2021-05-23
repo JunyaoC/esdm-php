@@ -130,7 +130,7 @@
                           $result2 = mysqli_query($con,$sql2);
                           $result2a = mysqli_query($con,$sql2);
                           $row2a=mysqli_fetch_array($result2a);
-                          echo '<select class="custom-select" required="required" id="secprocourse" name="secprocourse">';
+                          echo '<select class="custom-select" disabled id="secprocourse" name="secprocourse">';
                             echo '<option selected="selected" value="'.$row2a['procourse_code'].'" >'; echo $row2a['procourse_name']; echo '</option>';
                             while($row2=mysqli_fetch_array($result2))
                             {
