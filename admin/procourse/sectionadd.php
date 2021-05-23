@@ -100,7 +100,8 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header bg-secondary text-white"><h3>Add Section</h3></div>
+            <div class="card-header bg-secondary text-white"><h3>Add Section
+              <button onclick='goBack()' class="btn btn-danger pull-right">CANCEL</button></h3></div>
             <div class="card-body">
             <div class="col-md-12 p-4 border rounded">
                 <form class="" method="post" action="sectionaddprocess.php">
@@ -145,7 +146,6 @@
                     <input type="number" class="form-control" id="secmaxseat" min="1" name="secmaxseat" required>
                   </div>
                   <button type="submit" class="btn btn-primary">Add</button>
-                  <button onclick='goBack()' class="btn btn-danger">CANCEL</button>
                 </form>
               </div>
             </div>

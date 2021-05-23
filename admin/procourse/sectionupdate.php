@@ -119,7 +119,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header bg-secondary text-white"><h2>Update Pro Course Section</h2></div>
+                <div class="card-header bg-secondary text-white"><h2>Update Pro Course Section
+                  <button onclick='goBack()' class="btn btn-danger pull-right">CANCEL</button></h2></div>
                 <div class="card-body">
                 <div class="col-md-12 p-4 border rounded">
                 <?php echo '<form class="" method="post" action="sectionupdateprocess.php?id='.$id.'">'; ?>
@@ -176,7 +177,6 @@
                         <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat" min="<?php echo $row['courseSec_seat'];?>" value="<?php echo $row['courseSec_maxseat'];?>">
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
-                      <button onclick='goBack()' class="btn btn-danger">CANCEL</button>
                     </form>
                   </div>
                 </div>
