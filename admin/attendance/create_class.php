@@ -8,7 +8,7 @@
   }
 
   $sql = "SELECT * FROM tb_section
-  LEFT JOIN tb_class ON tb_section.section_id = tb_class.section_id
+  -- LEFT JOIN tb_class ON tb_section.section_id = tb_class.section_id
   LEFT JOIN tb_subject ON tb_section.subject_id = tb_subject.subject_id
   LEFT JOIN tb_user ON tb_section.lecturer_id =  tb_user.u_id
   WHERE subject_code = '$id' 
@@ -137,7 +137,7 @@ $row=mysqli_fetch_array($result);
                     </div>
                     <div class="form-group" id="confirmationForm">
                       <label for="fpdate">Class Time</label>
-                      <input type="datetime-local" class="form-control" id="ctime"  name="ctime" min="<?= date('Y-m-d'); ?>" required>
+                      <input type="datetime-local" class="form-control" id="ctime"  name="ctime" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary" onclick="myFunction()">CREATE</button>

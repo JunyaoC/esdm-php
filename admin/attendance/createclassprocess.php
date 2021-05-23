@@ -6,16 +6,14 @@
 
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-       
       }
     //retrieve info from form and session 
     $ctime = $_POST['ctime']; 
     $sid = $_POST['sid']; 
     
-
-    $ctime=date('Y-m-d h:i:s');
-    
- 
+    // $ctime = localtime();
+    // $ctime=date('Y-m-d h:i:s');
+  
     //SQL INSERT 
 
     $sql = "INSERT INTO tb_class(section_id,class_time) VALUES ('$sid','$ctime')
