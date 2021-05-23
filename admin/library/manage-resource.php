@@ -46,6 +46,21 @@ if (isset($_POST['Delete'])) {
             -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
             box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
         }
+        .error{
+            color: #fff;
+            background-color: #de403b;
+            border-color: black; 
+        }
+        .primary{
+            color: #fff;
+            background-color: #337ab7;
+            border-color: black; 
+        }
+        .success{
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: black; 
+        }
     </style>
 </head>
 
@@ -159,13 +174,13 @@ if (isset($_POST['Delete'])) {
 
 
                                                                 <td >
-                                                                    <button><a href="edit-resource.php?r_id=<?php echo htmlentities($result->r_id); ?>"><i class="fa fa-edit" title="Edit Record"></i> </a>
+                                                                    <button class="success"><a href="edit-resource.php?r_id=<?php echo htmlentities($result->r_id); ?>"><i class="fa fa-edit" title="Edit Record"></i> </a>
                                                                 </td>
                                                                 <td>
-                                                                    <button><a href="<?php echo htmlentities($result->r_file); ?>" target="_blank"><i class="fa fa-eye" title="View Record"></i> </a>
+                                                                    <button class="primary"><a href="<?php echo htmlentities($result->r_file); ?>" target="_blank"><i class="fa fa-eye" title="View Record"></i> </a>
                                                                 </td>
                                                                 <td>
-                                                               <button><a href="librarydelete.php?r_id=<?php echo htmlentities($result->r_id); ?>" onclick="return confirm('Confirm Delete?');"  ><i class="fa fa-trash" title="Delete Record"></i></a></button>
+                                                               <button class="error"><a href="librarydelete.php?r_id=<?php echo htmlentities($result->r_id); ?>" onclick="return confirm('Confirm Delete?');"  ><i class="fa fa-trash" title="Delete Record"></i></a></button>
                                                                 </td>
                                                             </tr>
 
