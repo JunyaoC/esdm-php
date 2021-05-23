@@ -127,8 +127,9 @@
           echo "<td>".$row['subject_name']."</td>";
           echo "<td>".$row['section_number']."</td>";
           echo "<td>
-             <a class='btn btn-secondary' href='create_class.php?id=".$row['subject_code']."&section=".$row['section_number']."'>Create</a><br><br>
-             <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_code']."&section=".$row['section_number']."'>Student</a>
+          <a class='btn btn-secondary' href='create_class.php?id=".$row['subject_code']."&section=".$row['section_number']."'>Create</a>
+          <a class='btn btn-primary' href='view_class.php?id=".$row['subject_code']."&section=".$row['section_id']."'>View</a><br><br>
+          <a class='btn btn-danger' href='view_student_attendance.php?id=".$row['subject_code']."&section=".$row['section_number']."'>Student</a>
               </td>";
           echo "</tr>";
         }

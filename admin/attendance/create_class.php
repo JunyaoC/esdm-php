@@ -133,7 +133,7 @@ $row=mysqli_fetch_array($result);
                     </div>
                     <div class="form-group"> 
                        
-                      <input type="hidden" class="form-control" id="sid" name="sid" value="<?php echo $row['section_id'];?>" readonly > 
+                      <input type="text" class="form-control" id="sid" name="sid" value="<?php echo $row['section_id'];?>" readonly > 
                     </div>
                     <div class="form-group" id="confirmationForm">
                       <label for="fpdate">Class Time</label>
@@ -141,7 +141,7 @@ $row=mysqli_fetch_array($result);
                     </div>
 
                     <button type="submit" class="btn btn-primary" onclick="myFunction()">CREATE</button>
-                    <a class='btn btn-secondary' href='create_qr.php'>Generate QR Code</a>
+                    <!-- <a class='btn btn-secondary' href='create_qr.php'>Generate QR Code</a> -->
                   </form>
                 </div>
               </div>

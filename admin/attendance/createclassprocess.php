@@ -18,7 +18,7 @@
  
     //SQL INSERT 
 
-    $sql = "INSERT INTO tb_class( section_id,class_time) VALUES ('$sid','$ctime')
+    $sql = "INSERT INTO tb_class(section_id,class_time) VALUES ('$sid','$ctime')
              ";
 
     //check SQL output
