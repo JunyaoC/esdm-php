@@ -121,7 +121,7 @@
                 <div class="card-header bg-secondary text-white"><h2>Reply Issue</h2></div>
                 <div class="card-body">
                   <div class="col-md-12 p-4 border rounded">
-                  <?php echo '<form class="" method="post" action="issuereplyprocess.php?id='.$id.'">'; ?>
+                  <?php echo '<form class="" method="post" action="issuerepledityprocess.php?id='.$id.'">'; ?>
                       <div class="form-group">
                         <label for="issueid">Issue ID</label>
                         <input class="form-control" type="text" id="replyid" name="replyid" value="<?php echo $row['issue_id']; ?>" readonly></input>                  
@@ -140,7 +140,7 @@
                       </div>
                       <div class="form-group">
                         <label for="issuereply">Reply</label>
-                        <textarea class="form-control" id="issuereply" name="issuereply" rows="4" placeholder="Enter you reply.."></textarea>
+                        <textarea class="form-control" id="issuereply" name="issuereply" rows="4" ><?php echo $row['issue_answer']; ?></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="myFunction()">Send</button>
                       <button href="issue.php" class="btn btn-danger">Cancel</button>
