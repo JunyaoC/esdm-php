@@ -9,7 +9,9 @@
     if($postjson['action'] == 'track_order') {
 
         //read item order
-        $sql = "SELECT * FROM tb_order WHERE order_id= '$order_id' ";
+        $sql = "SELECT * FROM tb_order 
+                LEFT JOIN tb_restaurant ON tb_order.restaurant_id = tb_restaurant.restaurant_id
+                WHERE order_id= '$order_id' ";
 
         $query = mysqli_query($conn, $sql);
 
@@ -17,7 +19,11 @@
 
         while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
             $data = array(
-               'order_date' => $read['order_date'],      
+                'restaurant_name'=> $read['restaurant_name'],
+                'order_date' => $read['order_date'],   
+                'restaurant_address'   => $read['restaurant_address'], 
+                'food_totalprice'  => $read['order_price'], 
+                'order_status' => $read['order_status'], 
             );
             array_push($read_data,$data);
         }
