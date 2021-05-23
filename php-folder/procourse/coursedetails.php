@@ -4,9 +4,9 @@
 
     $postjson = json_decode(file_get_contents('php://input'), true);
     $today = date('Y-m-d');
-    $id=$postjson['id'];
+    
     if($postjson['action'] == 'list_procourse') {
-
+        $id=$postjson['id'];
 
         $query = mysqli_query($conn, "SELECT * FROM tb_pro_course WHERE procourse_code='$id'");
 
@@ -30,7 +30,7 @@
     }
 
     if($postjson['action'] == 'list_section') {
-
+        $id=$postjson['id'];
 
         $query = mysqli_query($conn, "SELECT c.*,sc.*,f.* FROM tb_pro_course c 
         LEFT JOIN tb_procourse_section sc  ON sc.courseSec_courseID=c.procourse_code
@@ -65,24 +65,20 @@
     if($postjson['action'] == 'register') {
         $seat=$postjson['seat'];
         $sec_id=$postjson['course_section'];
+        $procourse_code=$postjson['procourse_code'];
+        $sql="SELECT rh.*,cs.* FROM tb_procourse_regHistory rh LEFT JOIN tb_procourse_section cs ON rh.procourse_sec=cs.courseSec_id WHERE cs.courseSec_courseID='$procourse_code' AND rh.stu_id='$postjson[student]'";
+        $result=mysqli_query($conn,$sql);
+        if (mysqli_num_rows($result)==0) {
+			$insert = mysqli_query($conn, "INSERT INTO tb_procourse_regHistory SET stu_id = '$postjson[student]', procourse_sec = '$postjson[course_section]', reg_date = '$today'");
+            $update = mysqli_query($conn, "UPDATE tb_procourse_section SET courseSec_seat = $seat WHERE courseSec_id =$sec_id");
 
-		$insert = mysqli_query($conn, "INSERT INTO tb_procourse_regHistory SET stu_id = '$postjson[student]', procourse_sec = '$postjson[course_section]', reg_date = '$today'");
-        $update = mysqli_query($conn, "UPDATE tb_procourse_section SET courseSec_seat = $seat WHERE courseSec_id =$sec_id");
-
-		if($insert) {
-			$result = json_encode(array('success'=>true, 'msg'=>'Success to register'));
-		} else {
-			$result = json_encode(array('success'=>false, 'msg'=>'Fail to register'));
-		}
-
-        if($update) {
-			$result1 = json_encode(array('success'=>true, 'msg'=>'Success to key in'));
-		} else {
-			$result1 = json_encode(array('success'=>false, 'msg'=>'Fail to key in'));
-		}
-
+            $result = json_encode(array('success'=>true, 'msg'=>'success'));
+		} 
+        else {
+            $result = json_encode(array('success'=>false, 'msg'=>'fail'));
+        }
 		echo $result;
-        echo $result1;
+
 	}
 
 
