@@ -118,7 +118,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header bg-secondary text-white"><h2>Reply Issue</h2></div>
+                <div class="card-header bg-secondary text-white"><h2>Reply Issue
+                  <button onclick='goBack()' class="btn btn-danger pull-right">CANCEL</button></h2></div>
                 <div class="card-body">
                   <div class="col-md-12 p-4 border rounded">
                   <?php echo '<form class="" method="post" action="issuereplyprocess.php?id='.$id.'">'; ?>
@@ -143,7 +144,7 @@
                         <textarea class="form-control" id="issuereply" name="issuereply" rows="4" placeholder="Enter you reply.."></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="myFunction()">Send</button>
-                      <button href="issue.php" class="btn btn-danger">Cancel</button>
+                      
                     </form>
                   </div>
                 </div>
@@ -182,6 +183,11 @@
       alert("Successfully send reply");
     }
 </script>
+  <script>
+    function goBack() {
+        window.history.back();
+    }
+  </script>
 
 <!--   Pingendo  -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

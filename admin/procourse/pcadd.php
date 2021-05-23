@@ -110,7 +110,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header bg-secondary text-white"><h2>Add Pro Course</h2></div>
+                <div class="card-header bg-secondary text-white"><h2>Add Pro Course
+                  <button onclick='goBack()' class="btn btn-danger pull-right">CANCEL</button></h2></div>
                 <div class="card-body">
                   <div class="col-md-12 p-4 border rounded">
                     <form class="" method="post" action="pcaddprocess.php">
@@ -139,7 +140,7 @@
                         <textarea class="textarea" id="pclearningoutcome" name="pclearningoutcome" rows="3" required></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="myFunction()">ADD</button>
-                      <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
+                      
                     </form>
                   </div>
                 </div>

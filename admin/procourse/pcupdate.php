@@ -124,7 +124,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-secondary text-white"><h2>Update Pro Course</h2></div>
+              <div class="card-header bg-secondary text-white"><h2>Update Pro Course
+                <button onclick='goBack()' class="btn btn-danger pull-right">CANCEL</button></h2></div>
               <div class="card-body">
                 <div class="col-md-12 p-4 border rounded">
                   <?php echo '<form class="" method="post" action="pcupdateprocess.php?id='.$id.'">'; ?>
@@ -164,7 +165,6 @@
                     </div>
                     <input type="hidden"  id="pccode" name="pccode" value="<?php echo $row['procourse_code'];?>"> 
                     <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
-                    <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
                   </form>
                 </div>
               </div>
