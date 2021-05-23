@@ -9,7 +9,7 @@
     if($postjson['action'] == 'list_food') {
 
         //read item order
-        $sql = "SELECT * FROM tb_food WHERE restaurant_id='$restaurant_id'";
+        $sql = "SELECT * FROM tb_food WHERE restaurant_id='$restaurant_id' AND food_availability = '1' ";
 
         $query = mysqli_query($conn, $sql);
 

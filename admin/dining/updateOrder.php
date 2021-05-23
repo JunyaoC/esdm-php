@@ -167,19 +167,42 @@
         echo '<select class="form-control" id="orderStatus" name="orderStatus" style="min-height:40px;">';
         while($rowstatus=mysqli_fetch_array($resultstatus))
           {
-            if($rowstatus['order_status']==$row['order_status'])
+            if($rowstatus['order_status']=='Preparing')
             {
               
               echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
+               echo"<option value='Pick Up'>Pick Up</option>";
+              echo"<option value='Cancelled'>Cancelled</option>";
+              echo"<option value='Completed'>Completed</option>";
               
             }
-
-            else
+            else if($rowstatus['order_status']=='Pick Up')
             {
-              echo"<option value='".$rowstatus['order_status']."'>".$rowstatus['order_status']."</option>";
+              
+              echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
+               echo"<option value='Preparing'>Preparing</option>";
+              echo"<option value='Cancelled'>Cancelled</option>";
+              echo"<option value='Completed'>Completed</option>";
               
             }
-         
+            else if($rowstatus['order_status']=='Cancelled')
+            {
+              
+              echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
+               echo"<option value='Preparing'>Preparing</option>";
+              echo"<option value='Pick Up'>Pick Up</option>";
+              echo"<option value='Completed'>Completed</option>";
+              
+            }
+            else if($rowstatus['order_status']=='Completed')
+            {
+              
+              echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
+               echo"<option value='Preparing>Preparing</option>";
+              echo"<option value='Pick Up'>Pick Up</option>";
+              echo"<option value='Cancelled'>Cancelled</option>";
+              
+            }         
           }
 
         echo'</select>';

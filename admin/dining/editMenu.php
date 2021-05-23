@@ -148,7 +148,14 @@
         echo '<select class="form-control" id="foodRes" name="foodRes" style="min-height:40px;">';
         while($row2=mysqli_fetch_array($resultstatus))
           {
-            echo"<option selected='selected' value='".$row2['restaurant_id']."'>".$row2['restaurant_name']."</option>";
+            if($row2['restaurant_id']==$row['restaurant_id'])
+            {
+              echo"<option selected='selected' value='".$row2['restaurant_id']."'>".$row2['restaurant_name']."</option>";
+            }
+            else{
+              echo"<option value='".$row2['restaurant_id']."'>".$row2['restaurant_name']."</option>";
+            }
+            
           }
         echo'</select>';
 

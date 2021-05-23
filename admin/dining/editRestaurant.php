@@ -155,7 +155,7 @@
 
       <?php
 
-        $sqlstatus="SELECT * FROM tb_restaurant";
+        $sqlstatus="SELECT DISTINCT(restaurant_status) FROM tb_restaurant";
         $resultstatus=mysqli_query($con,$sqlstatus);
 
         echo '<select class="form-control" id="restaurantStatus" name="restaurantStatus" style="min-height:40px;">';
@@ -168,9 +168,18 @@
                 echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Active</option>";
               }
               else{
-                echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Not Active</option>";
+                echo"<option value='".$rowstatus['restaurant_status']."'>Not Active</option>";
               }
               
+            }
+            else{
+              if($rowstatus['restaurant_status']==1)
+                {
+                  echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Active</option>";
+                }
+              else{
+                echo"<option value='".$rowstatus['restaurant_status']."'>Not Active</option>";
+              }
             }
          
           }
