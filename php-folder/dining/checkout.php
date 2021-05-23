@@ -7,13 +7,15 @@
     $order_status = 'Preparing';
     $user_id = '2';
 
+    $order_price = $postjson['totalPrice'];
+
     if($postjson['action'] == 'checkout') {
 
         //read item order
-        $sql = "INSERT INTO tb_order(order_status,user_id)VALUES ('$order_status','$user_id')";
+        $sql = "INSERT INTO tb_order(order_status,order_price,user_id)VALUES ('$order_status','$order_price', '$user_id')";
         mysqli_query($conn, $sql);
 
-
+        
         $sql2 = "SELECT * FROM tb_order WHERE order_id=(SELECT max(order_id) FROM tb_order)";
         $result = mysqli_query($conn, $sql2);
         $row = mysqli_fetch_array($result); 
