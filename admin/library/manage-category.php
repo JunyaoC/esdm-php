@@ -105,8 +105,8 @@ include('includes/config.php');
                                                     <tr>
                                                     <th style="width: 10px;">#</th>
                                                         <th>Category Name</th>
-                                                        <th style="width: 100px;">Update </th>
-                                                        <th style="width: 100px;">Delete</th>
+                                                        <th style="width: 100px; text-align: center;">Update </th>
+                                                        <th style="width: 100px; text-align: center;">Delete</th>
 
                                                     </tr>
                                                 </thead>
