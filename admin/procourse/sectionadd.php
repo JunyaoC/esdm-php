@@ -138,7 +138,7 @@
                   </div>
                   <div class="form-group"> 
                     <label for="seclocation">Location</label> 
-                    <input type="text" class="form-control" required="required" id="seclocation" name="seclocation"> 
+                    <input type="text" class="form-control" id="seclocation" name="seclocation" required> 
                   </div>
                   <div class="form-group">
                     <label for="secmaxseat">Maximum Seat</label>

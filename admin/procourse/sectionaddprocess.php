@@ -11,18 +11,24 @@
     $secfacilitator = $_POST['secfacilitator']; 
     $secseat = 0; 
     $secmaxseat = $_POST['secmaxseat']; 
-    
+    $seclocation=ucwords($seclocation);
     $sqlseat="SELECT * FROM tb_procourse_section WHERE courseSec_courseID='$secprocourse'";
     $result=mysqli_query($con,$sqlseat);
     $row=mysqli_num_rows($result);
     if($row>0)
     {
-        $sqls="SELECT MAX(section_no) as sec_max FROM tb_procourse_section WHERE courseSec_courseID='$secprocourse'";
-        $results=mysqli_query($con,$sqls);
-        while($rows=mysqli_fetch_array($results))
+        $num=1;
+        while($row=mysqli_fetch_array($result))
         {
-            $secno=$rows['sec_max']+1;
+            if($num==$row['section_no'])
+            {
+                $num=$num+1;
+            }
+            else{
+                break;
+            }
         }
+        $secno=$num;
         
     }
     else if($row==0){

@@ -130,7 +130,8 @@
                             <?php
                                 $sql = "SELECT cs.*,f.*,c.* FROM tb_procourse_section cs
                                         LEFT JOIN tb_procourse_fac f ON cs.courseSec_fac = f.fac_id
-                                        LEFT JOIN tb_pro_course c ON c.procourse_code=cs.courseSec_courseID";
+                                        LEFT JOIN tb_pro_course c ON c.procourse_code=cs.courseSec_courseID 
+                                        ORDER BY c.procourse_code,cs.section_no";
                                 
                                 $result = mysqli_query($con,$sql);
                                 $count=0;

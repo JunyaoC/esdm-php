@@ -124,24 +124,24 @@
                 <div class="col-md-12 p-4 border rounded">
                 <?php echo '<form class="" method="post" action="sectionupdateprocess.php?id='.$id.'">'; ?>
                       <div class="form-group">
-                        <label for="secprocourse">Pro Course</label>
+                        <label for="secprocourse">Pro Course</label><br>
                         <?php
-                          $sql2 = "SELECT * FROM tb_pro_course";
+                          $sql2 = "SELECT c.*,cs.* FROM tb_pro_course c LEFT JOIN tb_procourse_section cs ON c.procourse_code=cs.courseSec_courseID WHERE cs.courseSec_id=$id";
                           $result2 = mysqli_query($con,$sql2);
                           $result2a = mysqli_query($con,$sql2);
                           $row2a=mysqli_fetch_array($result2a);
-                          echo '<select class="custom-select" disabled id="secprocourse" name="secprocourse">';
-                            echo '<option selected="selected" value="'.$row2a['procourse_code'].'" >'; echo $row2a['procourse_name']; echo '</option>';
+                          // echo '<select class="custom-select" disabled id="secprocourse" name="secprocourse">';
+                          //   echo '<option selected="selected" value="'.$row2a['procourse_code'].'" >'; echo $row2a['procourse_name']; echo '</option>';
                             while($row2=mysqli_fetch_array($result2))
                             {
-                              echo "<option value= '".$row2['procourse_code']."'>".$row2['procourse_name']. "</option> ";
+                              echo $row2['procourse_code']." - ".$row2['procourse_name'];
                             }
-                          echo '</select>';
+                          // echo '</select>';
                         ?>
                       </div>
                       <div class="form-group">
-                        <label for="secno">Section Number</label>
-                        <input type="number" class="form-control" id="secno" required="required" name="secno" value="<?php echo $row['section_no'];?>" disabled>
+                        <label for="secno">Section Number</label><br>
+                        <?php echo $row['section_no'];?>
                       </div>
                       <div class="form-group"> 
                         <label for="secdate">Date</label> 
