@@ -2,15 +2,10 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
-  if(isset($_GET['id']))
-  {
-      $id = $_GET['id'];
-  }
+  $id = $_GET['id'];
 
-  $sql = "SELECT * FROM tb_section
-  LEFT JOIN tb_class ON tb_section.section_id = tb_class.section_id
-  LEFT JOIN tb_subject ON tb_section.subject_id = tb_subject.subject_id
-  LEFT JOIN tb_user ON tb_section.lecturer_id =  tb_user.u_id
+
+  $sql = "SELECT * FROM tb_class WHERE class_id='$id'
    
  ";
 $result = mysqli_query($con,$sql);
@@ -119,16 +114,7 @@ $row=mysqli_fetch_array($result);
 			<div class="col-md-3">
 		        <form class="form-horizontal" method="post" id="codeForm" onsubmit="return false">
 		            <div class="form-group">
-		            	<label class="control-label">Subject Name: </label>
-                  <input type="hidden" class="form-control" id='content' 
-                  value=
-                  "<?php 
-                  echo $row['subject_name'];
-                  echo $row['class_id'];
-                  echo $row['subject_code'];
-                  echo $row['class_time'];
-                  echo $row['section_number'];
-                  ?>" readonly>
+                  <input type="hidden" class="form-control" id='content' value="<?php echo $row['class_id'];?>" readonly>
 		            </div>
                 <div class="form-group">
 		            	<label class="control-label">Code Level (ECC) : </label>

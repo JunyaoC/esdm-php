@@ -125,7 +125,7 @@ include '../pages-styling.php';
                 echo "<td>" . $row['class_id'] . "</td>";
                 echo "<td>" . $row['class_time'] . "</td>";
                 echo "<td>
-                   <a class='btn btn-danger' href='create_qr.php?id=".$row['subject_code']."&section=".$row['section_number']."'>Generate QR</a>
+                    <a class='btn btn-primary' href='create_qr.php?id=".$row['class_id']."'>Generate</a>
                     </td>";
                     echo "<td>
                     <a class='btn btn-primary' href='attendance_open.php?id=".$row['class_id']."&section=".$row['section_number']."'>Open</a>
