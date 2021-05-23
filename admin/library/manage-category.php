@@ -38,6 +38,16 @@ include('includes/config.php');
             -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
             box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
         }
+        .error{
+            color: #fff;
+            background-color: #de403b;
+            border-color: black; 
+        }
+        .success{
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: black; 
+        }
     </style>
 </head>
 
@@ -133,11 +143,11 @@ include('includes/config.php');
 
 
                                                                 <td >
-                                                                    <button style="margin-left:auto;margin-right:auto;display:block;margin-bottom:0%"><a href="edit-category.php?category_id=<?php echo htmlentities($result->category_id); ?>"><i class="fa fa-edit" title="Edit Record"></i> </a></button>
+                                                                    <button class="success" style="margin-left:auto;margin-right:auto;display:block;margin-bottom:0%"><a href="edit-category.php?category_id=<?php echo htmlentities($result->category_id); ?>"><i class="fa fa-edit" title="Edit Record"></i> </a></button>
 
                                                                 </td>
                                                                 <td>
-                                                                <button style="margin-left:auto;margin-right:auto;display:block;margin-bottom:0%"><a href="category_delete.php?category_id=<?php echo htmlentities($result->category_id); ?>" onclick="return confirm('Confirm Delete?');"><i class="fa fa-trash" title="Edit Record"></i></a></button>
+                                                                <button class="error" style="margin-left:auto;margin-right:auto;display:block;margin-bottom:0%"><a href="category_delete.php?category_id=<?php echo htmlentities($result->category_id); ?>" onclick="return confirm('Confirm Delete?');"><i class="fa fa-trash" title="Edit Record"></i></a></button>
                                                                 </td>
                                                             </tr>
                                                     <?php $cnt = $cnt + 1;
