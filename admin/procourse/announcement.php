@@ -25,7 +25,7 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li >
+                <li class="active">
                     <a>
                     <p>Pro Course</p>
                     </a>
@@ -45,7 +45,7 @@
                 <li>
                     <a href="../procourse/studentlist.php">
                     <i class="fa fa-bars"></i>
-                    <p>Manage Appointment</p>
+                    <p>Manage Student</p>
                     </a>
                 </li>
                 <li>
@@ -54,7 +54,7 @@
                     <p>Manage Issue</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="../procourse/announcement.php">
                     <i class="fa fa-bars"></i>
                     <p>Manage Announcement</p>
@@ -102,10 +102,10 @@
             <div class="container">
                 <div class="row ml-1">
                     <div>
-                        <h3> Announcement</h3>
+                        <h3>Announcement</h3>
                     </div>
                     <div class="ml-auto mr-3"> 
-                        <a href='addannounce.php' class='btn btn-primary' style="color:white;"> ADD ANNOUNCEMENT &nbsp<i class="fa fa-plus "></i></a>
+                        <a href='announcementadd.php' class='btn btn-primary' style="color:white;"> ADD ANNOUNCEMENT &nbsp<i class="fa fa-plus "></i></a>
                     </div>
                 </div>
                 <div class="py-3 col bg-light border">
@@ -114,6 +114,7 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Details</th>
+                                <th>Editor</th>
                                 <th>Operation</th>
                             </tr>
                         </thead>
@@ -126,8 +127,9 @@
                                     echo "<tr>";
                                         echo "<td>".$row['an_title']."</td>";
                                         echo "<td>".$row['an_detail']."</td>";
+                                        echo "<td>".$row['an_user']."</td>";
                                         echo "<td>
-                                                <a class='btn btn-secondary' href='editannounce.php?id=".$row['an_id']."'>UPDATE</a> <a class='btn btn-danger' href='deleteannounce.php?id=".$row['an_id']."' onclick='ConfirmDelete()'>DELETE</a>
+                                                <a class='btn btn-secondary' href='announcementupdate.php?id=".$row['an_id']."' onclick='ConfirmUpdate()'>UPDATE</a> <a class='btn btn-danger' href='announcementdelete.php?id=".$row['an_id']."' onclick='ConfirmDelete()'>DELETE</a>
                                              </td>";
                                     echo "</tr>";
                                 }
@@ -177,22 +179,35 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
 
-</body>
 <script type="text/javascript">
-function ConfirmDelete()
-{
-  var x = confirm("Are you sure you want to delete?");
-  if (x)
-      return true;
-  else
-    return false;
-}
+    function ConfirmUpdate()
+    {
+    var x = confirm("Are you sure you want to update announcement?");
+    if (x)
+        return true;
+    else
+        return false;
+    }
 </script>
+
+<script type="text/javascript">
+    function ConfirmDelete()
+    {
+    var x = confirm("Are you sure you want to delete?");
+    if (x)
+        return true;
+    else
+        return false;
+    }
+</script>
+
 <script>
     $(document).ready( function () {
         $('#program').DataTable();
     } );
   </script>
+
+</body>
 </html>
 
 

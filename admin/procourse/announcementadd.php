@@ -1,8 +1,18 @@
 <?php 
   include('../dbconnection.php');
   include('../adminsession.php');
- 
+
+  $user_id = $_SESSION['user_id'];
+
+  $sql = "SELECT * FROM tb_user
+          WHERE u_id='$user_id'";
+
+  $result = mysqli_query($con,$sql);
+
+  $row=mysqli_fetch_array($result);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +33,7 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li>
+          <li class="active">
             <a>
               <p>Pro Course</p>
             </a>
@@ -43,7 +53,7 @@
           <li>
             <a href="../procourse/studentlist.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Appointment</p>
+              <p>Manage Student</p>
             </a>
           </li>
           <li>
@@ -52,7 +62,7 @@
               <p>Manage Issue</p>
             </a>
           </li>
-          <li  class="active">
+          <li>
             <a href="../procourse/announcement.php">
                 <i class="fa fa-bars"></i>
                 <p>Manage Announcement</p>
@@ -105,14 +115,18 @@
                 <div class="card-header bg-secondary text-white"><h2>Add Announcement</h2></div>
                 <div class="card-body">
                   <div class="col-md-12 p-4 border rounded">
-                    <form class="" method="post" action="addannounceprocess.php">
+                  <?php echo '<form class="" method="post" action="announcementaddprocess.php?id='.$user_id.'">'; ?>
+                      <div class="form-group">
+                        <label for="userid">Admin</label>
+                        <input class="form-control" type="text" id="userid" name="userid" value="<?php echo $row['u_name']; ?>" readonly></input>                  
+                      </div>
                       <div class="form-group"> 
                         <label for="atitle">Title</label> 
                         <input type="text" class="form-control" id="atitle" name="atitle" required="required"> 
                       </div>
                       <div class="form-group">
                         <label for="adetail">Detail</label>
-                        <textarea class="form-control" id="adetail" name="adetail" rows="3"></textarea>
+                        <textarea class="form-control" id="adetail" name="adetail" rows="10" required="required" placeholder="Enter announcement.."></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="myFunction()">ADD</button>
                       <button onclick='goBack()' class="btn btn-danger">CANCEL</button>

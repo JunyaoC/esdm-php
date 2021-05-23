@@ -3,13 +3,15 @@
     include('../dbconnection.php');
     include('../adminsession.php');
 
+
     //retrieve info from form and session 
-	$fctitle = $_POST['fctitle'];
-	$fcdetail = $_POST['fcdetail'];
+    $userid = $_POST['userid'];
+	$atitle = $_POST['atitle'];
+	$adetail = $_POST['adetail'];
 
     //SQL INSERT 
-	$sql = "INSERT INTO tb_pro_announcement(an_title, an_detail)
-			VALUES ('$fctitle', '$fcdetail')";
+	$sql = "INSERT INTO tb_pro_announcement (an_title, an_detail, an_user)
+			VALUES ('$atitle', '$adetail', '$userid')";
 
     //check SQL output
     var_dump($sql);
