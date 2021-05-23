@@ -151,7 +151,7 @@ if (isset($_POST['Delete'])) {
                                                     if ($query->rowCount() > 0) {
                                                         foreach ($results as $result) {   ?>
                                                             <tr>
-                                                                <td><?php echo htmlentities($cnt); ?></td>
+                                                            <td><?php echo htmlentities($cnt); ?></td>
                                                                 <td><?php echo htmlentities($result->r_category); ?></td>
                                                                 <td><?php echo htmlentities($result->r_title); ?></td>
                                                                 <td><?php echo htmlentities($result->r_author); ?></td>
@@ -165,7 +165,7 @@ if (isset($_POST['Delete'])) {
                                                                     <button><a href="<?php echo htmlentities($result->r_file); ?>" target="_blank"><i class="fa fa-eye" title="View Record"></i> </a>
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#modal">Delete</button>
+                                                               <button><a href="librarydelete.php?r_id=<?php echo htmlentities($result->r_id); ?>" onclick="return confirm('Confirm Delete?');"  ><i class="fa fa-trash" title="Delete Record"></i></a></button>
                                                                 </td>
                                                             </tr>
 
@@ -177,26 +177,7 @@ if (isset($_POST['Delete'])) {
 
                                                 </tbody>
                                             </table>
-                                            <div class="modal fade" id="modal" role="dialog">
-                                                <div class="modal-dialog">
-
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h4 class="modal-title">Delete</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Are you sure you want to delete?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" name="delete" class="btn btn-danger btn-labeled">Delete<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            
 
                                             <!-- /.col-md-12 -->
                                         </div>

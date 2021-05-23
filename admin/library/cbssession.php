@@ -4,8 +4,8 @@
 		session_start();
 	}
 
-	if(isset($_SESSION['StudentId']) != session_id()){
-		header("index.php");
+	if(isset($_SESSION['r_id']) != session_id()){
+		header("Location:../admin/dashboard.php");
 	}
 
 

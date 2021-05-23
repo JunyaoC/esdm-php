@@ -11,6 +11,7 @@ if (isset($_POST['Delete'])) {
     $count->bindParam(":cid", $cid, PDO::PARAM_INT);
     $count->execute();
     $msg = " Deleted!";
+    header("Location:manage-resource.php");
 }
 if (isset($_POST['update'])) {
     $r_file = $_POST['r_file_url'];
@@ -154,16 +155,25 @@ if (isset($_POST['update'])) {
                                                         <div class="">
                                                             <label for="success" class="control-label">Select Updated Category: </label>
                                                             <select name="r_category" class="form-control" id="r_category" required="required">
-                                                                <option value="r_category" disabled>Select Category</option>
+                                                               
                                                                 
                                                                 <?php $sql1 = "SELECT * from tb_category";
                                                                 $query1 = $dbh->prepare($sql1);
                                                                 $query1->execute();
                                                                 $result1 = $query1->fetchAll(PDO::FETCH_OBJ);
                                                                 if ($query1->rowCount() > 0) {
-                                                                    foreach ($result1 as $resul) {   ?>
-                                                                        <option value="<?php echo htmlentities($resul->category_name); ?>"><?php echo htmlentities($resul->category_name); ?></option>
-                                                                <?php }
+                                                                    foreach ($result1 as $resul) {   
+                                                                        
+                                                                        
+       
+                                                                           if(($resul->category_name)==($result->r_category)){
+                                                                                                 echo"<option value='$resul->category_name' selected='selected'>$resul->category_name</option>";
+                                                                                             }
+
+                                                                                            else{
+                                                                                            echo "<option value='$resul->category_name'>$resul->category_name</option>";
+                                                                                             }
+                                                                  }
                                                                 } ?>
                                                             </select>
 

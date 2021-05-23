@@ -103,9 +103,10 @@ include('includes/config.php');
                                             <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>#</th>
+                                                    <th>#</th>
                                                         <th>Category Name</th>
                                                         <th>Update Category</th>
+                                                        <th>Delete Category</th>
 
                                                     </tr>
                                                 </thead>
@@ -114,6 +115,7 @@ include('includes/config.php');
                                                         <th>#</th>
                                                         <th>Category Name</th>
                                                         <th>Update Category</th>
+                                                        <th>Delete Category</th>
 
                                                     </tr>
                                                 </tfoot>
@@ -131,8 +133,11 @@ include('includes/config.php');
 
 
                                                                 <td>
-                                                                    <a href="edit-category.php?category_id=<?php echo htmlentities($result->category_id); ?>"><i class="fa fa-edit" title="Edit Record"></i> </a>
+                                                                    <button><a href="edit-category.php?category_id=<?php echo htmlentities($result->category_id); ?>"><i class="fa fa-edit" title="Edit Record"></i> </a></button>
 
+                                                                </td>
+                                                                <td>
+                                                                <button><a href="category_delete.php?category_id=<?php echo htmlentities($result->category_id); ?>" onclick="return confirm('Confirm Delete?');"><i class="fa fa-trash" title="Edit Record"></i></a></button>
                                                                 </td>
                                                             </tr>
                                                     <?php $cnt = $cnt + 1;

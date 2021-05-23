@@ -130,32 +130,14 @@ if (isset($_POST['update'])) {
                                                 } ?>
                                                 <div class="form-group has-success">
 
-                                                    <div class="">
-                                                        <button type="submit" name="update" class="btn btn-success btn-labeled">Update<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
-                                                        <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#modal">Delete</button>
-                                                    </div>
-                                                    <!-- Modal content-->
-                                                    <div class="modal fade" id="modal" role="dialog">
-                                                        <div class="modal-dialog">
-
-                                                            <!-- Modal content-->
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                    <h4 class="modal-title">Delete</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p>Are you sure you want to delete?</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" name="Delete" class="btn btn-danger btn-labeled">Delete<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
-
-                                                                </div>
-                                                            </div>
-
+                                                <div class="">
+                                                        <a href="manage-category.php"><button type="button" class="btn btn-primary btn-labeled ">Back<span class="btn-label btn-label-right"><i class="fa fa-backward"></i></span></button></a>
+                                                            <button id="submit-button" type="submit" name="update" class="btn btn-success btn-labeled">Update<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+                                                            
+                                   
                                                         </div>
-                                                    </div>
-
+                                                    <!-- Modal content-->
+                                                   
 
                                                 </div>
                                             </form>
