@@ -112,7 +112,8 @@ $resultn=mysqli_query($con,$sqln);
             <tr>
               <th>Student Matric</th>              
               <th>Vehicle Plate</th>
-              <th>Sticker Date</th>
+              <th>Payment Date</th>
+              <th>Expiration Date</th>
               <th>Payment Proof</th>
               <th>Status</th>
               <th>Operation</th>
@@ -123,9 +124,13 @@ $resultn=mysqli_query($con,$sqln);
         <?php
             while ($rown=mysqli_fetch_array($resultn))
             {
-              $date = $rown['stickerDate'] ;
+              $date = $rown['paymentDate'] ;
               $timestamp = strtotime($date);
               $ddate =  date('d/m/Y', $timestamp);
+
+              $date1 = $rown['stickerDate'] ;
+              $timestamp1 = strtotime($date1);
+              $ddate1 =  date('d/m/Y', $timestamp1);
 
 
               $a = $rown['stickerID'];
@@ -133,6 +138,7 @@ $resultn=mysqli_query($con,$sqln);
               echo "<td>".$rown['stuACID']."</td>";
               echo "<td>".$rown['vehiclePlateNo']."</td>";
               echo "<td>" .$ddate. "</td>";
+              echo "<td>" .$ddate1. "</td>";
               echo "<td><a href='".$rown['paymentProve']."' target='_blank'> Download </a></td>";
               echo "<td>".$rown['stickerStatus']."</td>";
               echo "<td>";
