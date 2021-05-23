@@ -84,7 +84,7 @@ $error="Something went wrong. Please try again";
                                 <div class="col-md-6">
                                     <ul class="breadcrumb">
             							<li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-            							<li><a href="#">Category</a></li>
+            							<!-- <li><a href="#">Category</a></li> -->
             							<li class="active">Create Category</li>
             						</ul>
                                 </div>

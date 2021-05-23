@@ -97,7 +97,7 @@ if (isset($_POST['update'])) {
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                                    <li><a href="manage-resource.php">Update Resource</a></li>
+                                    <li><a href="manage-resource.php">Manage Resource</a></li>
                                     <li class="active">Update Resource</li>
                                 </ul>
                             </div>

@@ -63,7 +63,7 @@ if (isset($_POST['Delete'])) {
                     <div class="container-fluid" >
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">View</h2>
+                                <h2 class="title">Manage Resource</h2>
 
                             </div>
 
@@ -74,8 +74,8 @@ if (isset($_POST['Delete'])) {
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                                    <li>Resource</li>
-                                    <li class="active">View Resource</li>
+                                    <!-- <li>Resource</li> -->
+                                    <li class="active">Manage Resource</li>
                                 </ul>
                             </div>
 
@@ -128,11 +128,11 @@ if (isset($_POST['Delete'])) {
                                                 <tfoot>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Category</th>
+                                                        <th style="width: 100px;">Category</th>
                                                         <th>Title</th>
 
                                                         <th>Author</th>
-                                                        <th>Date</th>
+                                                        <th style="width: 100px;">Date</th>
 
                                                         <th>Update</th>
                                                         <th>View</th>

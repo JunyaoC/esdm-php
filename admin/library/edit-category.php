@@ -67,7 +67,7 @@ if (isset($_POST['update'])) {
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                                    <li><a href="manage-category.php">Update Category</a></li>
+                                    <li><a href="manage-category.php">Manage Category</a></li>
                                     <li class="active">Update Category</li>
                                 </ul>
                             </div>
