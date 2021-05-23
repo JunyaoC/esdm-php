@@ -176,7 +176,7 @@
                         <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat" min="<?php echo $row['courseSec_seat'];?>" value="<?php echo $row['courseSec_maxseat'];?>">
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
-                      <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
+                      <button onclick='goBack()' class="btn btn-danger">CANCEL</button>
                     </form>
                   </div>
                 </div>

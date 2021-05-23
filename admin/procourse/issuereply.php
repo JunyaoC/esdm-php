@@ -143,7 +143,7 @@
                         <textarea class="form-control" id="issuereply" name="issuereply" rows="4" placeholder="Enter you reply.."></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="myFunction()">Send</button>
-                      <button href="issue.php" class="btn btn-danger">Cancel</button>
+                      <button onclick='goBack()' class="btn btn-danger">CANCEL</button>
                     </form>
                   </div>
                 </div>
@@ -182,6 +182,11 @@
       alert("Successfully send reply");
     }
 </script>
+  <script>
+    function goBack() {
+        window.history.back();
+    }
+  </script>
 
 <!--   Pingendo  -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

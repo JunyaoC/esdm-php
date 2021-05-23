@@ -164,7 +164,7 @@
                     </div>
                     <input type="hidden"  id="pccode" name="pccode" value="<?php echo $row['procourse_code'];?>"> 
                     <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
-                    <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
+                    <button onclick='goBack()' class="btn btn-danger">CANCEL</button>
                   </form>
                 </div>
               </div>

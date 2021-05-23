@@ -145,7 +145,7 @@
                     <input type="number" class="form-control" id="secmaxseat" min="1" name="secmaxseat" required>
                   </div>
                   <button type="submit" class="btn btn-primary">Add</button>
-                  <button onclick='goBack()' class="btn btn-danger">Go Back</button>
+                  <button onclick='goBack()' class="btn btn-danger">CANCEL</button>
                 </form>
               </div>
             </div>
