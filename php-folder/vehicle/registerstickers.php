@@ -8,8 +8,8 @@
  $stickerDate = $postjson['stickerDate'];
  $stickerStatus = $postjson['stickerStatus'];
  $stickerFee = $postjson['stickerFee'];
- $today = date('Y-m-d');
-
+ //$today = date('Y-m-d');
+ $today = date_format(date_create("+1 year"), 'Y-m-d');
  if($postjson['action'] == 'addsticker'){
 
     //Run checking if the car plate exist
