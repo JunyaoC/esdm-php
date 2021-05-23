@@ -110,6 +110,7 @@ include '../pages-styling.php';
                 <th class="">Class ID</th>
                 <th>Class Time</th>
                 <th>Operation</th>
+                <th>Attendance</th>
               </tr>
             </thead>
             <tbody>
@@ -119,15 +120,19 @@ include '../pages-styling.php';
                       LEFT JOIN tb_section ON tb_class.section_id = tb_section.section_id
                       WHERE  tb_class.section_id='$section'";
 
+              
               $result = mysqli_query($con, $sql) or  die('Error:'.mysqli_error($con));
               while ($row = mysqli_fetch_array($result)) {
+                $a = $row['class_id'];
                 echo "<tr>";
                 echo "<td>" . $row['class_id'] . "</td>";
                 echo "<td>" . $row['class_time'] . "</td>";
                 echo "<td>
                    <a class='btn btn-danger' href='create_qr.php?id=".$row['subject_code']."&section=".$row['section_number']."'>Generate QR</a>
+                   
                     </td>";
-  
+                echo '<td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open</button></td>';
                 echo "</tr>";
               }
               ?>
@@ -161,21 +166,52 @@ include '../pages-styling.php';
       </div>
     </div>
 
+<!--   MODAL for Attendance -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 style="align-self: "> Open Attendance </h4>
+          <button type="button btn-primary" class="close" data-dismiss="modal">×</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+        <form method="POST" action="attendanceclassprocess.php">
+
+
+        <div class="form-group">
+        <label for="Role">Attendance</label> <br>
+        
+        <select class="form-control" id="attend" name="attend">
+               <option value= '1'>Open Attendance</option>
+               <option value= '0'>Close Attendance</option>
+                </div>
+
+        <input type="hidden"  id="cid" name="cid" value= "<?php echo $a; ?>'">
+        <br><br>
+        
+        </div>
+           <!-- Modal footer -->
+        <div class="modal-footer">
+        <button type="submit" class="button btn-info">Update</button>
+        </form>
+        </select>
+
+        <button type="button" class="button btn-danger" data-dismiss="modal">Close</button>
+        </div>         
+            </div>
+            </div>
+        </div>
+       </select></div> 
+
 
     <br> <br>
     <?php include 'adminfooter.php' ?>
   </div>
   </div>
 
-  <script type="text/javascript">
-    function ConfirmDelete() {
-      var x = confirm("Are you sure you want to delete?");
-      if (x)
-        return true;
-      else
-        return false;
-    }
-  </script>
+
   <!--   Core JS Files   -->
 
   <script src="../js/core/popper.min.js"></script>
