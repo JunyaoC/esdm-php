@@ -23,6 +23,7 @@
                'food_name' => $read['food_name'],
                 'restaurant_name' => $read['restaurant_name'],       
                 'food_price' => $read['totalprice'],      
+                'itemorder_id' => $read['itemorder_id'],    
             );
             array_push($read_data,$data);
         }
