@@ -34,6 +34,5 @@
     //Redirect page
     header('Location: procourse.php');
 
-?> 
 
-
+?>
