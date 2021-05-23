@@ -148,7 +148,7 @@
                                     echo "<td>".$row['procourse_objective']."</td>";
                                     echo "<td>".$row['procourse_learningOut']."</td>";
                                     echo "<td>
-                                        <a class='btn btn-secondary' href='pcupdate.php?id=".$row['procourse_code']."'>Update</a> <a class='btn btn-danger' href='pcdelete.php?id=".$row['procourse_code']."' onclick='ConfirmDelete()'>Delete</a>
+                                        <a class='btn btn-secondary' href='pcupdate.php?id=".$row['procourse_code']."'>Update</a> <a class='btn btn-danger' href='pcdelete.php?id=".$row['procourse_code']."'  onclick='return confirm(\"Are you sure you want to delete?\")'>Delete</a>
                                         </td>";
                                     echo "</tr>";
                                 }

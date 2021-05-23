@@ -157,7 +157,7 @@
 
                                         echo "<td>
                                                 <a class='btn btn-secondary' href='sectionupdate.php?id=".$row['courseSec_id']."'>Update</a>
-                                                <a class='btn btn-danger' href='sectiondelete.php?id=".$row['courseSec_id']."' onclick='ConfirmDelete()'>Delete</a>
+                                                <a class='btn btn-danger' href='sectiondelete.php?id=".$row['courseSec_id']."' onclick='return confirm(\"Are you sure you want to delete?\")'>Delete</a>
                                             </td>";
                                     echo "</tr>";
                                 }
