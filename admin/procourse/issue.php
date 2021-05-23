@@ -25,7 +25,7 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a>
                     <p>Pro Course</p>
                     </a>
@@ -48,7 +48,7 @@
                     <p>Manage Student</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="../procourse/issue.php">
                     <i class="fa fa-bars"></i>
                     <p>Manage Issue</p>
