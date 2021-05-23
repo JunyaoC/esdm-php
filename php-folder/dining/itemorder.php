@@ -30,6 +30,7 @@
         while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
             $data = array(
                // 'order_date' => $read['order_date'],
+                 'food_id' => $read['food_id'], 
                 'food_name' => $read['food_name'],       
                 // 'restaurant_name' => $read['restaurant_name'],  
                 'food_price' => $read['food_price'],
@@ -41,6 +42,7 @@
 
         while($read = mysqli_fetch_array($query2, MYSQLI_ASSOC)) {
             $data = array(
+                'food_id' => $read['food_id'], 
                'order_date' => $read['order_date'],   
                 'restaurant_name' => $read['restaurant_name'],
                 'order_price'=>$read['order_price'],
