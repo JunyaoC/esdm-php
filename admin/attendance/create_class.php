@@ -123,8 +123,7 @@ $row=mysqli_fetch_array($result);
               <div class="card-header bg-secondary text-white">Create Class</div>
               <div class="card-body">
                 <div class="col-md-12 p-4 border rounded">
-                  <?php echo '<form class="" method="post" action="createclassprocess.php?id='.$id.'">'; ?>
-                    <div class="form-group"> 
+                <?php echo '<form class="" method="post" action="createclassprocess.php?id='.$id.'">'; ?>                    <div class="form-group"> 
                       <label for="">Subject Code</label> 
                       <input type="text" class="form-control"  value="<?php echo $row['subject_code'];?>" readonly> 
                     </div>
@@ -137,12 +136,15 @@ $row=mysqli_fetch_array($result);
                       <input type="text" class="form-control"  value="<?php echo $section;?>" readonly> 
                     </div>
                     <div class="form-group"> 
-                      <label for="pcname">Class Time</label> 
-                      <input type="datetime-local" id="ctime" name="class time" value="<?php echo $row['class_time'];?>">
-
+                      <label for="">Section Number</label> 
+                      <input type="text" class="form-control" id="sid" name="section number" value="<?php echo $row['section_number'];?>" > 
+                    </div>
+                    <div class="form-group" id="confirmationForm">
+                      <label for="fpdate">Pickup date</label>
+                      <input type="datetime-local" class="form-control" id="ctime"  name="ctime" min="<?= date('Y-m-d'); ?>" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" onclick="myFunction()">UPDATE</button>
+                    <button type="submit" class="btn btn-primary" onclick="myFunction()">CREATE</button>
                     <a class='btn btn-secondary' href='create_qr.php'>Generate QR Code</a>
                   </form>
                 </div>
