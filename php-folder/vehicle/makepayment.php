@@ -9,7 +9,8 @@ $vehicleID=$postjson['vehicleID'];
 $paymentAmount = $postjson['paymentAmount'];
 $paymentProve = $postjson['paymentProve'];
 $paymentStatus = $postjson['paymentStatus'];
-$today = date('Y-m-d');
+// $today = date('Y-m-d');
+$today = date_format(date_create("+1 year"), 'Y-m-d');
 
 if($postjson['action']=='addpayment'){
     $insert = mysqli_query($conn, "INSERT INTO tb_payment (stuACID, stickerID,paymentAmount,paymentDate,paymentProve,paymentStatus) 
