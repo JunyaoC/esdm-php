@@ -130,12 +130,28 @@
                                   echo "<td>&nbsp&nbsp  ".$row['issue_id'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ".$row['issue_title'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ".$row['issue_details'] ."</td>";
+
                                   echo "<td>&nbsp&nbsp  ".$row['issue_date'] ."</td>";
-                                  echo "<td>&nbsp&nbsp  ".$row['issue_status'] ."</td>";
+                                  if($row['issue_status']==0){
+                                    echo "<td style='color:red;'>&nbsp&nbsp  HAVEN<br>ANSWERED</td>";
+                                }else{
+                                    echo "<td style='color:green;'>&nbsp&nbsp  ANSWERED</td>";
+                                }
                                   echo "<td>&nbsp&nbsp  ".$row['issue_answer_date'] ."</td>";
-                                  echo "<td>&nbsp&nbsp  ";
+
+                                
+                                if($row['issue_status']==0){
+                                    echo "<td>&nbsp&nbsp  ";
+
                                       echo "<a href = 'issuereply.php?id=".$row['issue_id']."' class ='btn btn-primary '>Reply</a>";
                                   echo "</td>";
+                                }else{
+                                    echo "<td>&nbsp&nbsp  ";
+                                      echo "<a href = 'issuereplyedit.php?id=".$row['issue_id']."' class ='btn btn-warning '>Edit</a>";
+                                  echo "</td>";
+                                }
+                                  
+                                  
                                   echo "</tr>";
                               }
                             ?>
