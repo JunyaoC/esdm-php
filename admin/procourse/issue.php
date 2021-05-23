@@ -130,7 +130,7 @@
                                   echo "<td>&nbsp&nbsp  ".$row['issue_details'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ".$row['issue_status'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ";
-                                      echo "<a href = 'issuereply.php?id=".$row['stu_matric']."' class ='btn btn-primary '>Reply</a>";
+                                      echo "<a href = 'issuereply.php?id=".$row['issue_id']."' class ='btn btn-primary '>Reply</a>";
                                   echo "</td>";
                                   echo "</tr>";
                               }
