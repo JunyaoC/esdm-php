@@ -9,7 +9,15 @@
 <?php 
   include '../pages-styling.php';
 ?>
-
+<style>
+.textarea{
+/* border: 2px solid; */
+  padding: 20px; 
+  width: 1000px;
+  resize: vertical; 
+  overflow: auto;
+  }
+</style>
 <body>
   <div class="wrapper ">
     <div class="sidebar" data-color="blue" data-active-color="danger">
@@ -117,18 +125,18 @@
                       <div class="form-group">
                         <label>Pro Course Type</label>
                         <select class="custom-select" id="pctype" name="pctype" required="required">
-                          <option disabled="" selected="">Select Pro Course Type</option>
+                          <option disabled="" selected="" hidden>Select Pro Course Type</option>
                           <option value="Compulsory">Compulsory</option>
                           <option value="Elective">Elective</option>
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="pcobjective">Pro Course Objective</label>
-                        <textarea class="form-control" id="pcobjective" name="pcobjective" rows="3"></textarea>
+                        <textarea class="textarea" id="pcobjective" name="pcobjective" rows="3" required></textarea>
                       </div>
                       <div class="form-group">
                         <label for="pclearningoutcome">Pro Course Learning Outcome</label>
-                        <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"></textarea>
+                        <textarea class="textarea" id="pclearningoutcome" name="pclearningoutcome" rows="3" required></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="myFunction()">ADD</button>
                       <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
@@ -167,7 +175,7 @@
 
   <script>
     function myFunction() {
-      alert("Pro Course successfully added");
+      // alert("Pro Course successfully added");
     }
   </script>
 

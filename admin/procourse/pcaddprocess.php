@@ -10,6 +10,11 @@
     $pcobjective = $_POST['pcobjective']; 
     $pclearningoutcome = $_POST['pclearningoutcome']; 
 
+    $pcobjective=ucwords($pcobjective);
+    $pclearningoutcome=ucwords($pclearningoutcome);
+    $pcname=strtoupper($pcname);
+    $pccode=strtoupper($pccode);
+    
     //SQL INSERT 
     $sql = "INSERT INTO tb_pro_course (procourse_code, procourse_name, procourse_type, procourse_objective, procourse_learningOut)
             VALUES ('$pccode','$pcname','$pctype','$pcobjective','$pclearningoutcome')";

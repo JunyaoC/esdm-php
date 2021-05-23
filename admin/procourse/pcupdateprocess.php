@@ -14,7 +14,9 @@
     $pctype = $_POST['pctype']; 
     $pcobjective = $_POST['pcobjective']; 
     $pclearningoutcome = $_POST['pclearningoutcome']; 
-
+    $pcobjective=ucwords($pcobjective);
+    $pclearningoutcome=ucwords($pclearningoutcome);
+    $pcname=strtoupper($pcname);
     //SQL INSERT 
     $sql = "UPDATE tb_pro_course 
             SET procourse_code='$pccode', procourse_name='$pcname', procourse_type='$pctype', procourse_objective='$pcobjective', procourse_learningOut='$pclearningoutcome'

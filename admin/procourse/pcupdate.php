@@ -25,7 +25,15 @@
     $row=mysqli_fetch_array($result);
 
 ?>
-
+<style>
+.textarea{
+/* border: 2px solid; */
+  padding: 20px; 
+  width: 1000px;
+  resize: vertical; 
+  overflow: auto;
+  }
+</style>
 <body>
   <div class="wrapper ">
   <div class="sidebar" data-color="blue" data-active-color="danger">
@@ -148,11 +156,11 @@
                     </div>
                     <div class="form-group">
                       <label for="pcobjective">Pro Course Objective</label>
-                      <textarea class="form-control" id="pcobjective" name="pcobjective" rows="3"><?php echo $row['procourse_objective'];?></textarea>
+                      <textarea class="textarea" id="pcobjective" name="pcobjective" rows="3"><?php echo $row['procourse_objective'];?></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="pclearningoutcome">Pro Course Learning Outcome</label>
-                      <textarea class="form-control" id="pclearningoutcome" name="pclearningoutcome" rows="3"><?php echo $row['procourse_learningOut'];?></textarea>
+                      <label for="pclearningoutcome">Pro Course Learning Outcome</label><br>
+                      <textarea class="textarea" id="pclearningoutcome" name="pclearningoutcome" rows="6"><?php echo $row['procourse_learningOut'];?></textarea>
                     </div>
                     <input type="hidden"  id="pccode" name="pccode" value="<?php echo $row['procourse_code'];?>"> 
                     <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>

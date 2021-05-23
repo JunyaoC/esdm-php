@@ -113,9 +113,11 @@
                     <table id="program" class="display">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>Type</th>
+                                <th>Total Section</th>
                                 <th>Objective</th>
                                 <th>Learning Outcome</th>
                                 <th>Operation</th>
@@ -123,19 +125,31 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT * FROM tb_pro_course";
+                                $sql = "SELECT * FROM tb_pro_course ORDER BY procourse_code";
                                 $result = mysqli_query($con,$sql);
+                                $count=0;
                                 while($row=mysqli_fetch_array($result))
                                 {
+                                    $count=$count+1;
+                                    $code=$row['procourse_code'];
                                     echo "<tr>";
-                                        echo "<td>".$row['procourse_code']."</td>";
-                                        echo "<td>".$row['procourse_name']."</td>";
-                                        echo "<td>".$row['procourse_type']."</td>";
-                                        echo "<td>".$row['procourse_objective']."</td>";
-                                        echo "<td>".$row['procourse_learningOut']."</td>";
-                                        echo "<td>
-                                                <a class='btn btn-secondary' href='pcupdate.php?id=".$row['procourse_code']."'>Update</a> <a class='btn btn-danger' href='pcdelete.php?id=".$row['procourse_code']."' onclick='ConfirmDelete()'>Delete</a>
-                                             </td>";
+                                    echo "<td>".$count.".</td>";
+                                    echo "<td>".$row['procourse_code']."</td>";
+                                    echo "<td>".$row['procourse_name']."</td>";
+                                    echo "<td>".$row['procourse_type']."</td>";
+                                    $sqlc = "SELECT COUNT(*) as sec_count FROM tb_procourse_section WHERE courseSec_courseID='$code'";
+                                    $resultc = mysqli_query($con,$sqlc);
+                                    $total=0;
+                                    while($rowc=mysqli_fetch_array($resultc))
+                                    {
+                                        $total=$total+$rowc['sec_count'];
+                                    }
+                                    echo "<td>".$total."</td>";
+                                    echo "<td>".$row['procourse_objective']."</td>";
+                                    echo "<td>".$row['procourse_learningOut']."</td>";
+                                    echo "<td>
+                                        <a class='btn btn-secondary' href='pcupdate.php?id=".$row['procourse_code']."'>Update</a> <a class='btn btn-danger' href='pcdelete.php?id=".$row['procourse_code']."' onclick='ConfirmDelete()'>Delete</a>
+                                        </td>";
                                     echo "</tr>";
                                 }
                             ?>
