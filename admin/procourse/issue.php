@@ -110,10 +110,12 @@
                     <thead>
                     <tr>
                       <th>Matric No</th>
+                      <th>ID</th>
                       <th>Issue</th>
-                      <th>Date</th>
                       <th>Details</th>
+                      <th>Date</th>
                       <th>Status</th>
+                      <th>Date Reply</th>
                       <th>Reply</th>
                     </tr>
                     </thead>
@@ -125,12 +127,14 @@
                                 {
                                   echo "<tr>";
                                   echo "<td>&nbsp&nbsp  ".$row['stu_matric'] ."</td>";
+                                  echo "<td>&nbsp&nbsp  ".$row['issue_id'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ".$row['issue_title'] ."</td>";
-                                  echo "<td>&nbsp&nbsp  ".$row['issue_date'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ".$row['issue_details'] ."</td>";
+                                  echo "<td>&nbsp&nbsp  ".$row['issue_date'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ".$row['issue_status'] ."</td>";
+                                  echo "<td>&nbsp&nbsp  ".$row['issue_answer_date'] ."</td>";
                                   echo "<td>&nbsp&nbsp  ";
-                                      echo "<a href = 'issuereply.php?id=".$row['stu_matric']."' class ='btn btn-primary '>Reply</a>";
+                                      echo "<a href = 'issuereply.php?id=".$row['issue_id']."' class ='btn btn-primary '>Reply</a>";
                                   echo "</td>";
                                   echo "</tr>";
                               }
@@ -181,16 +185,7 @@
   <script src="../js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
 
 </body>
-<script type="text/javascript">
-function ConfirmDelete()
-{
-  var x = confirm("Are you sure you want to delete?");
-  if (x)
-      return true;
-  else
-    return false;
-}
-</script>
+
 <script>
     $(document).ready( function () {
         $('#program').DataTable();
