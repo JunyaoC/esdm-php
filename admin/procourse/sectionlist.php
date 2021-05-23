@@ -128,16 +128,18 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT * FROM tb_procourse_section
-                                        LEFT JOIN tb_procourse_fac ON tb_procourse_section.courseSec_fac = tb_procourse_fac.fac_id";
+                                $sql = "SELECT cs.*,f.*,c.* FROM tb_procourse_section cs
+                                        LEFT JOIN tb_procourse_fac f ON cs.courseSec_fac = f.fac_id
+                                        LEFT JOIN tb_pro_course c ON c.procourse_code=cs.courseSec_courseID";
                                 
                                 $result = mysqli_query($con,$sql);
-                                
+                                $count=0;
                                 while($row=mysqli_fetch_array($result))
                                 {
+                                    $count=$count+1;
                                     echo "<tr>";
-                                        echo "<td>".$row['courseSec_id']."</td>";
-                                        echo "<td>".$row['courseSec_courseID']."</td>";
+                                        echo "<td>".$count.".</td>";
+                                        echo "<td><span style='color:#5C001E;'>".$row['courseSec_courseID']."</span><br>".$row['procourse_name']."</td>";
                                         echo "<td>".$row['section_no']."</td>";
                                         echo "<td>".$row['courseSec_date']."</td>";
                                         echo "<td>".$row['fac_name']."</td>";

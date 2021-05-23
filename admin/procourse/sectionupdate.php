@@ -141,11 +141,11 @@
                       </div>
                       <div class="form-group">
                         <label for="secno">Section Number</label>
-                        <input type="number" class="form-control" id="secno" required="required" name="secno" value="<?php echo $row['section_no'];?>">
+                        <input type="number" class="form-control" id="secno" required="required" name="secno" value="<?php echo $row['section_no'];?>" disabled>
                       </div>
                       <div class="form-group"> 
                         <label for="secdate">Date</label> 
-                        <input type="date" class="form-control" required="required" id="secdate" name="secdate" value="<?php echo $row['courseSec_date'];?>"> 
+                        <input type="date" class="form-control" required="required" id="secdate" name="secdate" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $row['courseSec_date'];?>"> 
                       </div>
                       <div class="form-group"> 
                         <label for="seclocation">Location</label> 
@@ -169,11 +169,11 @@
                       </div>
                       <div class="form-group">
                         <label for="secseat">Seat</label>
-                        <input type="number" class="form-control" id="secseat" required="required" name="secseat" value="<?php echo $row['courseSec_seat'];?>">
+                        <input type="number" class="form-control" id="secseat" required="required" name="secseat" value="<?php echo $row['courseSec_seat'];?>"disabled>
                       </div>
                       <div class="form-group">
                         <label>Maximum Seat</label>
-                        <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat" value="<?php echo $row['courseSec_maxseat'];?>">
+                        <input type="number" class="form-control" id="secmaxseat" required="required" name="secmaxseat" min="<?php echo $row['courseSec_seat'];?>" value="<?php echo $row['courseSec_maxseat'];?>">
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="ConfirmUpdate()">UPDATE</button>
                       <button onclick='goBack()' class="btn btn-danger">GO BACK</button>
