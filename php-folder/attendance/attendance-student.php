@@ -27,21 +27,21 @@
 			  {
 			  // Return the number of rows in result set
 			  $rowcount=mysqli_num_rows($result);
-			  printf("Result set has %d rows.\n",$rowcount);
 			  // Free result set
 			  mysqli_free_result($result);
 			  }
 
 	        if($rowcount > 0){
 	        	
-	        	$result = json_encode(array('success'=>false, 'msg'=>'user_signed_attendance'));
+	        	$result = json_encode(array('success'=>false, 'msg'=>'You had already signed the attendance for this class.'));
         		echo $result;
 
 	        }else{
 
 	        	mysqli_query($conn, "INSERT INTO esdm_db.tb_attendance (class_id,student_id,attendance_timestamp) VALUES ($class_id,$u_id,now());");
 
-	        	$result = json_encode(array('success'=>true, 'msg'=>'sign_attendance_success'));
+
+	        	$result = json_encode(array('success'=>true, 'msg'=>'Attendance taken!'));
 
         		echo $result;
 
@@ -49,7 +49,7 @@
 	        }
 
 	    }else{
-	    	$result = json_encode(array('success'=>false, 'msg'=>'attendance_closed'));
+	    	$result = json_encode(array('success'=>false, 'msg'=>'Sorry, but the attendance has been closed.'));
     		echo $result;
 	    }
 
@@ -85,4 +85,33 @@
 
         echo $result;
 
+	}
+
+	if($postjson['action'] == 'fetch_upcoming_class'){
+
+		$u_id = $postjson['u_id'];
+
+		$query = mysqli_query($conn, "SELECT tb_subject.subject_name,tb_subject.subject_code,tb_class.class_time,tb_class.class_id, tb_section.section_number
+				FROM tb_registration
+				INNER JOIN tb_section ON tb_section.section_id = tb_registration.section_id 
+				INNER JOIN tb_class ON tb_section.section_id = tb_class.section_id
+				INNER JOIN tb_subject ON tb_subject.subject_id = tb_section.subject_id 
+				WHERE tb_registration.student_id = '$u_id' AND tb_class.class_time > now();");
+
+        $read_data = array();
+
+        while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+            $data = array(
+                'subject_name' => $read['subject_name'],
+                'class_id' => $read['class_id'],
+                'subject_code' => $read['subject_code'],
+                'class_time' => $read['class_time'],
+                'section_number' => $read['section_number'], 
+            );
+            array_push($read_data,$data);
+        }
+
+        $result = json_encode(array('success'=>true, 'msg'=>'success', 'upcoming'=>$read_data));
+
+        echo $result;
 	}
