@@ -23,17 +23,19 @@ include('includes/config.php');
     <link rel="stylesheet" href="css/main.css" media="screen">
     <script src="js/modernizr/modernizr.min.js"></script>
 
+
+
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-storage.js"></script>
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-            apiKey: "AIzaSyBn6msKCQR6gstFDTjSUy7-WPSSxWUzUD0",
-            authDomain: "esdm-d16a4.firebaseapp.com",
-            projectId: "esdm-d16a4",
-            storageBucket: "esdm-d16a4.appspot.com",
-            messagingSenderId: "315333777495",
-            appId: "1:315333777495:web:a90401f4982ddf67f12b12"
+            apiKey: "AIzaSyDCWeMFpBvG6f3AvzTJqMcNuTrQGQeneRw",
+            authDomain: "esdm-519ca.firebaseapp.com",
+            projectId: "esdm-519ca",
+            storageBucket: "esdm-519ca.appspot.com",
+            messagingSenderId: "106796237894",
+            appId: "1:106796237894:web:ae2be41eed34557ebb3647"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
