@@ -30,12 +30,13 @@ include('includes/config.php');
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-            apiKey: "AIzaSyDCWeMFpBvG6f3AvzTJqMcNuTrQGQeneRw",
-            authDomain: "esdm-519ca.firebaseapp.com",
-            projectId: "esdm-519ca",
-            storageBucket: "esdm-519ca.appspot.com",
-            messagingSenderId: "106796237894",
-            appId: "1:106796237894:web:ae2be41eed34557ebb3647"
+            apiKey: "AIzaSyCYsOOm3KzYTVhkDLu7F1PohMBx8xjoZoA",
+            authDomain: "shoe-aco.firebaseapp.com",
+            projectId: "shoe-aco",
+            storageBucket: "shoe-aco.appspot.com",
+            messagingSenderId: "378662614993",
+            appId: "1:378662614993:web:499b24af05905caec6d2f0",
+            measurementId: "G-TM9HB1D91M"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
