@@ -144,38 +144,17 @@
     <div class="form-group">
       <label for="email">Restaurant Status</label>
  </div>
-      <select name="restaurantStatus" id="restaurantStatus">
+      <select class="form-control" name="restaurantStatus" id="restaurantStatus">
         <option value="1">Active</option>
         <option value="2">Not Active</option>
       </select>
-   
+      <br>
+     <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Add</button></center> 
 
- 
- <!--      <?php
-
-        $sqlstatus="SELECT * FROM tb_restaurant";
-        $resultstatus=mysqli_query($con,$sqlstatus);
-
-        echo '<select class="form-control" id="restaurantStatus" name="restaurantStatus" style="min-height:40px;">';
-        while($rowstatus=mysqli_fetch_array($resultstatus))
-          {
-            if($rowstatus['restaurant_status']==$row['restaurant_status'])
-            {
-              echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>".$rowstatus['restaurant_status']."</option>";
-            }
-            else
-            {
-              echo"<option value='".$rowstatus['restaurant_status']."'>".$rowstatus['restaurant_status']."</option>";
-            }
-          }
-
-        echo'</select>';
-
-      ?> -->
     </div>
 
 
-   <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Add</button></center>
+
 </div>
 
         <div class="modal fade" id="myModal" role="dialog">

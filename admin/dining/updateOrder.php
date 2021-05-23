@@ -2,15 +2,14 @@
   include('../adminsession.php');
   include('../dbconnection.php');
   
-  if(isset($_GET['id']))
-  {
-    $food_id=$_GET['id'];
-  }
+
+
+  $order_id=$_GET['id'];
+
   //JOIN
-  $sql = "SELECT * FROM tb_food WHERE food_id='$food_id'";
+  $sql = "SELECT * FROM tb_order LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id WHERE order_id='$order_id'";
   $result = mysqli_query($con,$sql) or die("Error: " . mysqli_error($con));
   $row = mysqli_fetch_array($result); 
-
 
 ?>
 
@@ -29,7 +28,7 @@
   float: left;
   width: 33.33%;
   padding: 10px;
-  height: 600px; /* Should be removed. Only for demonstration */
+  height: 520px; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -59,19 +58,19 @@
               <p>Dining</p>
             </a>
           </li>
-          <li>
+          <li >
             <a href="restaurant.php">
               <i class="fa fa-bars"></i>
               <p>Manage Restaurant</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="menuPage.php">
               <i class="fa fa-bars"></i>
               <p>Manage Menu</p>
             </a>
           </li>
-          <li>
+          <li class="active">
             <a href="orderPage.php">
               <i class="fa fa-bars"></i>
               <p>Manage Order</p>
@@ -117,81 +116,79 @@
         </div>
       </nav>
     <br> <br>
+
+    
 <div class="container">
 
   <br> <br> <br>
 <center>
-<h2>Food Details</h2>
+<h2>Order Details</h2>
 </center>
 
 <div class="row">
   <center>
   <div class="column" style="background-color:#eddbbb;width:500px;margin-left:300px;">
   
-  <form method="POST" action="editMenuProgress.php" enctype="multipart/form-data">
-    
+  <form method="POST" action="updateOrderProgress.php">
     <div class="form-group">
-      <label for="text">Food Name</label>
-      <input type="text" class="form-control" id="foodName" name="foodName" value= "<?php echo $row['food_name']?>">  
+      <label for="text">Order ID: </label>
+      <input type="text" class="form-control" id="orderId" name="orderId" value= "<?php echo $row['order_id']?>" readonly>
     </div>
 
     <div class="form-group">
-      <label for="email">Restaurant </label>
+      <label for="text">Order Date: </label>
+      <input type="text" class="form-control" id="orderDate" name="orderDate" value= "<?php echo $row['order_date']?>" readonly>  
     </div>
 
- 
+    <div class="form-group">
+      <label for="text">Order Price: </label>
+      <input type="text" class="form-control" id="orderPrice" name="orderPrice" value= "<?php echo $row['order_price']?>"readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="text">Student Name: </label>
+      <input type="text" class="form-control" id="studentName" name="studentName" value= "<?php echo $row['student_name']?>" readonly>  
+    </div>
+
+
+    <div class="form-group">
+      <label for="text">Student Matric: </label>
+      <input type="text" class="form-control" id="studentMatric" name="studentMatric" value= "<?php echo $row['student_matric']?>"readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Order Status</label>
+
       <?php
 
-        $sqlstatus="SELECT * FROM tb_restaurant";
+        $sqlstatus="SELECT DISTINCT order_status FROM tb_order";
         $resultstatus=mysqli_query($con,$sqlstatus);
 
-        echo '<select class="form-control" id="foodRes" name="foodRes" style="min-height:40px;">';
-        while($row2=mysqli_fetch_array($resultstatus))
+        echo '<select class="form-control" id="orderStatus" name="orderStatus" style="min-height:40px;">';
+        while($rowstatus=mysqli_fetch_array($resultstatus))
           {
-            echo"<option selected='selected' value='".$row2['restaurant_id']."'>".$row2['restaurant_name']."</option>";
+            if($rowstatus['order_status']==$row['order_status'])
+            {
+              
+              echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
+              
+            }
+
+            else
+            {
+              echo"<option value='".$rowstatus['order_status']."'>".$rowstatus['order_status']."</option>";
+              
+            }
+         
           }
+
         echo'</select>';
 
       ?>
-
-      <div class="form-group">
-      <label for="text">Food Description</label>
-      <input type="text" class="form-control" id="foodDesc" name="foodDesc" value= "<?php echo $row['food_description']?>">  
     </div>
 
-    <div class="form-group">
-      <label for="text">Availability</label>
-      <select class="form-control"style="min-height:40px;" name="foodAva" id="foodAva">
-        <option value="1">Yes</option>
-        <option value="2">No</option>
-      </select>  
-    </div>
 
-    <div class="form-group">
-      <label for="text">Price</label>
-      <input type="text" class="form-control" id="foodPrice" name="foodPrice" value= "<?php echo $row['food_price']?>">  
-    </div>
-
-    <div class="form-group">
-      <label for="text">Type</label>
-      <input type="text" class="form-control" id="foodType" name="foodType" value= "<?php echo $row['food_type']?>">  
-    </div>
-    <br>
-    <div class="form-group">
-      <label class="custom-file-label" for="propFile">Select image to upload: (in *.png)</label>
-            <input type="file" name="fileToUpload" id="fileToUpload" accept=".png" value= "<?php echo $row['food_image']?>">
-            <input type="submit" value="Upload" name="submit">
-    </div>
-
-       <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Edit</button></center>
-
-  </div>
-
-     <input type="hidden" id="id" name="id" value= "<?php echo $food_id; ?>"> 
-
-  
-
-
+   <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Update</button></center>
 </div>
 
         <div class="modal fade" id="myModal" role="dialog">
@@ -200,11 +197,11 @@
             <!-- Modal content-->
         <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title"><center>Confirmation on edit</center></h4>
+        <h4 class="modal-title"><center>Confirmation on update</center></h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-        <p>Are you sure you want to edit this menu?</p>
+        <p>Are you sure you want to update the status of order?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary btn-labeled" data-dismiss="modal">No <i class="fa fa-times"></i></button>
@@ -228,7 +225,7 @@
 
  
 
-
+</div>
         
         <div class="modal fade" id="logout" role="dialog">
         <div class="modal-dialog">

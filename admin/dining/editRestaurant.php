@@ -163,12 +163,16 @@
           {
             if($rowstatus['restaurant_status']==$row['restaurant_status'])
             {
-              echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>".$rowstatus['restaurant_status']."</option>";
+              if($rowstatus['restaurant_status']==1)
+              {
+                echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Active</option>";
+              }
+              else{
+                echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Not Active</option>";
+              }
+              
             }
-            else
-            {
-              echo"<option value='".$rowstatus['restaurant_status']."'>".$rowstatus['restaurant_status']."</option>";
-            }
+         
           }
 
         echo'</select>';

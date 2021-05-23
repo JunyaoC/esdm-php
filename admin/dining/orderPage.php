@@ -3,8 +3,8 @@
   include('../adminsession.php');
 
   $sql = "SELECT * FROM tb_order
-          LEFT JOIN tb_user
-          ON tb_user.u_id = tb_order.user_id
+          LEFT JOIN tb_user ON tb_user.u_id = tb_order.user_id
+          LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id       
           WHERE order_status != 'Completed'";
   $result = mysqli_query($con,$sql);
 ?>
@@ -99,6 +99,82 @@
 
 
   <br> <br> <br> <br> <br>
+
+        <div class="container">
+          <div class="row">
+          <div class="col-md-3">
+            <div class="card-counter success">
+              <i class="fa fa-check"></i>
+              <span class="count-numbers">
+                <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Completed' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalComplete=$results->num_rows;
+                  echo htmlentities($totalComplete);
+                ?>
+              </span>
+              <span class="count-name">Completed Order</span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card-counter info">
+              <i class="fa fa-clock-o"></i>
+              <span class="count-numbers">
+                <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Preparing' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalPrepare=$results->num_rows;
+                  echo htmlentities($totalPrepare);
+                ?>
+              </span>
+              <span class="count-name">Preparing Order</span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card-counter primary">
+              <i class="fa fa-cutlery"></i>
+              <span class="count-numbers">
+                <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Pick Up' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalPickUp=$results->num_rows;
+                  echo htmlentities($totalPickUp);
+                ?>
+              </span>
+              <span class="count-name">Ready Order</span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card-counter danger">
+              <i class="fa fa-ban"></i>
+              <span class="count-numbers">
+              <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Cancelled' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalPickUp=$results->num_rows;
+                  echo htmlentities($totalPickUp);
+                ?>
+              </span>
+              <span class="count-name">Cancelled Order</span>
+            </div>
+          </div>    
+        </div>
+    <br><br>
+
+
+      </div>
+
     <div class="container">
     <div class="row ml-1">
       <div>
@@ -109,9 +185,10 @@
         <thead>
           <tr>
             <th>Date</th>
-            <th>Customer</th>
-            <th>Status</th>
+            <th>Student Name</th>
+            <th>Student Matric</th>
             <th>Price</th>
+            <th>Status</th>
             <th>Operation</th>
           </tr>
         </thead>
@@ -121,10 +198,12 @@
             {
               echo "<tr>";
               echo"<td>".$row['order_date'] ."</td>";
-              echo"<td>".$row['u_name'] ."</td>";
-              echo"<td>".$row['order_status'] ."</td>";
+              echo"<td>".$row['student_name'] ."</td>";
+              echo"<td>".$row['student_matric'] ."</td>";
               echo"<td>"."RM " .$row['order_price'] ."</td>";
+              echo"<td>".$row['order_status'] ."</td>";
               echo"<td>";
+                echo "<a href='updateOrder.php?id=".$row['order_id']."' class='btn btn-warning'>Update</a> &nbsp";
                 echo "<a href='deleteOrder.php?id=".$row['order_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
               echo"</td>";
               echo"</tr>";

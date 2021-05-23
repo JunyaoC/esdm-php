@@ -136,9 +136,10 @@
         $resultstatus=mysqli_query($con,$sqlstatus);
 
         echo '<select class="form-control" id="foodRes" name="foodRes" style="min-height:40px;">';
+        echo '<option hidden="" disabled="disabled" selected="selected" value="">Please select</option>';
         while($row=mysqli_fetch_array($resultstatus))
           {
-            echo"<option selected='selected' value='".$row['restaurant_id']."'>".$row['restaurant_name']."</option>";
+            echo"<option value='".$row['restaurant_id']."'>".$row['restaurant_name']."</option>";
           }
         echo'</select>';
 
@@ -151,7 +152,8 @@
 
     <div class="form-group">
       <label for="text">Availability</label>
-      <select name="foodAva" id="foodAva">
+      <select class="form-control"style="min-height:40px;" name="foodAva" id="foodAva">
+        <option hidden="" disabled="disabled" selected="selected" value="">Please select</option>
         <option value="1">Yes</option>
         <option value="2">No</option>
       </select>  
@@ -166,19 +168,23 @@
       <label for="text">Type</label>
       <input type="text" class="form-control" id="foodType" name="foodType" required>  
     </div>
+    <br>
 
     <div class="form-group">
-      <label for="propFile">Select image to upload:</label>
+      <label class="custom-file-label" for="propFile">Select image to upload: (in *.png)</label>
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload" name="submit">
     </div>
+
+
+   <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Add</button></center>
+
   </div>
 
     
 
   
 
-   <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Add</button></center>
 </div>
 
         <div class="modal fade" id="myModal" role="dialog">
@@ -206,7 +212,7 @@
 
   </div>
   </center>
-</div>
+
 
 
 <br><br>
@@ -215,7 +221,7 @@
 
  
 
-</div>
+
         
         <div class="modal fade" id="logout" role="dialog">
         <div class="modal-dialog">

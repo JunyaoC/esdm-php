@@ -3,8 +3,8 @@
   include('../adminsession.php');
 
   $sql = "SELECT * FROM tb_order
-          LEFT JOIN tb_user
-          ON tb_user.u_id = tb_order.user_id
+          LEFT JOIN tb_user ON tb_user.u_id = tb_order.user_id
+          LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id
           WHERE order_status = 'Completed'";
   $result = mysqli_query($con,$sql);
 ?>
@@ -108,8 +108,10 @@
       <table id="program" class="display">
         <thead>
           <tr>
+            <th>Order Id</th>
             <th>Date</th>
-            <th>Customer</th>
+            <th>Student Name</th>
+            <th>Student Matric</th>
             <th>Status</th>
             <th>Price</th>
           </tr>
@@ -119,8 +121,10 @@
             while($row=mysqli_fetch_array($result))
             {
               echo "<tr>";
+              echo"<td>".$row['order_id'] ."</td>";
               echo"<td>".$row['order_date'] ."</td>";
-              echo"<td>".$row['u_name'] ."</td>";
+              echo"<td>".$row['student_name'] ."</td>";
+              echo"<td>".$row['student_matric'] ."</td>";
               echo"<td>".$row['order_status'] ."</td>";
               echo"<td>"."RM " .$row['order_price'] ."</td>";
               echo"</tr>";
