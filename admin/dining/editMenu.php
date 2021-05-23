@@ -185,9 +185,10 @@
     </div>
     <br>
     <div class="form-group">
-      <label class="custom-file-label" for="propFile">Select image to upload: (in *.png)</label>
+     
             <input type="file" name="fileToUpload" id="fileToUpload" accept=".png" value= "<?php echo $row['food_image']?>">
             <input type="submit" value="Upload" name="submit">
+             <label class="custom-file-label" for="propFile">Select image to upload: (in *.png)</label>
     </div>
 
        <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Edit</button></center>
