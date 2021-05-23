@@ -34,7 +34,8 @@
                 'courseSec_date' => $read['courseSec_date'],
                 'regHis_id' => $read['regHis_id'],
                 'procourse_sec' => $read['procourse_sec'],
-                'diff' => $diff,   
+                'diff' => $diff,  
+                'today' => $today,   
             );
             array_push($read_data,$data);
         }
