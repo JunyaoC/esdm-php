@@ -129,7 +129,7 @@
                                         echo "<td>".$row['an_detail']."</td>";
                                         echo "<td>".$row['an_user']."</td>";
                                         echo "<td>
-                                                <a class='btn btn-secondary' href='announcementupdate.php?id=".$row['an_id']."' onclick='ConfirmUpdate()'>UPDATE</a> <a class='btn btn-danger' href='announcementdelete.php?id=".$row['an_id']."' onclick='ConfirmDelete()'>DELETE</a>
+                                                <a class='btn btn-secondary' href='announcementupdate.php?id=".$row['an_id']."' onclick='ConfirmUpdate()'>UPDATE</a> <a class='btn btn-danger' href='announcementdelete.php?id=".$row['an_id']."' onclick='return confirm(\"Are you sure you want to delete?\")'>DELETE</a>
                                              </td>";
                                     echo "</tr>";
                                 }
