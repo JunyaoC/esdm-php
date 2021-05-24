@@ -142,9 +142,12 @@ $resultn=mysqli_query($con,$sqln);
               echo "<td><a href='".$rown['paymentProve']."' target='_blank'> Download </a></td>";
               echo "<td>".$rown['stickerStatus']."</td>";
               echo "<td>";
-                          echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              if($rown['stickerStatus']=='Received'){
+                                          echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                                   Update
                                 </button>';
+              }
+
                           echo "</td>";             
               echo "</tr>";
             }
