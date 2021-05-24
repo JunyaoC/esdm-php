@@ -25,7 +25,7 @@
 				if($item = 'Water Heater/Electric Kettle'){
 					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
 					$price = mysqli_fetch_array($sql_run);
-					$heater = $price['item_price'] * $heater;
+					$heater = $price['item_price'] * $qty_heater;
 				}
 				if($item = 'Laptop/Handphone Charger'){
 					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
@@ -45,7 +45,7 @@
 				if($item = 'Radio'){
 					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
 					$price = mysqli_fetch_array($sql_run);
-					$radio = $price['item_price'] * $qty_radios;
+					$radio = $price['item_price'] * $qty_radio;
 				}
 			
 				$total = $iron + $heater + $charger + $toaster + $dryer + $radio;
@@ -115,7 +115,7 @@
 		$today = date('Y-m-d');
 		$query = mysqli_query($conn, "UPDATE tb_hos_electric_payment SET payment_method='$postjson[method]', payment_date='$today' WHERE student_id='A18CS1234'");
 		
-		if($insert){
+		if($query){
 			$result = json_encode(array('success'=>true,'msg'=>'success'));
 		}else{
 			$result = json_encode(array('success'=>false,'msg'=>'fail'));
