@@ -2,7 +2,7 @@
 
   include('../dbconnection.php');
   include('../adminsession.php');
-    $sid = $_POST['sid'];
+    $sid = $_POST['fbid'];
     $stats = $_POST['status'];
     $sidnum = (int)$sid;
    
@@ -11,10 +11,14 @@
             SET stickerStatus = '$stats'
             WHERE stickerID = '$sidnum' ";
 
-  //var_dump($sql);     
+//   var_dump($sql);     
 
 
-
+// if (mysqli_query($con, $sql)) {
+//   echo "New record created successfully";
+// } else {
+//   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+// }
     mysqli_query($con,$sql);
     mysqli_close($con);     
 

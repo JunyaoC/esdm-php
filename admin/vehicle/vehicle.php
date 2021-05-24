@@ -124,6 +124,8 @@ $resultn=mysqli_query($con,$sqln);
         <?php
             while ($rown=mysqli_fetch_array($resultn))
             {
+
+              $a = $rown['stickerID'];
               $date = $rown['paymentDate'] ;
               $timestamp = strtotime($date);
               $ddate =  date('d/m/Y', $timestamp);
@@ -133,7 +135,7 @@ $resultn=mysqli_query($con,$sqln);
               $ddate1 =  date('d/m/Y', $timestamp1);
 
 
-              $a = $rown['stickerID'];
+              
               echo "<tr>";
               echo "<td>".$rown['stuACID']."</td>";
               echo "<td>".$rown['vehiclePlateNo']."</td>";
@@ -142,8 +144,7 @@ $resultn=mysqli_query($con,$sqln);
               echo "<td><a href='".$rown['paymentProve']."' target='_blank'> Download </a></td>";
               echo "<td>".$rown['stickerStatus']."</td>";
               echo "<td>";
-          
-                                          echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                          echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rown['stickerID'].'">
                                   Update
                                 </button>';
               
@@ -206,7 +207,7 @@ $resultn=mysqli_query($con,$sqln);
                <option value= 'Received'>Received</option>
         
                 </div>
-
+        <input type="hidden"  id="fbid" name="fbid" value="<?php echo $rown['stickerID']; ?>">
         <input type="hidden"  id="sid" name="sid" value= "<?php echo $a; ?>'">
         <br><br>
         
@@ -233,6 +234,21 @@ $resultn=mysqli_query($con,$sqln);
   <script src="../js/core/popper.min.js"></script>
   <script src="../js/core/bootstrap.min.js"></script>
   <script src="../js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+<script>
+    $('#myModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('whatever') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-title').text('WARNING ' + recipient)
+    modal.find('.modal-body input').val(recipient)
+    // modal.find('.modal-footer').attr('action="test.php?"'+ recipient)
+    $('#userForm').attr("action", 'stickerprocess.php?id=' + recipient);
+  })
+  </script> 
+
 
   <!--  Notifications Plugin    -->
   <script src="../js/plugins/bootstrap-notify.js"></script>
