@@ -88,8 +88,9 @@
         </div>
       </nav>
 <br><br><br><br>
-<a  href="register.php" class="btn btn-primary">Return</a>
-<div class="container" style="padding-left: 15%;padding-bottom: 3%;padding-top: 5%">
+
+<div class="container" style="padding-left: 20%;padding-bottom: 3%;padding-top: 5%">
+  <a  href="register.php" class="btn btn-secondary">Return</a>
  <div class="row">
   <div class="col-sm-8">
     <div class="card">
@@ -99,11 +100,11 @@
       <div class="card-text" style="padding-left: 100px;">
         <form method="post">
           <div class="form-group">
-            <h5><label class="col-form-label">Select Block:</label>
+            <h5 ><label class="col-form-label">Select Block:</label>
             <?php
                   $bquery = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.*,tb_hos_block.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id INNER JOIN tb_hos_block ON tb_hos_college.kolej_id = tb_hos_block.hostel_id WHERE tb_hostel_reg.reg_id = '$reg_id' ")or die(mysqli_error()); 
 
-                    echo'<select name="getblock" style="padding-left: 100px;">
+                    echo'<select name="getblock" style="padding-left: 100px;height:40px">
                     <option> Select block..</option>';
                         while ($brow = mysqli_fetch_array($bquery)) {
                             echo "<option value='".$brow['block_id']."'>".$brow['block_name']."</option>";
@@ -116,7 +117,7 @@
             <h5><label class="col-form-label">Select Room:</label>
                         <?php
                   $rquery = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.*,tb_hos_block.*,tb_hos_room.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id INNER JOIN tb_hos_block ON tb_hos_college.kolej_id = tb_hos_block.hostel_id INNER JOIN tb_hos_room ON tb_hos_block.block_id = tb_hos_room.block_id WHERE tb_hostel_reg.reg_id = '$reg_id' ")or die(mysqli_error());       
-                    echo'<select name="getroom" style="padding-left: 100px;">
+                    echo'<select name="getroom" style="padding-left: 100px;height:40px">
                     <option> Select room..</option>';
                         while ($rrow = mysqli_fetch_array($rquery)) {
                             echo "<option value='".$rrow['room_id']."'>".$rrow['room_no']."</option>";
@@ -124,10 +125,9 @@
                     echo'</select></h5>';
                 ?>
           </div>
-          <div style="padding-left: 100px">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div style="padding-left: 140px">
         <input type="hidden" name="regid" value="<?php echo $reg_id; ?>">
-        <button name="save1" type="submit" class="btn btn-primary">Save</button> 
+        <button name="save1" type="submit" class="btn btn-primary btn-lg" >Save</button> 
           </div>
          </form>
      </div>  

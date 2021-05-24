@@ -84,7 +84,7 @@
 
 
 <br><br><br><br>
-<div class="container" style="padding-left: 20%;padding-bottom: 3%;padding-top: 5%">
+<div class="container" style="padding-left: 25%;padding-bottom: 3%;padding-top: 5%">
           <form method="post">
                 <?php
                     $cquery = mysqli_query($con,"SELECT * FROM tb_hos_college")or die(mysqli_error());       
