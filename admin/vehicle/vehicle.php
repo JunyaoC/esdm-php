@@ -149,9 +149,9 @@ $resultn=mysqli_query($con,$sqln);
               echo "<td>" .$ddate1. "</td>";
               echo "<td><a href='".$rown['paymentProve']."' target='_blank'> Download </a></td>";
               echo "<td>".$rown['paymentType']."</td>";
-              echo "<td>".$rown['stickerStatus']."</td>";
+              echo "<td>".$rown['paymentStatus']."</td>";
               echo "<td>";
-                                          echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rown['stickerID'].'">
+                                          echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rown['paymentID'].'">
                                   Update
                                 </button>';
               
@@ -214,8 +214,8 @@ $resultn=mysqli_query($con,$sqln);
                <option value= 'Received'>Received</option>
         
                 </div>
-        <input type="hidden"  id="fbid" name="fbid" value="<?php echo $rown['stickerID']; ?>">
-        <input type="hidden"  id="sid" name="sid" value= "<?php echo $a; ?>'">
+        <input type="hidden"  id="sid" name="sid" value="<?php echo $rown['stickerID']; ?>">
+        <input type="hidden"  id="pid" name="pid" value="<?php echo $rown['paymentID']; ?>">
         <br><br>
         
         </div>
