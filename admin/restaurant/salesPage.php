@@ -2,10 +2,18 @@
   include('../dbconnection.php');
   include('../restaurantSession.php');
 
+
+  $rest_user_id = $_SESSION['user_id'];
+
+          
   $sql = "SELECT * FROM tb_order
           LEFT JOIN tb_user ON tb_user.u_id = tb_order.user_id
+          LEFT JOIN tb_item_order ON tb_item_order.order_id = tb_order.order_id
+          LEFT JOIN tb_food ON tb_food.food_id = tb_item_order.food_id
+          LEFT JOIN tb_restaurant ON tb_restaurant.restaurant_id = tb_food.restaurant_id
           LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id
-          WHERE order_status = 'Completed'";
+          WHERE order_status = 'Completed' AND tb_restaurant.u_id =  '$rest_user_id'";
+
   $result = mysqli_query($con,$sql);
 ?>
 
@@ -30,19 +38,13 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+        <a href="menuPage.php" class="simple-text logo-normal">ESDM Restaurant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
             <a>
               <p>Dining</p>
-            </a>
-          </li>
-          <li>
-            <a href="restaurant.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
             </a>
           </li>
           <li>
@@ -79,7 +81,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">ESDM Admin Page</a>
+            <a class="navbar-brand">ESDM Restaurant</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -110,10 +112,12 @@
           <tr>
             <th>Order Id</th>
             <th>Date</th>
+            <th>Food Name</th>
+            <th>Quantity</th>
             <th>Student Name</th>
             <th>Student Matric</th>
             <th>Status</th>
-            <th>Price</th>
+            <th>Total Price</th>
           </tr>
         </thead>
         <tbody>
@@ -123,10 +127,12 @@
               echo "<tr>";
               echo"<td>".$row['order_id'] ."</td>";
               echo"<td>".$row['order_date'] ."</td>";
+              echo"<td>".$row['food_name'] ."</td>";
+              echo"<td>".$row['item_quantity'] ."</td>";
               echo"<td>".$row['student_name'] ."</td>";
               echo"<td>".$row['student_matric'] ."</td>";
               echo"<td>".$row['order_status'] ."</td>";
-              echo"<td>"."RM " .$row['order_price'] ."</td>";
+              echo"<td>"."RM " .$row['totalprice'] ."</td>";
               echo"</tr>";
             }
           ?>
@@ -156,7 +162,7 @@
         </div>
 
   <br> <br>
-       <?php include 'adminfooter.php' ?>
+       <?php include '../adminfooter.php' ?>
     </div>
   </div>
   <!--   Core JS Files   -->

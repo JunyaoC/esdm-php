@@ -1,7 +1,12 @@
 <?php
   include('../restaurantSession.php');
   include('../dbconnection.php');
+
+  $rest_user_id = $_SESSION['user_id'];
   
+  $sqlstatus="SELECT * FROM tb_restaurant WHERE u_id = '$rest_user_id'";
+  $resultstatus=mysqli_query($con,$sqlstatus);
+  $row=mysqli_fetch_array($resultstatus);
 ?>
 
 <!DOCTYPE html>
@@ -40,19 +45,13 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">PSM Admin Panel</a>
+        <a href="menuPage.php" class="simple-text logo-normal">ESDM Restaurant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
             <a>
               <p>Dining</p>
-            </a>
-          </li>
-          <li>
-            <a href="restaurant.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
             </a>
           </li>
           <li class="active">
@@ -89,7 +88,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">PSM System Admin Page</a>
+            <a class="navbar-brand">ESDM Restaurant</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -124,26 +123,12 @@
       <label for="text">Food Name</label>
       <input type="text" class="form-control" id="foodName" name="foodName" required>  
     </div>
-
-    <div class="form-group">
-      <label for="email">Restaurant </label>
-    </div>
-
  
-      <?php
 
-        $sqlstatus="SELECT * FROM tb_restaurant";
-        $resultstatus=mysqli_query($con,$sqlstatus);
-
-        echo '<select class="form-control" id="foodRes" name="foodRes" style="min-height:40px;">';
-        echo '<option hidden="" disabled="disabled" selected="selected" value="">Please select</option>';
-        while($row=mysqli_fetch_array($resultstatus))
-          {
-            echo"<option value='".$row['restaurant_id']."'>".$row['restaurant_name']."</option>";
-          }
-        echo'</select>';
-
-      ?>
+<div class="form-group">
+      <label for="text">Restaurant Name</label>
+      <input type="text" class="form-control" id="foodRes" name="foodRes" value = <?php echo $row['restaurant_name']?> readonly>  
+    </div>
 
       <div class="form-group">
       <label for="text">Food Description</label>

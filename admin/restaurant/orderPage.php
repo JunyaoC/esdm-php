@@ -2,10 +2,16 @@
   include('../dbconnection.php');
   include('../restaurantSession.php');
 
+  $rest_user_id = $_SESSION['user_id'];
+
   $sql = "SELECT * FROM tb_order
           LEFT JOIN tb_user ON tb_user.u_id = tb_order.user_id
-          LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id       
-          WHERE order_status != 'Completed'";
+          LEFT JOIN tb_item_order ON tb_item_order.order_id = tb_order.order_id
+          LEFT JOIN tb_food ON tb_food.food_id = tb_item_order.food_id
+          LEFT JOIN tb_restaurant ON tb_restaurant.restaurant_id = tb_food.restaurant_id
+          LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id
+          WHERE order_status != 'Completed' AND tb_restaurant.u_id =  '$rest_user_id'";
+
   $result = mysqli_query($con,$sql);
 ?>
 
@@ -30,19 +36,13 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+        <a href="menuPage.php" class="simple-text logo-normal">ESDM Restaurant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
             <a>
               <p>Dining</p>
-            </a>
-          </li>
-          <li>
-            <a href="restaurant.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
             </a>
           </li>
           <li>
@@ -79,7 +79,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">ESDM Admin Page</a>
+            <a class="navbar-brand">ESDM Restaurant</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -102,29 +102,18 @@
 
         <div class="container">
           <div class="row">
-          <div class="col-md-3">
-            <div class="card-counter success">
-              <i class="fa fa-check"></i>
-              <span class="count-numbers">
-                <?php 
-                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Completed' ";
-                  $query = $con -> prepare($sql);
-                  $query->execute();
-                  $results=$query->get_result();
-                  $totalComplete=$results->num_rows;
-                  echo htmlentities($totalComplete);
-                ?>
-              </span>
-              <span class="count-name">Completed Order</span>
-            </div>
-          </div>
 
           <div class="col-md-3">
             <div class="card-counter info">
               <i class="fa fa-clock-o"></i>
               <span class="count-numbers">
                 <?php 
-                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Preparing' ";
+                  $sql ="SELECT * FROM tb_order 
+                          LEFT JOIN tb_item_order ON tb_item_order.order_id = tb_order.order_id
+                          LEFT JOIN tb_food ON tb_food.food_id = tb_item_order.food_id
+                          LEFT JOIN tb_restaurant ON tb_restaurant.restaurant_id = tb_food.restaurant_id
+                          WHERE tb_order.order_status = 'Preparing'
+                          AND tb_restaurant.u_id = '$rest_user_id' ";
                   $query = $con -> prepare($sql);
                   $query->execute();
                   $results=$query->get_result();
@@ -141,7 +130,12 @@
               <i class="fa fa-cutlery"></i>
               <span class="count-numbers">
                 <?php 
-                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Pick Up' ";
+                  $sql ="SELECT * FROM tb_order 
+                        LEFT JOIN tb_item_order ON tb_item_order.order_id = tb_order.order_id
+                        LEFT JOIN tb_food ON tb_food.food_id = tb_item_order.food_id
+                        LEFT JOIN tb_restaurant ON tb_restaurant.restaurant_id = tb_food.restaurant_id
+                        WHERE tb_order.order_status = 'Pick Up'
+                        AND tb_restaurant.u_id = '$rest_user_id' ";
                   $query = $con -> prepare($sql);
                   $query->execute();
                   $results=$query->get_result();
@@ -158,7 +152,12 @@
               <i class="fa fa-ban"></i>
               <span class="count-numbers">
               <?php 
-                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Cancelled' ";
+                  $sql ="SELECT * FROM tb_order 
+                      LEFT JOIN tb_item_order ON tb_item_order.order_id = tb_order.order_id
+                      LEFT JOIN tb_food ON tb_food.food_id = tb_item_order.food_id
+                      LEFT JOIN tb_restaurant ON tb_restaurant.restaurant_id = tb_food.restaurant_id
+                      WHERE tb_order.order_status = 'Cancelled'
+                      AND tb_restaurant.u_id = '$rest_user_id' ";
                   $query = $con -> prepare($sql);
                   $query->execute();
                   $results=$query->get_result();
@@ -186,8 +185,10 @@
           <tr>
             <th>Date</th>
             <th>Student Name</th>
-            <th>Student Matric</th>
-            <th>Price</th>
+            <th>Student Matric</th>                     
+            <th>Food</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
             <th>Status</th>
             <th>Operation</th>
           </tr>
@@ -200,7 +201,9 @@
               echo"<td>".$row['order_date'] ."</td>";
               echo"<td>".$row['student_name'] ."</td>";
               echo"<td>".$row['student_matric'] ."</td>";
-              echo"<td>"."RM " .$row['order_price'] ."</td>";
+              echo"<td>".$row['food_name'] ."</td>";
+              echo"<td>".$row['item_quantity'] ."</td>";
+              echo"<td>"."RM " .$row['totalprice'] ."</td>";
               echo"<td>".$row['order_status'] ."</td>";
               echo"<td>";
                 echo "<a href='updateOrder.php?id=".$row['order_id']."' class='btn btn-warning'>Update</a> &nbsp";
@@ -235,7 +238,7 @@
         </div>
 
   <br> <br>
-       <?php include 'adminfooter.php' ?>
+       <?php include '../adminfooter.php' ?>
     </div>
   </div>
   <!--   Core JS Files   -->

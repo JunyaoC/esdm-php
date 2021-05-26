@@ -7,7 +7,16 @@
   $order_id=$_GET['id'];
 
   //JOIN
-  $sql = "SELECT * FROM tb_order LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id WHERE order_id='$order_id'";
+  //$sql = "SELECT * FROM tb_order LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id WHERE order_id='$order_id'";
+  
+  $sql = "SELECT * FROM tb_order
+          LEFT JOIN tb_user ON tb_user.u_id = tb_order.user_id
+          LEFT JOIN tb_item_order ON tb_item_order.order_id = tb_order.order_id
+          LEFT JOIN tb_food ON tb_food.food_id = tb_item_order.food_id
+          LEFT JOIN tb_restaurant ON tb_restaurant.restaurant_id = tb_food.restaurant_id
+          LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id
+          WHERE order_status != 'Completed' AND tb_order.order_id = '$order_id'";
+
   $result = mysqli_query($con,$sql) or die("Error: " . mysqli_error($con));
   $row = mysqli_fetch_array($result); 
 
@@ -28,7 +37,7 @@
   float: left;
   width: 33.33%;
   padding: 10px;
-  height: 520px; /* Should be removed. Only for demonstration */
+  height: 660px; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -49,19 +58,13 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">PSM Admin Panel</a>
+        <a href="menuPage.php" class="simple-text logo-normal">ESDM Restaurant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
             <a>
               <p>Dining</p>
-            </a>
-          </li>
-          <li >
-            <a href="restaurant.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
             </a>
           </li>
           <li>
@@ -98,7 +101,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">PSM System Admin Page</a>
+            <a class="navbar-brand">ESDM Restaurant</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -141,8 +144,19 @@
     </div>
 
     <div class="form-group">
-      <label for="text">Order Price: </label>
-      <input type="text" class="form-control" id="orderPrice" name="orderPrice" value= "<?php echo $row['order_price']?>"readonly>
+      <label for="text">Food Name: </label>
+      <input type="text" class="form-control" id="food" name="food" value= "<?php echo $row['food_name']?>" readonly>  
+    </div>
+
+    <div class="form-group">
+      <label for="text">Quantity: </label>
+      <input type="text" class="form-control"  value= "<?php echo $row['item_quantity']?>" readonly>  
+    </div>
+
+
+    <div class="form-group">
+      <label for="text">Total Price: </label>
+      <input type="text" class="form-control" id="orderPrice" name="orderPrice" value= "<?php echo $row['totalprice']?>"readonly>
     </div>
 
     <div class="form-group">
@@ -156,6 +170,9 @@
       <input type="text" class="form-control" id="studentMatric" name="studentMatric" value= "<?php echo $row['student_matric']?>"readonly>
     </div>
 
+
+    
+
     <div class="form-group">
       <label for="email">Order Status</label>
 
@@ -167,40 +184,44 @@
         echo '<select class="form-control" id="orderStatus" name="orderStatus" style="min-height:40px;">';
         while($rowstatus=mysqli_fetch_array($resultstatus))
           {
-            if($rowstatus['order_status']=='Preparing')
+            if($row['order_status']=='Preparing')
             {
               
               echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
-               echo"<option value='Pick Up'>Pick Up</option>";
+              echo"<option value='Pick Up'>Pick Up</option>";
               echo"<option value='Cancelled'>Cancelled</option>";
               echo"<option value='Completed'>Completed</option>";
+              break;
               
             }
-            else if($rowstatus['order_status']=='Pick Up')
+            else if($row['order_status']=='Pick Up')
             {
               
               echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
-               echo"<option value='Preparing'>Preparing</option>";
+              echo"<option value='Preparing'>Preparing</option>";
               echo"<option value='Cancelled'>Cancelled</option>";
               echo"<option value='Completed'>Completed</option>";
+              break;
               
             }
-            else if($rowstatus['order_status']=='Cancelled')
+            else if($row['order_status']=='Cancelled')
             {
               
               echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
                echo"<option value='Preparing'>Preparing</option>";
               echo"<option value='Pick Up'>Pick Up</option>";
               echo"<option value='Completed'>Completed</option>";
+              break;
               
             }
-            else if($rowstatus['order_status']=='Completed')
+            else if($row['order_status']=='Completed')
             {
               
               echo"<option selected='selected' value='".$row['order_status']."'>".$row['order_status']."</option>";
                echo"<option value='Preparing>Preparing</option>";
               echo"<option value='Pick Up'>Pick Up</option>";
               echo"<option value='Cancelled'>Cancelled</option>";
+              break;
               
             }         
           }

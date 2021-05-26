@@ -50,19 +50,13 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">PSM Admin Panel</a>
+        <a href="menuPage.php" class="simple-text logo-normal">ESDM Restaurant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
             <a>
               <p>Dining</p>
-            </a>
-          </li>
-          <li>
-            <a href="restaurant.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
             </a>
           </li>
           <li class="active">
@@ -99,7 +93,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">PSM System Admin Page</a>
+            <a class="navbar-brand">ESDM Restaurant</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>

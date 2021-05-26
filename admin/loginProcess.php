@@ -37,7 +37,7 @@
 
 					if($_SESSION['u_role']=='restaurant')
 					{
-						header('Location: restaurant/restaurant.php');
+						header('Location: restaurant/menuPage.php');
 					}
 					else
 					{	
