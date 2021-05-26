@@ -115,9 +115,7 @@
                     <div>
                         <h3>History</h3>
                     </div>
-                    <div class="ml-auto mr-3"> 
-                        <a href='sectionadd.php' class='btn btn-primary' style="color:white;"> Add Section &nbsp<i class="fa fa-plus "></i></a>
-                    </div>
+                    
                 </div>
                 <div class="py-3 col bg-light border">
                     <table id="program" class="display">
