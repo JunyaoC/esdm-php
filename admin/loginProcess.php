@@ -34,8 +34,16 @@
 					$_SESSION['user_session'] = session_id();
 					$_SESSION['user_id'] = $user_id;  
 					$_SESSION['u_role'] = $row['u_role'];
-					header('Location: admin/dashboard.php');
-	
+
+					if($_SESSION['u_role']=='restaurant')
+					{
+						header('Location: restaurant/restaurant.php');
+					}
+					else
+					{	
+						header('Location: admin/dashboard.php');
+					}
+					
 					
 				}
 				else
