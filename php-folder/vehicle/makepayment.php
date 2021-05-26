@@ -9,11 +9,12 @@ $vehicleID=$postjson['vehicleID'];
 $paymentAmount = $postjson['paymentAmount'];
 $paymentProve = $postjson['paymentProve'];
 $paymentStatus = $postjson['paymentStatus'];
+$paymentType = $postjson['paymentType'];
 $today = date('Y-m-d');
 
 if($postjson['action']=='addpayment'){
-    $insert = mysqli_query($conn, "INSERT INTO tb_payment (stuACID, stickerID,paymentAmount,paymentDate,paymentProve,paymentStatus) 
-    VALUES('$stuACID',(SELECT stickerID FROM tb_sticker WHERE tb_sticker.vehiclePlateNo = '$vehicleID'),'$paymentAmount','$today','$paymentProve','$paymentStatus')");
+    $insert = mysqli_query($conn, "INSERT INTO tb_payment (stuACID, stickerID,paymentAmount,paymentDate,paymentProve,paymentStatus,paymentType) 
+    VALUES('$stuACID',(SELECT stickerID FROM tb_sticker WHERE tb_sticker.vehiclePlateNo = '$vehicleID'),'$paymentAmount','$today','$paymentProve','$paymentStatus', '$paymentType')");
 	
     if($insert) {
         $result = json_encode(array('success'=>true, 'msg'=>'success'));

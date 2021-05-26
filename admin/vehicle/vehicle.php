@@ -17,6 +17,11 @@ $resultn=mysqli_query($con,$sqln);
 <?php 
   include '../pages-styling.php';
 ?>
+  <script>
+    $(document).ready( function () {
+    $('#program').DataTable();
+} );
+  </script>
 
 
 <body class="">
@@ -106,7 +111,7 @@ $resultn=mysqli_query($con,$sqln);
         <div class="row">
         </div>
       <div class="table-responsive">         
-      <table class="table table-hover">
+      <table class="table table-hover" id="program">
  
         <thead>
             <tr>
@@ -115,6 +120,7 @@ $resultn=mysqli_query($con,$sqln);
               <th>Payment Date</th>
               <th>Expiration Date</th>
               <th>Payment Proof</th>
+              <th>Payment Type</th>
               <th>Status</th>
               <th>Operation</th>
             </tr>
@@ -142,6 +148,7 @@ $resultn=mysqli_query($con,$sqln);
               echo "<td>" .$ddate. "</td>";
               echo "<td>" .$ddate1. "</td>";
               echo "<td><a href='".$rown['paymentProve']."' target='_blank'> Download </a></td>";
+              echo "<td>".$rown['paymentType']."</td>";
               echo "<td>".$rown['stickerStatus']."</td>";
               echo "<td>";
                                           echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rown['stickerID'].'">
