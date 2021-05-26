@@ -22,7 +22,7 @@
     mysqli_close($con);
 
     //Redirect page
-    header('Location: sectionlist.php');
+    header('Location: announcement.php');
 
 ?> 
 
