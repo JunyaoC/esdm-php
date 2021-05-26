@@ -48,6 +48,12 @@
                     <p>Manage Appointment</p>
                     </a>
                 </li>
+                <li>
+                    <a href="../procourse/history.php">
+                        <i class="fa fa-bars"></i>
+                        <p>History</p>
+                    </a>
+                </li> 
                 <li class="active">
                     <a href="../procourse/issue.php">
                     <i class="fa fa-bars"></i>

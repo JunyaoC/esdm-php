@@ -64,6 +64,12 @@
             </a>
           </li>
           <li>
+              <a href="../procourse/history.php">
+                <i class="fa fa-bars"></i>
+                  <p>History</p>
+              </a>
+          </li> 
+          <li>
             <a href="../procourse/issue.php">
               <i class="fa fa-bars"></i>
               <p>Manage Issue</p>

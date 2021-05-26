@@ -12,7 +12,7 @@
     $secseat = 0; 
     $secmaxseat = $_POST['secmaxseat']; 
     $seclocation=ucwords($seclocation);
-    $sqlseat="SELECT * FROM tb_procourse_section WHERE courseSec_courseID='$secprocourse'";
+    $sqlseat="SELECT * FROM tb_procourse_section WHERE courseSec_courseID='$secprocourse' AND section_status=1";
     $result=mysqli_query($con,$sqlseat);
     $row=mysqli_num_rows($result);
     if($row>0)
@@ -36,8 +36,8 @@
     }
 
     // SQL INSERT 
-    $sql = "INSERT INTO tb_procourse_section (section_no, courseSec_date, courseSec_loc, courseSec_courseID, courseSec_fac, courseSec_seat, courseSec_maxseat)
-            VALUES ($secno,'$secdate','$seclocation','$secprocourse','$secfacilitator',$secseat,$secmaxseat)";
+    $sql = "INSERT INTO tb_procourse_section (section_no, courseSec_date, courseSec_loc, courseSec_courseID, courseSec_fac, courseSec_seat, courseSec_maxseat,section_status)
+            VALUES ($secno,'$secdate','$seclocation','$secprocourse','$secfacilitator',$secseat,$secmaxseat,1)";
 
     //check SQL output
     var_dump($sql);

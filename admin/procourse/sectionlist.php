@@ -2,7 +2,16 @@
 
     include('../dbconnection.php');
     include('../adminsession.php');
+    $today=date('Y-m-d');
+    $sqlt = "SELECT * FROM tb_procourse_section WHERE courseSec_date<'$today'";
+    $resultt=mysqli_query($con,$sqlt);
+    while($rowt=mysqli_fetch_array($resultt))
+    {
+            $sec_status=0;
+            $ssqlupdate="UPDATE tb_procourse_section SET section_status=$sec_status WHERE courseSec_date<'$today'";
+            mysqli_query($con,$ssqlupdate);
 
+    }
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +57,12 @@
                     <a href="../procourse/studentlist.php">
                     <i class="fa fa-bars"></i>
                     <p>Manage Appointment</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../procourse/history.php">
+                    <i class="fa fa-bars"></i>
+                    <p>History</p>
                     </a>
                 </li>
                 <li>
@@ -131,7 +146,7 @@
                                 $sql = "SELECT cs.*,f.*,c.* FROM tb_procourse_section cs
                                         LEFT JOIN tb_procourse_fac f ON cs.courseSec_fac = f.fac_id
                                         LEFT JOIN tb_pro_course c ON c.procourse_code=cs.courseSec_courseID 
-                                        ORDER BY c.procourse_code,cs.section_no";
+                                        WHERE cs.section_status=1 ORDER BY c.procourse_code,cs.section_no";
                                 
                                 $result = mysqli_query($con,$sql);
                                 $count=0;
@@ -139,6 +154,7 @@
                                 {
                                     $count=$count+1;
                                     echo "<tr>";
+                                    
                                         echo "<td>".$count.".</td>";
                                         echo "<td><span style='color:#5C001E;'>".$row['courseSec_courseID']."</span><br>".$row['procourse_name']."</td>";
                                         echo "<td>".$row['section_no']."</td>";

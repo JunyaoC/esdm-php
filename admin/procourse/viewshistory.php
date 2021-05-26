@@ -1,18 +1,24 @@
 <?php
-  include('../dbconnection.php');
-  include('../adminsession.php');
+
+    include('../dbconnection.php');
+    include('../adminsession.php');
+    
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <?php 
-  include '../pages-styling.php';
+
+    include '../pages-styling.php';
+
 ?>
 
 <body>
 <div class="wrapper ">
-<div class="sidebar" data-color="blue" data-active-color="danger">
+        <div class="sidebar" data-color="blue" data-active-color="danger">
         <div class="logo">
             <a href="dashboard.php" class="simple-text logo-mini">
             <div class="logo-image-small">
@@ -23,7 +29,7 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li>
+                <li >
                     <a>
                     <p>Pro Course</p>
                     </a>
@@ -40,13 +46,13 @@
                     <p>Manage Section</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="../procourse/studentlist.php">
                     <i class="fa fa-bars"></i>
                     <p>Manage Appointment</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="../procourse/history.php">
                     <i class="fa fa-bars"></i>
                     <p>History</p>
@@ -109,30 +115,31 @@
                     <div>
                         <h3> Student Registered List</h3>
                     </div>
-                    <div class="ml-auto mr-3"> 
+                    <div class="ml-auto mr-3">
+                    <a href='history.php'><button class='btn btn-info' >Back</button></a> 
                     </div>
                 </div>
                 <div class="py-3 col bg-light border">
                     <table id="program" class="display">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
-                                <th>ID</th>
-                                <th>ProCourse</th>
-                                <th>Section</th>
-                                <th>Date</th>
-                                <th>Facilitator</th>
-                                <th>Location</th>
-                                <th>Seat</th>
-                                <th>Status</th>
-                                <th>Operation</th>
+                                <th>No.</th>
+                                <th>Matric</th>
+                                <th>Name</th>
+                                <th>Attended Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT cs.*,f.*,c.* FROM tb_procourse_section cs
-                                        LEFT JOIN tb_procourse_fac f ON cs.courseSec_fac = f.fac_id
-                                        LEFT JOIN tb_pro_course c ON c.procourse_code=cs.courseSec_courseID 
-                                        WHERE cs.section_status=1 ORDER BY c.procourse_code,cs.section_no";
+                            if(isset($_GET['id']))
+                            {
+                                $id=$_GET['id'];
+                            }
+                            $today=date('Y-m-d');
+                                $sql = "SELECT * FROM tb_procourse_regHistory
+                                        LEFT JOIN tb_student ON tb_procourse_regHistory.stu_id = tb_student.student_matric
+                                       
+                                        WHERE tb_procourse_regHistory.pro_code='$id' AND tb_procourse_regHistory.course_date<'$today' ORDER BY tb_procourse_regHistory.pro_code,tb_procourse_regHistory.course_date";
                                 
                                 $result = mysqli_query($con,$sql);
                                 $count=0;
@@ -140,25 +147,12 @@
                                 {
                                     $count=$count+1;
                                     echo "<tr>";
-                                        echo "<td>".$count.".</td>";
-                                        echo "<td><span style='color:#5C001E;'>".$row['courseSec_courseID']."</span><br>".$row['procourse_name']."</td>";
-                                        echo "<td>".$row['section_no']."</td>";
-                                        echo "<td>".$row['courseSec_date']."</td>";
-                                        echo "<td>".$row['fac_name']."</td>";
-                                        echo "<td>".$row['courseSec_loc']."</td>";
-                                        echo "<td>".$row['courseSec_seat']."/".$row['courseSec_maxseat']."</td>";
-                                        if($row['courseSec_seat'] == $row['courseSec_maxseat'])
-                                        {
-                                            echo "<td>FULL</td>";
-                                        }
-                                        else
-                                        {
-                                            echo "<td>AVAILABLE</td>";
-                                        }
-
-                                        echo "<td>
-                                                <a class='btn btn-secondary' href='viewstulist.php?id=".$row['courseSec_id']."'>View</a>
-                                            </td>";
+                                    echo "<td>".$count.".</td>";
+                                    echo "<td>".$row['stu_id']."</td>";
+                                    echo "<td>".$row['student_name']."</td>";
+                                    echo "<td>".$row['course_date']."</td>";
+                                   
+                                   
                                     echo "</tr>";
                                 }
                             ?>
@@ -168,10 +162,8 @@
             </div>
         </div>
     </div>
-</div>
 
-
-    <!-- Logout Modal-->                                
+    <!-- Logout Modal-->     
     <div class="modal fade" id="logout" role="dialog">
         <div class="modal-dialog">                                                
             <!-- Modal content-->
@@ -191,36 +183,38 @@
         </div>
     </div>
 
-    <br><br>
+  <br><br>
 
-    <?php include '../adminfooter.php' ?>
+  <?php include '../adminfooter.php' ?>
+  </div>
+</div>
 
-    <script type="text/javascript">
-        function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete?");
-            if (x)
-                return true;
-            else
-                return false;
-        }
-    </script>
+  <script type="text/javascript">
+    function ConfirmDelete() {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+  </script>
 
-    <script>
-        $(document).ready( function () {
-            $('#program').DataTable();
-        } );
-    </script>
+  <script>
+    $(document).ready( function () {
+        $('#program').DataTable();
+    } );
+  </script>
 
-    <!--   Core JS Files   -->
-    <script src="../js/core/popper.min.js"></script>
-    <script src="../js/core/bootstrap.min.js"></script>
-    <script src="../js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--   Core JS Files   -->
+  <script src="../js/core/popper.min.js"></script>
+  <script src="../js/core/bootstrap.min.js"></script>
+  <script src="../js/plugins/perfect-scrollbar.jquery.min.js"></script>
 
-    <!--  Notifications Plugin    -->
-    <script src="../js/plugins/bootstrap-notify.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../js/plugins/bootstrap-notify.js"></script>
 
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
 
 </body>
 </html>
