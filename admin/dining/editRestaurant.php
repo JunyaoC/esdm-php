@@ -8,7 +8,7 @@
     $restaurant_id=$_GET['id'];
   }
   //JOIN
-  $sql = "SELECT * FROM tb_restaurant WHERE restaurant_id='$restaurant_id'";
+  $sql = "SELECT * FROM tb_restaurant LEFT JOIN tb_user ON tb_user.u_id = tb_restaurant.u_id WHERE restaurant_id='$restaurant_id'";
   $result = mysqli_query($con,$sql) or die("Error: " . mysqli_error($con));
   $row = mysqli_fetch_array($result); 
 
@@ -29,7 +29,7 @@
   float: left;
   width: 33.33%;
   padding: 10px;
-  height: 480px; /* Should be removed. Only for demonstration */
+  height: 600px; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -50,7 +50,7 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">PSM Admin Panel</a>
+         <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -63,18 +63,6 @@
             <a href="restaurant.php">
               <i class="fa fa-bars"></i>
               <p>Manage Restaurant</p>
-            </a>
-          </li>
-          <li>
-            <a href="menuPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Menu</p>
-            </a>
-          </li>
-          <li>
-            <a href="orderPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Order</p>
             </a>
           </li>
           <li>
@@ -99,7 +87,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">PSM System Admin Page</a>
+            <a class="navbar-brand">ESDM System Admin Page</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -190,6 +178,19 @@
     </div>
 
 
+    <div class="form-group">
+      <label for="text">Restaurant Username</label>
+      <input type="text" class="form-control" id="restaurantUsername" name="restaurantUsername" value= "<?php echo $row['u_username']?>">
+    </div>
+
+    <div class="form-group">
+      <label for="text">Restaurant Password</label>
+      <input type="text" class="form-control" id="restaurantPassword" name="restaurantPassword" placeholder="Update New Password">
+    </div>
+
+
+    <input hidden class="form-control" id="restaurantId" name="restaurantId" value= "<?php echo $row['u_id']?>">
+
    <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Modify</button></center>
 </div>
 
@@ -250,8 +251,7 @@
         </div>
   <br> <br>
       <?php include '../adminfooter.php' ?>
-    </div>
-  </div>
+   
   <!--   Core JS Files   -->
   <script src="../js/core/jquery.min.js"></script>
   <script src="../js/core/popper.min.js"></script>

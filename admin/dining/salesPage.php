@@ -30,7 +30,7 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+        <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -43,18 +43,6 @@
             <a href="restaurant.php">
               <i class="fa fa-bars"></i>
               <p>Manage Restaurant</p>
-            </a>
-          </li>
-          <li>
-            <a href="menuPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Menu</p>
-            </a>
-          </li>
-          <li>
-            <a href="orderPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Order</p>
             </a>
           </li>
           <li class="active">
@@ -99,6 +87,84 @@
 
 
   <br> <br> <br> <br> <br>
+
+
+
+        <div class="container">
+          <div class="row">
+          <div class="col-md-3">
+            <div class="card-counter success">
+              <i class="fa fa-check"></i>
+              <span class="count-numbers">
+                <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Completed' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalComplete=$results->num_rows;
+                  echo htmlentities($totalComplete);
+                ?>
+              </span>
+              <span class="count-name">Completed Order</span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card-counter info">
+              <i class="fa fa-clock-o"></i>
+              <span class="count-numbers">
+                <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Preparing' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalPrepare=$results->num_rows;
+                  echo htmlentities($totalPrepare);
+                ?>
+              </span>
+              <span class="count-name">Preparing Order</span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card-counter primary">
+              <i class="fa fa-cutlery"></i>
+              <span class="count-numbers">
+                <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Pick Up' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalPickUp=$results->num_rows;
+                  echo htmlentities($totalPickUp);
+                ?>
+              </span>
+              <span class="count-name">Ready Order</span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card-counter danger">
+              <i class="fa fa-ban"></i>
+              <span class="count-numbers">
+              <?php 
+                  $sql ="SELECT order_id FROM tb_order WHERE order_status = 'Cancelled' ";
+                  $query = $con -> prepare($sql);
+                  $query->execute();
+                  $results=$query->get_result();
+                  $totalPickUp=$results->num_rows;
+                  echo htmlentities($totalPickUp);
+                ?>
+              </span>
+              <span class="count-name">Cancelled Order</span>
+            </div>
+          </div>    
+        </div>
+    <br><br>
+
+
+      </div>
+      
     <div class="container">
     <div class="row ml-1">
       <div>

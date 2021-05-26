@@ -19,7 +19,7 @@
   float: left;
   width: 33.33%;
   padding: 10px;
-  height: 480px; /* Should be removed. Only for demonstration */
+  height: 620px; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -40,7 +40,7 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">PSM Admin Panel</a>
+         <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -53,18 +53,6 @@
             <a href="restaurant.php">
               <i class="fa fa-bars"></i>
               <p>Manage Restaurant</p>
-            </a>
-          </li>
-          <li>
-            <a href="menuPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Menu</p>
-            </a>
-          </li>
-          <li>
-            <a href="orderPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Order</p>
             </a>
           </li>
           <li>
@@ -89,7 +77,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">PSM System Admin Page</a>
+            <a class="navbar-brand">ESDM System Admin Page</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -135,7 +123,7 @@
       <input type="text" class="form-control" id="restaurantPhone" name="restaurantPhone" required>
     </div>
 
-        <div class="form-group">
+    <div class="form-group">
       <label for="text">Restaurant Review</label>
       <input type="text" class="form-control" id="restaurantReview" name="restaurantReview" required>
     </div>
@@ -149,6 +137,21 @@
         <option value="2">Not Active</option>
       </select>
       <br>
+
+
+
+    <div class="form-group">
+      <label for="text">Restaurant Username</label>
+      <input type="text" class="form-control" id="restaurantUsername" name="restaurantUsername" required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="text">Restaurant Password</label>
+      <input type="text" class="form-control" id="restaurantPassword" name="restaurantPassword" required>
+    </div>
+
+
      <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Add</button></center> 
 
     </div>
@@ -182,7 +185,7 @@
 
   </div>
   </center>
-</div>
+
 
 
 <br><br>
@@ -191,8 +194,6 @@
 
  
 
-</div>
-        
         <div class="modal fade" id="logout" role="dialog">
         <div class="modal-dialog">
                                                         
@@ -214,8 +215,8 @@
         </div>
   <br> <br>
       <?php include '../adminfooter.php' ?>
-    </div>
-  </div>
+
+
   <!--   Core JS Files   -->
   <script src="../js/core/jquery.min.js"></script>
   <script src="../js/core/popper.min.js"></script>

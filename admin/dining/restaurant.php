@@ -27,7 +27,7 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+         <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -40,18 +40,6 @@
             <a href="restaurant.php">
               <i class="fa fa-bars"></i>
               <p>Manage Restaurant</p>
-            </a>
-          </li>
-          <li>
-            <a href="menuPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Menu</p>
-            </a>
-          </li>
-          <li>
-            <a href="orderPage.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Order</p>
             </a>
           </li>
           <li>
@@ -138,7 +126,7 @@
           ?>
         </tbody>
       </table>
-    </div>
+
 
       </div>
         <div class="modal fade" id="logout" role="dialog">
@@ -162,9 +150,8 @@
         </div>
 
   <br> <br>
-       <?php include 'adminfooter.php' ?>
-    </div>
-  </div>
+       <?php include '../adminfooter.php' ?>
+
   <!--   Core JS Files   -->
 
   <script src="../js/core/popper.min.js"></script>
