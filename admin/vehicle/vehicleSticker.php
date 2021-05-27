@@ -4,7 +4,6 @@
 
 $sqln = "SELECT * FROM tb_sticker
          LEFT JOIN tb_vehicle ON tb_vehicle.vehicleID = tb_sticker.vehiclePlateNo
-         LEFT JOIN tb_payment ON tb_payment.stickerID = tb_sticker.stickerID
          ";
 $resultn=mysqli_query($con,$sqln);
 
@@ -74,7 +73,7 @@ $resultn=mysqli_query($con,$sqln);
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">Manage Application</a>
+            <a class="navbar-brand">Manage Sticker</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -119,13 +118,11 @@ $resultn=mysqli_query($con,$sqln);
  
         <thead>
             <tr>
-              <th>Payment ID</th>
+              <th>Sticker ID</th>
               <th>Student Matric</th>              
               <th>Vehicle Plate</th>
-              <th>Payment Date</th>
-              <th>Payment Proof</th>
-              <th>Payment Type</th>
-              <th>Payment Status</th>
+              <th>Expiration Date</th>
+              <th>Sticker Status</th>
               <th>Action</th>
             </tr>
         </thead>
@@ -136,9 +133,9 @@ $resultn=mysqli_query($con,$sqln);
             {
 
               $a = $rown['stickerID'];
-              $date = $rown['paymentDate'] ;
-              $timestamp = strtotime($date);
-              $ddate =  date('d/m/Y', $timestamp);
+              //$date = $rown['paymentDate'] ;
+              //$timestamp = strtotime($date);
+              //$ddate =  date('d/m/Y', $timestamp);
 
               $date1 = $rown['stickerDate'] ;
               $timestamp1 = strtotime($date1);
@@ -147,15 +144,13 @@ $resultn=mysqli_query($con,$sqln);
 
               
               echo "<tr>";
-              echo "<td>".$rown['paymentID']."</td>";
+              echo "<td>".$rown['stickerID']."</td>";
               echo "<td>".$rown['stuACID']."</td>";
               echo "<td>".$rown['vehiclePlateNo']."</td>";
-              echo "<td>" .$ddate. "</td>";
-              echo "<td><a href='".$rown['paymentProve']."' target='_blank'> Download </a></td>";
-              echo "<td>".$rown['paymentType']."</td>";
-              echo "<td>".$rown['paymentStatus']."</td>";
+              echo "<td>" .$ddate1. "</td>";
+              echo "<td>".$rown['stickerStatus']."</td>";
               echo "<td>";
-                echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rown['paymentID'].'">
+                echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="'.$rown['stickerID'].'">
                         Update
                       </button>';
               echo "</td>";           
@@ -198,21 +193,21 @@ $resultn=mysqli_query($con,$sqln);
       <div class="modal-content">
       <!-- Modal Header -->
         <div class="modal-header">
-          <h4 style="align-self: "> Update Payment Status</h4>
+          <h4 style="align-self: "> Update Sticker Status</h4>
           <button type="button btn-primary" class="close" data-dismiss="modal">×</button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-        <form method="POST" action="paymentprocess.php">
+        <form method="POST" action="stickerprocess.php">
           <div class="form-group">
             <label for="Role">Role</label> <br>
         
-            <select class="form-control" id="pstatus" name="pstatus">   
+            <select class="form-control" id="sstatus" name="sstatus">   
                <option value= 'Approve'>Approve</option>
                <option value= 'Rejected'>Rejected</option>
                <option value= 'Received'>Received</option>
           </div>
-          <input type="hidden"  id="pid" name="pid" value="<?php echo $rown['paymentID']; ?>">
+          <input type="hidden"  id="sid" name="sid" value="<?php echo $rown['stickerID']; ?>">
         <br><br>
         
         </div>

@@ -27,7 +27,7 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">Sticker Applicant</a>
+        <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -40,6 +40,10 @@
             <a href="../vehicle/vehicle.php">
               <i class="fa fa-bars"></i>
               <p>Manage Application</p>
+            </a>
+            <a href="../vehicle/vehicleSticker.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Sticker</p>
             </a>
             <a href="../vehicle/vehicleTicket.php">
               <i class="fa fa-bars"></i>
@@ -64,7 +68,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">ESDM Admin Page</a>
+            <a class="navbar-brand">Summon Ticket</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -119,7 +123,7 @@
               <th>Student Matric</th>              
               <th>Vehicle No Plate</th>
               <th>Ticket Amount</th>
-              <th>Tisket Description</th>
+              <th>Ticket Description</th>
               <th>Operation</th>
               <!-- <th>Operation</th> -->
             </tr>

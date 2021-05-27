@@ -2,11 +2,11 @@
 
   include('../dbconnection.php');
   include('../adminsession.php');
-    //$pid = $_POST['pid'];
-   $sid = $_POST['sid'];
-    $stats = $_POST['sstatus'];
-   $sidnum = (int)$sid;
-    //$pidnum = (int)$pid;
+    $pid = $_POST['pid'];
+   // $sid = $_POST['sid'];
+    $stats = $_POST['pstatus'];
+   // $sidnum = (int)$sid;
+    $pidnum = (int)$pid;
 
 
 
@@ -27,9 +27,9 @@
 
 
   // Do something.
-     $sqlp = "UPDATE tb_sticker
-            SET stickerStatus = '$stats'
-            WHERE stickerID = '$sidnum' ";
+     $sqlp = "UPDATE tb_payment
+            SET paymentStatus = '$stats'
+            WHERE paymentID = '$pidnum' ";
 
                 // var_dump($sqlp);
 
@@ -66,4 +66,4 @@
       mysqli_query($con,$sqlp);
       mysqli_close($con);   
 
-   header('Location:vehicleSticker.php');
+   header('Location:vehicle.php');

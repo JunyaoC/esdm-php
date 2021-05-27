@@ -41,6 +41,10 @@
               <i class="fa fa-bars"></i>
               <p>Manage Application</p>
             </a>
+            <a href="../vehicle/vehicleSticker.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Sticker</p>
+            </a>
             <a href="../vehicle/vehicleTicket.php">
               <i class="fa fa-bars"></i>
               <p>Summon Ticket</p>
