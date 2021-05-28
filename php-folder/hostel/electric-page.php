@@ -3,6 +3,24 @@
 	include "../connect.php";
 	$postjson = json_decode(file_get_contents('php://input'), true);
 
+	if($postjson['action'] == 'checkStudent'){
+		$query = mysqli_query($conn, "SELECT COUNT(*) FROM tb_hos_electric_payment WHERE student_id = 'A18CS1234'");
+		//$query2 = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment WHERE student_id='A18CS1234'");
+		$read_data = array();
+
+		while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+			
+				$data = array(
+					'count'=> $read['COUNT(*)'],
+
+			   );
+				   array_push($read_data,$data);			
+	    }
+
+	    $result = json_encode(array('success'=>true,'msg'=>'success','detail'=>$read_data));
+	    echo $result;
+	}
+
     if($postjson['action'] == 'add-item'){
 	  
 			$qty_iron = $postjson['qty_iron'];
@@ -17,7 +35,7 @@
 			while($row = $result->fetch_assoc()){
 				$item=$row['item_name'];
 				
-				if($item = 'iron'){
+				if($item = 'Iron'){
 					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
 					$price = mysqli_fetch_array($sql_run);
 					$iron = $price['item_price'] * $qty_iron;
