@@ -35,64 +35,82 @@
 			// Calculation of payment
 
 			//Iron
-			$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Iron'");
-			$row = mysqli_fetch_array($result);
-			$item_id = $row['item_id'];
-			$item_price = $row['item_price'];
-			$iron = $item_price * $qty_iron;
+			if($qty_iron != 0){
+				$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Iron'");
+				$row = mysqli_fetch_array($result);
+				$item_id = $row['item_id'];
+				$item_price = $row['item_price'];
+				$iron = $item_price * $qty_iron;
 
-			$in_iron = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-			VALUES ('A18CS1234', $item_id, $qty_iron, $iron)");
+				$in_iron = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
+				VALUES ('A18CS1234', $item_id, $qty_iron, $iron)");
+			}
+			
 
 			// Kettle
-			$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Water Heater/Electric Kettle'");
-			$row = mysqli_fetch_array($result);
-			$item_id = $row['item_id'];
-			$item_price = $row['item_price'];
-			$heater = $item_price * $qty_heater;
+			if($qty_heater != 0){
+				$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Water Heater/Electric Kettle'");
+				$row = mysqli_fetch_array($result);
+				$item_id = $row['item_id'];
+				$item_price = $row['item_price'];
+				$heater = $item_price * $qty_heater;
 
-			$in_kettle = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-			VALUES ('A18CS1234', $item_id, $qty_heater, $heater)");
+				$in_kettle = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
+				VALUES ('A18CS1234', $item_id, $qty_heater, $heater)");
+			}
+			
 
 			// Charger
-			$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Laptop/Handphone Charger'");
-			$row = mysqli_fetch_array($result);
-			$item_id = $row['item_id'];
-			$item_price = $row['item_price'];
-			$charger = $item_price * $qty_charger;
+			if($qty_charger !=0 ){
+				$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Laptop/Handphone Charger'");
+				$row = mysqli_fetch_array($result);
+				$item_id = $row['item_id'];
+				$item_price = $row['item_price'];
+				$charger = $item_price * $qty_charger;
 
-			$in_charger = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-			VALUES ('A18CS1234', $item_id, $qty_charger, $charger)");
+				$in_charger = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
+				VALUES ('A18CS1234', $item_id, $qty_charger, $charger)");
+			}
+			
 
 			// Toaster
-			$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Toaster'");
-			$row = mysqli_fetch_array($result);
-			$item_id = $row['item_id'];
-			$item_price = $row['item_price'];
-			$toaster = $item_price * $qty_toaster;
+			if($qty_toaster != 0) {
+				$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Toaster'");
+				$row = mysqli_fetch_array($result);
+				$item_id = $row['item_id'];
+				$item_price = $row['item_price'];
+				$toaster = $item_price * $qty_toaster;
 
-			$in_toaster = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-			VALUES ('A18CS1234', $item_id, $qty_toaster, $toaster)");
+				$in_toaster = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
+				VALUES ('A18CS1234', $item_id, $qty_toaster, $toaster)");
 
+			}
+			
 			// Hair Dryer
-			$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Hair Dryer'");
-			$row = mysqli_fetch_array($result);
-			$item_id = $row['item_id'];
-			$item_price = $row['item_price'];
-			$dryer = $item_price * $qty_dryer;
+			if($qty_dryer != 0){
+				$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Hair Dryer'");
+				$row = mysqli_fetch_array($result);
+				$item_id = $row['item_id'];
+				$item_price = $row['item_price'];
+				$dryer = $item_price * $qty_dryer;
 
-			$in_dryer = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-			VALUES ('A18CS1234', $item_id, $qty_dryer, $dryer)");
+				$in_dryer = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
+				VALUES ('A18CS1234', $item_id, $qty_dryer, $dryer)");
+			}
+			
 
 			// Radio
-			$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Radio'");
-			$row = mysqli_fetch_array($result);
-			$item_id = $row['item_id'];
-			$item_price = $row['item_price'];
-			$radio = $item_price * $qty_radio;
+			if($qty_radio!=0){
+				$result = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance WHERE item_name = 'Radio'");
+				$row = mysqli_fetch_array($result);
+				$item_id = $row['item_id'];
+				$item_price = $row['item_price'];
+				$radio = $item_price * $qty_radio;
 
-			$in_dryer = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-			VALUES ('A18CS1234', $item_id, $qty_radio, $radio)");
+				$in_dryer = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
+				VALUES ('A18CS1234', $item_id, $qty_radio, $radio)");
+			}
+			
 			
 
 			// Calculate the total payment
