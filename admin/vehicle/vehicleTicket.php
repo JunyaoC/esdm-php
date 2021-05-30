@@ -17,6 +17,12 @@
   include '../pages-styling.php';
 ?>
 
+<script>
+    $(document).ready( function () {
+    $('#program').DataTable();
+} );
+  </script>
+
 
 <body class="">
   <div class="wrapper ">
@@ -115,7 +121,7 @@
         <div class="row">
         </div>
          <div class="table-responsive">         
-      <table class="table table-hover">
+      <table class="table table-hover" id="program">
  
         <thead>
             <tr>
