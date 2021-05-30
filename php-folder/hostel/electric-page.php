@@ -93,65 +93,28 @@
 
 			$in_dryer = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
 			VALUES ('A18CS1234', $item_id, $qty_radio, $radio)");
-
-
-/*			while($row = $result->fetch_assoc()){
-				$item=$row['item_name'];
-				
-				if($item = 'Iron'){
-					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
-					$price = mysqli_fetch_array($sql_run);
-					$iron = $price['item_price'] * $qty_iron;
-				}				
-				if($item = 'Water Heater/Electric Kettle'){
-					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
-					$price = mysqli_fetch_array($sql_run);
-					$heater = $price['item_price'] * $qty_heater;
-				}
-				if($item = 'Laptop/Handphone Charger'){
-					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
-					$price = mysqli_fetch_array($sql_run);
-					$charger = $price['item_price'] * $qty_charger;
-				}
-				if($item = 'Toaster'){
-					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
-					$price = mysqli_fetch_array($sql_run);
-					$toaster = $price['item_price'] * $qty_toaster;
-				}
-				if($item = 'Hair Dryer'){
-					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
-					$price = mysqli_fetch_array($sql_run);
-					$dryer = $price['item_price'] * $qty_dryer;
-				}
-				if($item = 'Radio'){
-					$sql_run = mysqli_query($conn,"SELECT item_price FROM tb_hos_electric_appliance WHERE item_name = '$item'");
-					$price = mysqli_fetch_array($sql_run);
-					$radio = $price['item_price'] * $qty_radio;
-				}*/
-			
-				$total = $iron + $heater + $charger + $toaster + $dryer + $radio;
 			
 
-				$insert = mysqli_query($conn,"INSERT INTO tb_hos_electric_payment SET student_id = 'A18CS1234', payment_total='$total'");
+			// Calculate the total payment
+			$total = $iron + $heater + $charger + $toaster + $dryer + $radio;			
+
+			$insert = mysqli_query($conn,"INSERT INTO tb_hos_electric_payment SET student_id = 'A18CS1234', payment_total='$total'");
 
 				
-				if($insert){
-					$result = json_encode(array('success'=>true,'msg'=>'success'));
-				}else{
-					$result = json_encode(array('success'=>false,'msg'=>'fail'));
-				}
+			if($insert){
+				$result = json_encode(array('success'=>true,'msg'=>'success'));
+			}else{
+				$result = json_encode(array('success'=>false,'msg'=>'fail'));
+			}
 				
-				echo $result;
-
-
-			   	
+			echo $result;		   	
 
 	}
 
 	// Payment page: show the selected item and its quantity
 	if($postjson['action'] == 'list_electric'){
 		$query = mysqli_query($conn, "SELECT * FROM tb_hos_electric_appliance");
-		//$query2 = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment WHERE student_id='A18CS1234'");
+		
 		$read_data = array();
 
 		while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
@@ -170,11 +133,7 @@
 
 	// show total price
 	if($postjson['action'] == 'totalprice'){
-	/*	$query = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment 
-		WHERE dryer='$postjson[qty_dryer]' AND iron='$postjson[qty_iron]'
-		AND toaster='$postjson[qty_toaster]'AND kettle='$postjson[qty_heater]'AND
-		charger='$postjson[charger]'AND radio='$postjson[radio]'");*/
-
+	
 		$query = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment WHERE student_id='A18CS1234'");
 		
 		$read_data = array();
@@ -188,7 +147,7 @@
 	    }
 
 	    $result = json_encode(array('success'=>true,'msg'=>'success','detail'=>$read_data));
-		//echo $postjson[qty_dryer];
+		
 	    echo $result;
 	}
 
@@ -232,7 +191,7 @@
 	    echo $result;
 	}
 
-	//Show the status (Payment history)
+	//Show the registered electric appliances (Payment history)
 	if($postjson['action'] == 'check_appliance'){
 		$query = mysqli_query($conn, "SELECT register.item_quantity, electric.item_name FROM tb_hos_electric_register AS register 
 		LEFT JOIN tb_hos_electric_appliance AS electric
