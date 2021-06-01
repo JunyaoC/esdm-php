@@ -13,6 +13,7 @@ if($postjson['action']=='show_ticket'){
             'vehiclePlateNo'=> $read['vehiclePlateNo'],
             'ticketAmount'=> $read['ticketAmount'],
             'ticketDesc'=> $read['ticketDesc'],
+            'ticketStatus'=> $read['ticketStatus']
         );
         array_push($read_data,$data);
     }
