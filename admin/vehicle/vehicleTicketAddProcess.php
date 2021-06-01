@@ -10,9 +10,10 @@
 	$tticket = (float)$ticket;
 
 	$comment_text = $_POST['comment_text'];
+	$status = $_POST['status'];
 
-	$sql = "INSERT INTO  tb_ticket(ticket_uID, vehiclePlateNo, ticketAmount, ticketDesc) 
-		VALUES ( '$id' , '$plate', $tticket ,  '$comment_text')"; 
+	$sql = "INSERT INTO  tb_ticket(ticket_uID, vehiclePlateNo, ticketAmount, ticketDesc, ticketStatus) 
+		VALUES ( '$id' , '$plate', $tticket , '$comment_text', '$status')"; 
 
 	mysqli_query($con,$sql);
 

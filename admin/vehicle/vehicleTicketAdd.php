@@ -8,6 +8,9 @@
   $resultn=mysqli_query($con,$sqln);
 // $resultn=mysqli_query($con,$sqln);
 
+  $sqlp = "SELECT * FROM tb_vehicle";
+  $resultp = mysqli_query($con,$sqlp);
+
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +127,16 @@
               <input type="text" id="id" name="id" placeholder="Matric No"><br>
 
               <label for="plate">Vehicle Plate</label>
-              <input type="text" id="plate" name="plate" placeholder="Vehicle Plate"><br>
+              <?php 
+                $sqlp = "SELECT * FROM tb_vehicle";
+                $resultp = mysqli_query($con,$sqlp);
+                echo '<select id="plate" name="plate">';
+                while($rowp=mysqli_fetch_array($resultp)){
+                  echo "<option value='". $rowp['vehicleID'] ."'>" .$rowp['vehicleID'] ."</option>";  // displaying data in option menu
+                }
+                echo '</select>';
+              ?>
+<br>
 
               <label for="amount">Ticket Amount</label>
               <input type="number" id="ticket" name="ticket" placeholder="0.00"><br>
@@ -132,6 +144,10 @@
               <label for="desc">Ticket Description</label>
               <textarea name="comment_text" id="comment_text" class="form-control" cols="30" rows="3"></textarea>
               
+              <label for="status">Payment Status</label>
+              <select name="status">
+                  <option value="Not Paid">Not Paid</option>
+              </select>
 
               <input type="submit" value="Submit">
             
