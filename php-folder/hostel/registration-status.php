@@ -11,9 +11,8 @@
 		INNER JOIN tb_hos_block ON tb_hostel_reg.block_id = tb_hos_block.block_id
 		INNER JOIN tb_hos_room ON tb_hostel_reg.room_id = tb_hos_room.room_id
 		WHERE tb_hostel_reg.student_id = 'A18CS1234'");*/
-		$query = mysqli_query($conn, "SELECT tb_hostel_reg.*,tb_hos_college.* FROM tb_hostel_reg
-		INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id 
-		WHERE tb_hostel_reg.student_id = 'A18CS1234'");
+		$query = mysqli_query($conn, "SELECT * FROM tb_hostel_reg
+		INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id INNER JOIN tb_student ON tb_hostel_reg.student_id = tb_student.student_matric INNER JOIN tb_user ON tb_student.u_id = tb_user.u_id WHERE tb_student.u_id = '$postjson[student_id]'");
 
 		$read_data = array();
 
