@@ -1,8 +1,19 @@
 <?php
   include('../dbconnection.php');
-  include('../adminsession.php');
+  include('../restaurantSession.php');
 
-  $sql = "SELECT * FROM tb_restaurant";
+
+  $rest_user_id = $_SESSION['user_id'];
+
+          
+  $sql = "SELECT * FROM tb_order
+          LEFT JOIN tb_user ON tb_user.u_id = tb_order.user_id
+          LEFT JOIN tb_item_order ON tb_item_order.order_id = tb_order.order_id
+          LEFT JOIN tb_food ON tb_food.food_id = tb_item_order.food_id
+          LEFT JOIN tb_restaurant ON tb_restaurant.restaurant_id = tb_food.restaurant_id
+          LEFT JOIN tb_student ON tb_student.u_id = tb_order.user_id
+          WHERE order_status = 'Completed' AND tb_restaurant.u_id =  '$rest_user_id'";
+
   $result = mysqli_query($con,$sql);
 ?>
 
@@ -27,7 +38,7 @@
             <img src="../img/logo.png">
           </div>
         </a>
-         <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+        <a href="menuPage.php" class="simple-text logo-normal">ESDM Restaurant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -36,13 +47,19 @@
               <p>Dining</p>
             </a>
           </li>
-          <li class="active">
-            <a href="restaurant.php">
+          <li>
+            <a href="menuPage.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
+              <p>Manage Menu</p>
             </a>
           </li>
           <li>
+            <a href="orderPage.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Order</p>
+            </a>
+          </li>
+          <li class="active">
             <a href="salesPage.php">
               <i class="fa fa-bars"></i>
               <p>View Sales</p>
@@ -64,7 +81,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">ESDM Admin Page</a>
+            <a class="navbar-brand">ESDM Restaurant</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -87,20 +104,20 @@
     <div class="container">
     <div class="row ml-1">
       <div>
-        <h3>Restaurant List</h3>
-      </div>
-      <div class="ml-auto mr-3"> 
-        <a href='addRestaurant.php' class='btn btn-primary' style="color:white;"> Add Restaurant &nbsp<i class="fa fa-plus "></i></a>
+        <h3>Sales List</h3>
       </div>
     </div>
       <table id="program" class="display">
         <thead>
           <tr>
-            <th>Restaurant Name</th>
-            <th>Restaurant Address</th>
-            <th>Restaurant Phone</th>
-            <th>Restaurant Status</th>
-            <th>Operation</th>
+            <th>Order Id</th>
+            <th>Date</th>
+            <th>Food Name</th>
+            <th>Quantity</th>
+            <th>Student Name</th>
+            <th>Student Matric</th>
+            <th>Status</th>
+            <th>Total Price</th>
           </tr>
         </thead>
         <tbody>
@@ -108,25 +125,20 @@
             while($row=mysqli_fetch_array($result))
             {
               echo "<tr>";
-              echo"<td>".$row['restaurant_name'] ."</td>";
-              echo"<td>".$row['restaurant_address'] ."</td>";
-              echo"<td>".$row['restaurant_phone'] ."</td>";
-              if($row['restaurant_status'] == 1){
-                echo "<td>"."Active"."</td>";
-              }
-              else{
-                echo "<td>"."Not Active"."</td>";
-              }
-              echo"<td>";
-                echo "<a href='editRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-warning'>Edit</a> &nbsp";
-                echo "<a href='deleteRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
-              echo"</td>";
+              echo"<td>".$row['order_id'] ."</td>";
+              echo"<td>".$row['order_date'] ."</td>";
+              echo"<td>".$row['food_name'] ."</td>";
+              echo"<td>".$row['item_quantity'] ."</td>";
+              echo"<td>".$row['student_name'] ."</td>";
+              echo"<td>".$row['student_matric'] ."</td>";
+              echo"<td>".$row['order_status'] ."</td>";
+              echo"<td>"."RM " .$row['totalprice'] ."</td>";
               echo"</tr>";
             }
           ?>
         </tbody>
       </table>
-
+    </div>
 
       </div>
         <div class="modal fade" id="logout" role="dialog">
@@ -151,7 +163,8 @@
 
   <br> <br>
        <?php include '../adminfooter.php' ?>
-
+    </div>
+  </div>
   <!--   Core JS Files   -->
 
   <script src="../js/core/popper.min.js"></script>

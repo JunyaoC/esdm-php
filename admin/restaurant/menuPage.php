@@ -1,9 +1,16 @@
 <?php
   include('../dbconnection.php');
-  include('../adminsession.php');
+  include('../restaurantSession.php');
 
-  $sql = "SELECT * FROM tb_restaurant";
+  $rest_user_id = $_SESSION['user_id'];
+
+  $sql = "SELECT * FROM tb_food
+          LEFT JOIN tb_restaurant 
+          ON tb_restaurant.restaurant_id = tb_food.restaurant_id
+          WHERE tb_restaurant.u_id='$rest_user_id'";
+
   $result = mysqli_query($con,$sql);
+  
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +34,7 @@
             <img src="../img/logo.png">
           </div>
         </a>
-         <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+        <a href="menuPage.php" class="simple-text logo-normal">ESDM Restaurant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -37,9 +44,15 @@
             </a>
           </li>
           <li class="active">
-            <a href="restaurant.php">
+            <a href="menuPage.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
+              <p>Manage Menu</p>
+            </a>
+          </li>
+          <li>
+            <a href="orderPage.php">
+              <i class="fa fa-bars"></i>
+              <p>Manage Order</p>
             </a>
           </li>
           <li>
@@ -64,7 +77,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">ESDM Admin Page</a>
+            <a class="navbar-brand">ESDM Restaurant</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -87,19 +100,20 @@
     <div class="container">
     <div class="row ml-1">
       <div>
-        <h3>Restaurant List</h3>
+        <h3>Food List</h3>
       </div>
       <div class="ml-auto mr-3"> 
-        <a href='addRestaurant.php' class='btn btn-primary' style="color:white;"> Add Restaurant &nbsp<i class="fa fa-plus "></i></a>
+        <a href='addMenu.php' class='btn btn-primary' style="color:white;"> Add Food &nbsp<i class="fa fa-plus "></i></a>
       </div>
     </div>
       <table id="program" class="display">
         <thead>
           <tr>
-            <th>Restaurant Name</th>
-            <th>Restaurant Address</th>
-            <th>Restaurant Phone</th>
-            <th>Restaurant Status</th>
+            <th>Food Name</th>
+            <th>Availability</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>Image</th>
             <th>Operation</th>
           </tr>
         </thead>
@@ -108,25 +122,34 @@
             while($row=mysqli_fetch_array($result))
             {
               echo "<tr>";
-              echo"<td>".$row['restaurant_name'] ."</td>";
-              echo"<td>".$row['restaurant_address'] ."</td>";
-              echo"<td>".$row['restaurant_phone'] ."</td>";
-              if($row['restaurant_status'] == 1){
-                echo "<td>"."Active"."</td>";
+              echo"<td>".$row['food_name'] ."</td>";
+
+              if($row['food_availability'] == 1){
+                echo "<td>"."Available"."</td>";
               }
               else{
-                echo "<td>"."Not Active"."</td>";
+                echo "<td>"."Not Available"."</td>";
               }
+
+              echo"<td>"."RM " .$row['food_price'] ."</td>";
+              echo"<td>".$row['food_type'] ."</td>";
+              if($row['food_image'] != NULL){
+                echo "<td>"."Uploaded"."</td>";
+              }
+              else{
+                echo "<td>"."Not Uploaded"."</td>";
+              }
+              // echo"<td>".$row['food_image'] ."</td>";
               echo"<td>";
-                echo "<a href='editRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-warning'>Edit</a> &nbsp";
-                echo "<a href='deleteRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
+                echo "<a href='editMenu.php?id=".$row['food_id']."' class='btn btn-warning'>Edit</a> &nbsp";
+                echo "<a href='deleteMenu.php?id=".$row['food_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
               echo"</td>";
               echo"</tr>";
             }
           ?>
         </tbody>
       </table>
-
+    </div>
 
       </div>
         <div class="modal fade" id="logout" role="dialog">
@@ -151,7 +174,8 @@
 
   <br> <br>
        <?php include '../adminfooter.php' ?>
-
+    </div>
+  </div>
   <!--   Core JS Files   -->
 
   <script src="../js/core/popper.min.js"></script>

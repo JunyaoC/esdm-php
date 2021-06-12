@@ -1,22 +1,35 @@
 <?php
-  include('../dbconnection.php');
   include('../adminsession.php');
-
-  $sql = "SELECT * FROM tb_restaurant";
-  $result = mysqli_query($con,$sql);
+  include('../dbconnection.php');
+  
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 <?php 
   include '../pages-styling.php';
 ?>
-  <script>
-    $(document).ready( function () {
-    $('#program').DataTable();
-} );
-  </script>
+  <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 620px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
 
 <body class="">
   <div class="wrapper ">
@@ -64,7 +77,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">ESDM Admin Page</a>
+            <a class="navbar-brand">ESDM System Admin Page</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -75,60 +88,112 @@
             <ul class="navbar-nav">
               <li class="nav-item">
                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#logout" style="color:white;"> Log out &nbsp <i class="fa fa-sign-out "></i></button>
-              
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+    <br> <br>
+<div class="container">
 
+  <br> <br> <br>
+<center>
+<h2>Restaurant Details</h2>
+</center>
 
-  <br> <br> <br> <br> <br>
-    <div class="container">
-    <div class="row ml-1">
-      <div>
-        <h3>Restaurant List</h3>
-      </div>
-      <div class="ml-auto mr-3"> 
-        <a href='addRestaurant.php' class='btn btn-primary' style="color:white;"> Add Restaurant &nbsp<i class="fa fa-plus "></i></a>
-      </div>
+<div class="row">
+  <center>
+  <div class="column" style="background-color:#eddbbb;width:500px;margin-left:300px;">
+  
+  <form method="POST" action="addRestaurantProgress.php">
+    
+    <div class="form-group">
+      <label for="text">Restaurant Name</label>
+      <input type="text" class="form-control" id="restaurantName" name="restaurantName" required>  
     </div>
-      <table id="program" class="display">
-        <thead>
-          <tr>
-            <th>Restaurant Name</th>
-            <th>Restaurant Address</th>
-            <th>Restaurant Phone</th>
-            <th>Restaurant Status</th>
-            <th>Operation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-            while($row=mysqli_fetch_array($result))
-            {
-              echo "<tr>";
-              echo"<td>".$row['restaurant_name'] ."</td>";
-              echo"<td>".$row['restaurant_address'] ."</td>";
-              echo"<td>".$row['restaurant_phone'] ."</td>";
-              if($row['restaurant_status'] == 1){
-                echo "<td>"."Active"."</td>";
-              }
-              else{
-                echo "<td>"."Not Active"."</td>";
-              }
-              echo"<td>";
-                echo "<a href='editRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-warning'>Edit</a> &nbsp";
-                echo "<a href='deleteRestaurant.php?id=".$row['restaurant_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
-              echo"</td>";
-              echo"</tr>";
-            }
-          ?>
-        </tbody>
-      </table>
+
+    <div class="form-group">
+      <label for="text">Restaurant Address</label>
+      <input type="text" class="form-control" id="restaurantAddr" name="restaurantAddr" required>
+    </div>
+
+    <div class="form-group">
+      <label for="text">Restaurant Phone</label>
+      <input type="text" class="form-control" id="restaurantPhone" name="restaurantPhone" required>
+    </div>
+
+    <div class="form-group">
+      <label for="text">Restaurant Review</label>
+      <input type="text" class="form-control" id="restaurantReview" name="restaurantReview" required>
+    </div>
 
 
-      </div>
+    <div class="form-group">
+      <label for="email">Restaurant Status</label>
+ </div>
+      <select class="form-control" name="restaurantStatus" id="restaurantStatus">
+        <option value="1">Active</option>
+        <option value="2">Not Active</option>
+      </select>
+      <br>
+
+
+
+    <div class="form-group">
+      <label for="text">Restaurant Username</label>
+      <input type="text" class="form-control" id="restaurantUsername" name="restaurantUsername" required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="text">Restaurant Password</label>
+      <input type="text" class="form-control" id="restaurantPassword" name="restaurantPassword" required>
+    </div>
+
+
+     <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Add</button></center> 
+
+    </div>
+
+
+
+</div>
+
+        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+                                                        
+            <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title"><center>Confirmation on addition</center></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+        <p>Are you sure you want to add this restaurant?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-labeled" data-dismiss="modal">No <i class="fa fa-times"></i></button>
+        <button type="submit" name="submit" class="btn btn-warning btn-labeled">Yes<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+  
+        </div>
+        </div>                                                
+        </div>
+        </div>
+
+  </form>
+
+  </div>
+  </center>
+
+
+
+<br><br>
+<center>
+
+
+ 
+
         <div class="modal fade" id="logout" role="dialog">
         <div class="modal-dialog">
                                                         
@@ -148,20 +213,30 @@
         </div>                                                
         </div>
         </div>
-
   <br> <br>
-       <?php include '../adminfooter.php' ?>
+      <?php include '../adminfooter.php' ?>
+
 
   <!--   Core JS Files   -->
-
+  <script src="../js/core/jquery.min.js"></script>
   <script src="../js/core/popper.min.js"></script>
   <script src="../js/core/bootstrap.min.js"></script>
   <script src="../js/plugins/perfect-scrollbar.jquery.min.js"></script>
-
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chart JS -->
+  <script src="../js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="../js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+      demo.initChartsPages();
+    });
+  </script>
 </body>
 
 </html>
