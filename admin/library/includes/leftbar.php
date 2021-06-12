@@ -12,7 +12,7 @@
                                         <span class=""><b>Main Menu</b></span>
                                     </li>
                                     <li>
-                                        <a href="dashboard.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
+                                        <a href="../admin/dashboard.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
                                      
                                     </li>
 

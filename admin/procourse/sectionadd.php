@@ -14,12 +14,12 @@
   <div class="wrapper ">
   <div class="sidebar" data-color="blue" data-active-color="danger">
       <div class="logo">
-        <a href="dashboard.php" class="simple-text logo-mini">
+        <a href="../admin/dashboard.php" class="simple-text logo-mini">
         <div class="logo-image-small">
           <img src="../img/logo.png">
         </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+        <a href="../admin/dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
