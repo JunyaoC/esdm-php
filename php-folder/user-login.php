@@ -3,24 +3,6 @@
 	include "connect.php";
 
 	$postjson = json_decode(file_get_contents('php://input'), true);
-	// $today = date('Y-m-d H:i:s');
-
-	// if($postjson['action'] == 'insert_user') {
-
-	// 	$password = md5($postjson['password']);
-
-	// 	$insert = mysqli_query($conn, "INSERT INTO user_tb SET username = '$postjson[username]', password = '$password'");
-
-	// 	if($insert) {
-	// 		$result = json_encode(array('success'=>true, 'msg'=>'success'));
-	// 	} else {
-	// 		$result = json_encode(array('success'=>false, 'msg'=>'fail'));
-	// 	}
-
-	// 	echo $result;
-	// }
-
-
 
 	if($postjson['action'] == 'login_user') {
 
