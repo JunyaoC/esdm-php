@@ -2,13 +2,24 @@
   include('../dbconnection.php');
   include('../adminsession.php');
 
+  
+
+  $sqln = "SELECT * FROM tb_ticket";
+  $resultn=mysqli_query($con,$sqln);
+// $resultn=mysqli_query($con,$sqln);
+
+  $sqlp = "SELECT * FROM tb_vehicle";
+  $resultp = mysqli_query($con,$sqlp);
+
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 <?php 
   include '../pages-styling.php';
 ?>
+
 
 <body class="">
   <div class="wrapper ">
@@ -19,93 +30,32 @@
             <img src="../img/logo.png">
           </div>
         </a>
-        <a href="dashboard.php" class="simple-text logo-normal">ESDM Admin Panel</a>
+        <a href="dashboard.php" class="simple-text logo-normal">Sticker Applicant</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li>
-            <a class="active">
-              <i class="fa fa-bars"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li>
-            <a>
-              <p>Dining</p>
-            </a>
-          </li>
-          <li>
-            <a href="../dining/restaurant.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Restaurant</p>
-            </a>
-          </li>
-          <li>
-            <a>
-              <p>Hostel</p>
-            </a>
-          </li>
-          <li>
-            <a href="../hostel/phase.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Hostel</p>
-            </a>
-          </li>
-          <li>
-            <a>
-              <p>Attendance</p>
-            </a>
-          </li>        
-          <li>
-            <a href="../attendance/attendance.php">
-              <i class="fa fa-bars "></i>
-              <p>Manage attendance</p>
-            </a>
-          </li>
-          <li>
+          <li class="active">
             <a>
               <p>Vehicle</p>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="../vehicle/vehicle.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Vehicle</p>
+              <p>Manage Application</p>
             </a>
-          </li>
-          <li>
-            <a>
-              <p>Health</p>
-            </a>
-          </li> 
-          <li>
-            <a href="../health/health.php">
+            <a href="../vehicle/vehicleSticker.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Health</p>
+              <p>Manage Sticker</p>
             </a>
-          </li>
-          <li>
-            <a>
-              <p>Library</p>
-            </a>
-          </li> 
-          <li>
-            <a href="../library/library.php">
+            <a href="../vehicle/vehicleTicket.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Library</p>
+              <p>Summon Ticket</p>
             </a>
           </li>
-          <li>
-            <a>
-              <p>Pro Course</p>
-            </a>
-          </li> 
-          <li>
-            <a href="../procourse/procourse.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Pro Course</p>
-            </a>
-          </li>
+
+
+
         </ul>
       </div>
     </div>
@@ -128,6 +78,10 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
+
+
+
+
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
               <li class="nav-item">
@@ -139,12 +93,99 @@
         </div>
       </nav>
 
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+            
+        </div>
+      </div>
+    </div>
+
+     <div class="py-3">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+    </div>
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+    </div>
+
+       <div class="container-fluid">
+        <div class="row">
+        </div>
+         <h4>Add Ticket</h4>
+      <form method="POST" action="vehicleTicketAddProcess.php">
+
+        <div class="form-group">
+          <div>
+            
+              <label for="matric">Student Matric</label>
+              <input type="text" id="id" name="id" placeholder="Matric No"><br>
+
+              <label for="plate">Vehicle Plate</label>
+              <?php 
+                $sqlp = "SELECT * FROM tb_vehicle";
+                $resultp = mysqli_query($con,$sqlp);
+                echo '<select id="plate" name="plate">';
+                while($rowp=mysqli_fetch_array($resultp)){
+                  echo "<option value='". $rowp['vehicleID'] ."'>" .$rowp['vehicleID'] ."</option>";  // displaying data in option menu
+                }
+                echo '</select>';
+              ?>
+<br>
+
+              <label for="amount">Ticket Amount</label>
+              <input type="number" id="ticket" name="ticket" placeholder="0.00"><br>
+              
+              <label for="desc">Ticket Description</label>
+              <textarea name="comment_text" id="comment_text" class="form-control" cols="30" rows="3"></textarea>
+              
+              <label for="status">Payment Status</label>
+              <select name="status">
+                  <option value="Not Paid">Not Paid</option>
+              </select>
+
+              <input type="submit" value="Submit">
+            
+              
+
+              <!-- <button type="submit" class="btn btn-warning">Submit</button>  -->   
+                      
+                    
+        </div>
+        
+       
+    
+    </form>
+
+    </div>
+
+      
 
 
 
 
+    <div class="row">
+      <div class="column"> 
+         <div id="chartContainer" style="height: 370px; width: 90%; margin-left: 40px;"></div>
+      </div>
+      <div class="column">
+         <div id="chartContainer1" style="height: 370px; width: 90%;margin-right: 10px;">
+           
+         </div>
+      </div>
+    </div>
 
 
+
+
+      </div>
+
+    </div>
 
 
 
@@ -169,9 +210,8 @@
         </div>
 
   <br> <br>
-       
+       <?php include 'adminfooter.php' ?>
     </div>
-    <?php include '../adminfooter.php' ?>
   </div>
   <!--   Core JS Files   -->
 
