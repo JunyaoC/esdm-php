@@ -22,7 +22,7 @@
   <div class="wrapper ">
     <div class="sidebar" data-color="blue" data-active-color="danger">
       <div class="logo">
-        <a href="dashboard.php" class="simple-text logo-mini">
+        <a href="../admin/dashboard.php" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="../img/logo.png">
           </div>
