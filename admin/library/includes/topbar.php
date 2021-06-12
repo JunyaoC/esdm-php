@@ -2,7 +2,7 @@
             	<div class="container-fluid">
                     <div class="row">
                         <div class="navbar-header no-padding">
-                			<a class="navbar-brand" href="dashboard.php">
+                			<a class="navbar-brand" href="../admin/dashboard.php">
                 			    Admin
                 			</a>
                             <span class="small-nav-handle hidden-sm hidden-xs"><i class="fa fa-outdent"></i></span>
