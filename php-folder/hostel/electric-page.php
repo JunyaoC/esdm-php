@@ -5,8 +5,10 @@
 
 	// Check student already registered or not 
 	if($postjson['action'] == 'checkStudent'){
-		$query = mysqli_query($conn, "SELECT COUNT(*) FROM tb_hos_electric_payment WHERE student_id = 'A18CS1234'");
-		//$query2 = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment WHERE student_id='A18CS1234'");
+		$query = mysqli_query($conn, "SELECT COUNT(*) FROM tb_hos_electric_payment 
+		INNER JOIN tb_student ON tb_hos_electric_payment.student_id = tb_student.student_matric 
+		WHERE tb_student.u_id = '$postjson[student_id]'");
+		
 		$read_data = array();
 
 		while($read = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
@@ -32,6 +34,11 @@
 			$qty_radio = $postjson['qty_radio'];
 			$qty_toaster = $postjson['qty_toaster'];
 
+			// Get student matric
+			$query = mysqli_query($conn, "SELECT student_matric FROM tb_student WHERE u_id = '$postjson[student_id]'");
+			$run_q = mysqli_fetch_array($query);
+			$matric = $run_q['student_matric'];
+
 			// Calculation of payment
 
 			//Iron
@@ -43,7 +50,7 @@
 				$iron = $item_price * $qty_iron;
 
 				$in_iron = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-				VALUES ('A18CS1234', $item_id, $qty_iron, $iron)");
+				VALUES ('$matric', $item_id, $qty_iron, $iron)");
 			}
 			
 
@@ -56,7 +63,7 @@
 				$heater = $item_price * $qty_heater;
 
 				$in_kettle = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-				VALUES ('A18CS1234', $item_id, $qty_heater, $heater)");
+				VALUES ('$matric', $item_id, $qty_heater, $heater)");
 			}
 			
 
@@ -69,7 +76,7 @@
 				$charger = $item_price * $qty_charger;
 
 				$in_charger = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-				VALUES ('A18CS1234', $item_id, $qty_charger, $charger)");
+				VALUES ('$matric', $item_id, $qty_charger, $charger)");
 			}
 			
 
@@ -82,7 +89,7 @@
 				$toaster = $item_price * $qty_toaster;
 
 				$in_toaster = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-				VALUES ('A18CS1234', $item_id, $qty_toaster, $toaster)");
+				VALUES ('$matric', $item_id, $qty_toaster, $toaster)");
 
 			}
 			
@@ -95,7 +102,7 @@
 				$dryer = $item_price * $qty_dryer;
 
 				$in_dryer = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-				VALUES ('A18CS1234', $item_id, $qty_dryer, $dryer)");
+				VALUES ('$matric', $item_id, $qty_dryer, $dryer)");
 			}
 			
 
@@ -108,7 +115,7 @@
 				$radio = $item_price * $qty_radio;
 
 				$in_dryer = mysqli_query($conn, "INSERT INTO tb_hos_electric_register (student_id, item_id, item_quantity, item_price) 
-				VALUES ('A18CS1234', $item_id, $qty_radio, $radio)");
+				VALUES ('$matric', $item_id, $qty_radio, $radio)");
 			}
 			
 			
@@ -116,7 +123,7 @@
 			// Calculate the total payment
 			$total = $iron + $heater + $charger + $toaster + $dryer + $radio;			
 
-			$insert = mysqli_query($conn,"INSERT INTO tb_hos_electric_payment SET student_id = 'A18CS1234', payment_total='$total'");
+			$insert = mysqli_query($conn,"INSERT INTO tb_hos_electric_payment SET student_id = '$matric', payment_total='$total'");
 
 				
 			if($insert){
@@ -151,8 +158,10 @@
 
 	// show total price
 	if($postjson['action'] == 'totalprice'){
-	
-		$query = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment WHERE student_id='A18CS1234'");
+		
+		$query = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment 
+		INNER JOIN tb_student ON tb_hos_electric_payment.student_id = tb_student.student_matric
+		WHERE tb_student.u_id='$postjson[student_id]'");
 		
 		$read_data = array();
 
@@ -172,10 +181,16 @@
 	//Insert payment method
 	if($postjson['action']== 'paymentMethod'){
 		$today = date('Y-m-d');
-		$query = mysqli_query($conn, "UPDATE tb_hos_electric_payment SET payment_method='$postjson[method]', payment_date='$today' WHERE student_id='A18CS1234'");
+
+		// Get student matric
+		$query1 = mysqli_query($conn, "SELECT student_matric FROM tb_student WHERE u_id = '$postjson[student_id]'");
+		$run_q = mysqli_fetch_array($query1);
+		$matric = $run_q['student_matric'];
+
+		$query = mysqli_query($conn, "UPDATE tb_hos_electric_payment SET payment_method='$postjson[method]', payment_date='$today' 
+		WHERE student_id='$matric'");
 		
 		// Update payment_id
-
 		
 		if($query){
 			$result = json_encode(array('success'=>true,'msg'=>'success'));
@@ -183,16 +198,18 @@
 			$result = json_encode(array('success'=>false,'msg'=>'fail'));
 		}
 		
-		$sql = mysqli_query($conn, "SELECT payment_id FROM tb_hos_electric_payment WHERE student_id='A18CS1234'");
+		$sql = mysqli_query($conn, "SELECT payment_id FROM tb_hos_electric_payment WHERE student_id='$matric'");
 		$row = mysqli_fetch_array($sql);
 		$pid = $row['payment_id'];
-		$sql_update = mysqli_query($conn, "UPDATE tb_hos_electric_register SET payment_id = $pid WHERE student_id='A18CS1234'");
+		$sql_update = mysqli_query($conn, "UPDATE tb_hos_electric_register SET payment_id = $pid WHERE student_id='$matric'");
 		echo $result;
 	}
 
 	//Show the status (Payment history)
 	if($postjson['action'] == 'check_status'){
-		$query = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment WHERE student_id = 'A18CS1234'");
+		$query = mysqli_query($conn, "SELECT * FROM tb_hos_electric_payment 
+		INNER JOIN tb_student ON tb_hos_electric_payment.student_id = tb_student.student_matric 
+		WHERE tb_student.u_id = '$postjson[student_id]'");
 
 		$read_data = array();
 
@@ -212,9 +229,9 @@
 	//Show the registered electric appliances (Payment history)
 	if($postjson['action'] == 'check_appliance'){
 		$query = mysqli_query($conn, "SELECT register.item_quantity, electric.item_name FROM tb_hos_electric_register AS register 
-		LEFT JOIN tb_hos_electric_appliance AS electric
-		ON register.item_id = electric.item_id
-		WHERE register.student_id = 'A18CS1234'");
+		LEFT JOIN tb_hos_electric_appliance AS electric ON register.item_id = electric.item_id
+		INNER JOIN tb_student ON register.student_id = tb_student.student_matric
+		WHERE tb_student.u_id = '$postjson[student_id]'");
 
 		$read_data = array();
 
