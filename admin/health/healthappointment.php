@@ -59,56 +59,7 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li>
-            <a class="active">
-            <i class="fa fa-bars"></i>
-            <p>Dashboard</p>
-            </a>
-          </li>
-          <li>
-            <a>
-            <p>Dining</p>
-            </a>
-          </li>
-          <li>
-            <a href="../dining/restaurant.php">
-            <i class="fa fa-bars"></i>
-            <p>Manage Restaurant</p>
-            </a>
-          </li>
-          <li>
-            <a>
-            <p>Hostel</p>
-            </a>
-          </li>
-          <li>
-            <a href="../hostel/hostel.php">
-            <i class="fa fa-bars"></i>
-            <p>Manage Hostel</p>
-            </a>
-          </li>
-          <li>
-            <a>
-            <p>Attendance</p>
-            </a>
-          </li>        
-          <li>
-            <a href="../attendance/attendance.php">
-            <i class="fa fa-bars "></i>
-            <p>Manage attendance</p>
-            </a>
-          </li>
-          <li>
-            <a>
-            <p>Vehicle</p>
-            </a>
-          </li> 
-          <li>
-            <a href="../vehicle/vehicle.php">
-            <i class="fa fa-bars"></i>
-            <p>Manage Vehicle</p>
-            </a>
-          </li>
+          
           <li>
             <a>
             <p>Health</p>
@@ -120,28 +71,7 @@
             <p>Manage Health</p>
             </a>
           </li>
-            <li>
-            <a>
-            <p>Library</p>
-            </a>
-          </li> 
-          <li>
-            <a href="../library/library.php">
-            <i class="fa fa-bars"></i>
-            <p>Manage Library</p>
-            </a>
-          </li>
-          <li>
-            <a>
-            <p>Pro Course</p>
-            </a>
-          </li> 
-          <li>
-            <a href="../procourse/procourse.php">
-            <i class="fa fa-bars"></i>
-            <p>Manage Pro Course</p>
-            </a>
-          </li>
+            
         </ul>
       </div>
     </div>
