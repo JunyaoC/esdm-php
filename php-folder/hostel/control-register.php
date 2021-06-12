@@ -4,7 +4,9 @@
 
     // Kuota pengetua: To control the kuota pengetua
     if($postjson['action'] == 'check-register'){
-        $query = mysqli_query($conn, "SELECT COUNT(*) FROM tb_hostel_reg WHERE student_id='A18CS1234' AND reg_phase = 1 ");
+        $query = mysqli_query($conn, "SELECT COUNT(*) FROM tb_hostel_reg 
+		INNER JOIN tb_student ON tb_hostel_reg.student_id=tb_student.student_matric 
+		WHERE tb_student.u_id='$postjson[student_id]' AND reg_phase = 1 ");
 		
 		$read_data = array();
 
@@ -23,7 +25,9 @@
 
 	// Kuota Pengetua: To control the kuota pengetua
     if($postjson['action'] == 'check_kpstatus'){
-        $query = mysqli_query($conn, "SELECT * FROM tb_hostel_reg WHERE student_id='A18CS1234' AND reg_phase = 1 ");
+        $query = mysqli_query($conn, "SELECT * FROM tb_hostel_reg 
+		INNER JOIN tb_student ON tb_hostel_reg.student_id = tb_student.student_matric
+		WHERE tb_student.u_id='$postjson[student_id]' AND reg_phase = 1 ");
 		
 		$read_data = array();
 
@@ -61,7 +65,9 @@
 
 	// Open Registration: To control the open-registration
 	if($postjson['action'] == 'check_op'){
-        $query = mysqli_query($conn, "SELECT COUNT(*) FROM tb_hostel_reg WHERE student_id='A18CS1234' AND reg_phase = 2 ");
+        $query = mysqli_query($conn, "SELECT COUNT(*) FROM tb_hostel_reg 
+		INNER JOIN tb_student ON tb_hostel_reg.student_id = tb_student.student_matric
+		WHERE tb_student.u_id='$postjson[student_id]' AND reg_phase = 2 ");
 		
 		$read_data = array();
 
@@ -80,7 +86,9 @@
 
     // Open Registration: To control the open-registration
     if($postjson['action'] == 'checking'){
-        $query = mysqli_query($conn, "SELECT * FROM tb_hostel_reg WHERE student_id='A18CS1234' AND reg_phase = 2");
+        $query = mysqli_query($conn, "SELECT * FROM tb_hostel_reg 
+		INNER JOIN tb_student ON tb_hostel_reg.student_id = tb_student.student_matric
+		WHERE tb_student.u_id='$postjson[student_id]' AND reg_phase = 2");
 		
 		$read_data = array();
 
