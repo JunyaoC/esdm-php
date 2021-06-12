@@ -52,7 +52,12 @@
               <p>Manage Complaint</p>
             </a>
           </li> 
-
+          <li>
+            <a href="../hostel/complaintdone.php">
+              <i class="fa fa-bars"></i>
+              <p>Accepted Complaint</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -115,14 +120,14 @@
                 $kolej_id = $_POST['col'];
                 $phase_id = $_POST['phase'];
                   if($kolej_id > 0 && $phase_id > 0){
-                    $query = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.hostel_id = '$kolej_id' AND tb_hostel_reg.reg_phase = '$phase_id' AND reg_status ='Pending' ") or die(mysqli_error());
+                    $query = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.hostel_id = '$kolej_id' AND tb_hostel_reg.reg_phase = '$phase_id'") or die(mysqli_error());
                         include('../hostel/registration_list.php');
                   }
                   elseif($kolej_id > 0){
-                        $query = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.hostel_id = '$kolej_id' AND reg_status ='Pending'") or die(mysqli_error());
+                        $query = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.hostel_id = '$kolej_id'") or die(mysqli_error());
                         include('../hostel/registration_list.php');
                     }elseif($phase_id > 0){
-                        $query = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.reg_phase = '$phase_id' AND reg_status ='Pending'") or die(mysqli_error());
+                        $query = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.reg_phase = '$phase_id'") or die(mysqli_error());
                         include('../hostel/registration_list.php');
                     }
                   }

@@ -72,19 +72,33 @@ while($row = mysqli_fetch_array($query)){
               <div class="modal-content">
                   <div class="modal-header">
                       </div>
+                    <form action="accept_complaint.php" method="post"> 
                         <div class="modal-body">
-                            <div class="alert alert-success">Are you Sure you Want to <strong>Accept</strong>&nbsp;this Complaint?</div>
-                                </div>
+                            <div class="alert alert-success">Assign a <strong>Technician</strong>&nbsp;for this Complaint</div>
+                            <input type="hidden" name="com_id" value="<?php echo $complaint_id ?>">                           
+                            <div class="form-group">
+                              <label>Technician: </label>
+                              <?php
+                    $tquery = mysqli_query($con,"SELECT * FROM tb_hos_technician WHERE tech_hostel = '$kolej_id'")or die(mysqli_error());
+                              echo '<select class="col-lg-8 form-control" name="tech" style="width:30%;height:40px">
+                                <option selected hidden> Select technician..</option>';
+                                while ($trow = mysqli_fetch_array($tquery)) { ?>
+                            <option value="<?php echo $trow['tech_id']?>"><?php echo $trow['tech_name']?></option><?php } 
+                             echo'</select>'?>
+                            </div>
+                          </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <a href="accept_complaint.php?id=<?php echo $complaint_id ?>" class="btn btn-success">Accept</a>
-                                </div>
+                            <button type="submit" name="save2">Confirm</button>
+<!--                               <a href="accept_complaint.php?id=<?php echo $complaint_id ?>" class="btn btn-success">Accept</a> -->
+                          </div> 
+                        </form>                       
                       </div>
 </div>
 </div>
-
     </tr>
-<?php } ?>
+
+ <?php } ?>
   </tbody>
 </table>
 </div>

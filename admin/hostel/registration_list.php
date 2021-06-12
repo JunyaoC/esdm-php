@@ -18,6 +18,7 @@ while($row = mysqli_fetch_array($query)){
     $reg_id = $row['reg_id'];
     $student_id = $row['student_id'];
     $phase_id = $row['reg_phase'];
+    $status = $row['reg_status'];
     $squery = mysqli_query($con,"SELECT * FROM tb_student WHERE student_matric = '$student_id' ") or die(mysqli_error());
     $srow = mysqli_fetch_array($squery);
     $ppquery = mysqli_query($con,"SELECT * FROM tb_hos_phase WHERE phase_id = '$phase_id' ") or die(mysqli_error());
@@ -34,11 +35,17 @@ while($row = mysqli_fetch_array($query)){
       <td><?php echo $pprow['phase_name'] ?></td>
       <td><?php echo $row['activity_list']?></td>
       <td><?php echo $row['reason'] ?></td>
-      <td>
+<?php if($status == "Pending"){ ?>
+        <td>
         <a rel="tooltip"  title="Approve" role="button" href="approve.php?id=<?php echo $reg_id; ?>" class="btn btn-success">Approve</a>
 
         <a rel="tooltip"  title="Rejected" id="r<?php echo $reg_id; ?>" href="#r<?php echo $reg_id; ?>" role="button" data-toggle="modal" class="btn btn-danger">Reject</a>
       </td>
+<?php }else {?>
+    <td>
+      <i><?php echo $status ?></i>
+    </td>
+<?php }?>
 <!-- Reject Modal -->
           <div id="r<?php echo $reg_id; ?>" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">

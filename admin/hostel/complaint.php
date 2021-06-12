@@ -49,6 +49,12 @@
               <p>Manage Complaint</p>
             </a>
           </li>
+          <li>
+            <a href="../hostel/complaintdone.php">
+              <i class="fa fa-bars"></i>
+              <p>Accepted Complaint</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -105,7 +111,7 @@
                 
 
                   if($kolej_id > 0){
-                        $query = mysqli_query($con,"SELECT tb_hos_complaint.*,tb_hostel_reg.*,tb_hos_college.* FROM tb_hos_complaint INNER JOIN tb_hostel_reg ON tb_hos_complaint.student_id = tb_hostel_reg.student_id INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.hostel_id = '$kolej_id' AND reg_status ='Accepted' AND complaint_status = 'Pending'") or die(mysqli_error());
+                        $query = mysqli_query($con,"SELECT * FROM tb_hos_complaint INNER JOIN tb_hostel_reg ON tb_hos_complaint.student_id = tb_hostel_reg.student_id INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE tb_hostel_reg.hostel_id = '$kolej_id' AND reg_status ='Accepted' AND complaint_status = 'Pending'") or die(mysqli_error());
                         include('../hostel/complaint_list.php');
                     }
                   }
