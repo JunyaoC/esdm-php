@@ -163,7 +163,7 @@ img {vertical-align: middle;}
             </a>
           </li> 
           <li>
-            <a href="../library/dashboard.php">
+            <a href="../library/create-category.php">
               <i class="fa fa-bars"></i>
               <p>Manage Library</p>
             </a>

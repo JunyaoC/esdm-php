@@ -18,6 +18,9 @@ $row=mysqli_fetch_array($result);
 <!DOCTYPE html>
 
 <html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+  </head>
 <?php 
   include '../pages-styling.php';
 ?>
@@ -109,7 +112,8 @@ $row=mysqli_fetch_array($result);
         </div>
         <link rel="stylesheet" href="css/style.css">
 <script src="script/ajax_generate_code.js"></script>
-	<div class="container">		
+<input type="hidden" class="form-control" id='content' value="<?php echo $row['class_id'];?>" readonly>
+	<!-- <div class="container">		
 		<div class="row">
 			<div class="col-md-3">
 		        <form class="form-horizontal" method="post" id="codeForm" onsubmit="return false">
@@ -139,7 +143,26 @@ $row=mysqli_fetch_array($result);
 	    		<div class="showQRCode"></div>
 	    	</div>
     	</div>
-    </div>
+    </div> -->
+
+    <div id="qrcode"></div>
+<script type="text/javascript">
+
+
+var qrcode = new QRCode("qrcode", {
+    text: document.getElementById("content").value,
+    width: 128,
+    height: 128,
+    colorDark : "#000000",
+    colorLight : "#F4F3EF",
+    correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+</script>
+
+
 </div>	
   </div>
 
@@ -170,7 +193,6 @@ $row=mysqli_fetch_array($result);
 
 
   <br> <br>
-       <?php include 'adminfooter.php' ?>
     </div>
   </div>
 

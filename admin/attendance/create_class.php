@@ -181,7 +181,6 @@ $row=mysqli_fetch_array($result);
 
 
   <br> <br>
-       <?php include 'adminfooter.php' ?>
     </div>
   </div>
 
