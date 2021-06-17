@@ -40,7 +40,7 @@
             VALUES ($secno,'$secdate','$seclocation','$secprocourse','$secfacilitator',$secseat,$secmaxseat,1)";
 
     //check SQL output
-    var_dump($sql);
+   // var_dump($sql);
 
     //Execute SQL
     mysqli_query($con,$sql);

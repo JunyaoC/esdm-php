@@ -18,6 +18,7 @@
     }
   
     $sql = "SELECT * FROM tb_procourse_section
+            LEFT JOIN tb_procourse_fac ON tb_procourse_fac.fac_id = tb_procourse_section.courseSec_fac
             WHERE courseSec_id = '$id'";
 
     $result = mysqli_query($con,$sql);
@@ -166,7 +167,7 @@
                           $result3a = mysqli_query($con,$sql3);
                           $row3a=mysqli_fetch_array($result3a);
                           echo '<select class="custom-select" required="required" id="secfacilitator" name="secfacilitator">';
-                          echo '<option selected="selected" value="'.$row3a['fac_id'].'" >'; echo $row3a['fac_name']; echo '</option>';
+                          echo '<option selected="selected" value="'.$row['fac_id'].'" >'; echo $row['fac_name']; echo '</option>';
                             while($row3=mysqli_fetch_array($result3))
                             {
                               echo "<option value= '".$row3['fac_id']."'>".$row3['fac_name']. "</option> ";

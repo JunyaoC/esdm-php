@@ -5,7 +5,7 @@
 
 
     //retrieve info from form and session 
-    $userid = $_POST['userid'];
+    $userid = $_GET['id'];
 	$atitle = $_POST['atitle'];
 	$adetail = $_POST['adetail'];
 
@@ -14,7 +14,7 @@
 			VALUES ('$atitle', '$adetail', '$userid')";
 
     //check SQL output
-    var_dump($sql);
+    //var_dump($sql);
 
     //Execute SQL
     mysqli_query($con,$sql);
@@ -23,7 +23,7 @@
     mysqli_close($con);
 
     //Redirect page
-    header('Location: announcement.php');
+   header('Location: announcement.php');
 
 ?> 
 

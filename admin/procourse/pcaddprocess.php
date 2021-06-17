@@ -20,7 +20,7 @@
             VALUES ('$pccode','$pcname','$pctype','$pcobjective','$pclearningoutcome')";
 
     //check SQL output
-    var_dump($sql);
+   // var_dump($sql);
 
     //Execute SQL
     mysqli_query($con,$sql);
