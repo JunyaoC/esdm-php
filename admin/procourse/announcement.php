@@ -126,14 +126,15 @@
                         </thead>
                         <tbody>
                         <?php
-                                $sql = "SELECT * FROM tb_pro_announcement";
+                                $sql = "SELECT * FROM tb_pro_announcement
+                                LEFT JOIN tb_user ON tb_pro_announcement.an_user = tb_user.u_id";
                                 $result = mysqli_query($con,$sql);
                                 while($row=mysqli_fetch_array($result))
                                 {
                                     echo "<tr>";
                                         echo "<td>".$row['an_title']."</td>";
                                         echo "<td>".$row['an_detail']."</td>";
-                                        echo "<td>".$row['an_user']."</td>";
+                                        echo "<td>".$row['u_name']."</td>";
                                         echo "<td>
                                                 <a class='btn btn-secondary' href='announcementupdate.php?id=".$row['an_id']."' >UPDATE</a> <a class='btn btn-danger' href='announcementdelete.php?id=".$row['an_id']."' onclick='return confirm(\"Are you sure you want to delete?\")'>DELETE</a>
                                              </td>";
