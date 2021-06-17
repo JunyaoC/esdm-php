@@ -35,10 +35,6 @@ include '../pages-styling.php';
               <i class="fa fa-bars"></i>
               <p>Manage Attendance Wizard Session</p>
             </a>
-            <a href="../attendance/attendance.php">
-              <i class="fa fa-bars"></i>
-              <p>Upcoming</p>
-            </a>
           </li>
 
 
@@ -158,7 +154,6 @@ include '../pages-styling.php';
 
 
     <br> <br>
-    <?php include 'adminfooter.php' ?>
   </div>
   </div>
 

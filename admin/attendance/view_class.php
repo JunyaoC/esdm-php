@@ -176,7 +176,6 @@ include '../pages-styling.php';
       </div>
     </div>
     <br> <br>
-    <?php include 'adminfooter.php' ?>
   </div>
   </div>
 

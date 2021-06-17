@@ -193,7 +193,6 @@ var qrcode = new QRCode("qrcode", {
 
 
   <br> <br>
-       <?php include 'adminfooter.php' ?>
     </div>
   </div>
 
