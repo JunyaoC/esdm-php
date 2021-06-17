@@ -57,13 +57,13 @@
 //   echo "Error: " . $sql . "<br>" . mysqli_error($con);
 // }
   if (mysqli_query($con, $sqlp)) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sqlp . "<br>" . mysqli_error($con);
-}             
-
-
-      mysqli_query($con,$sqlp);
+  // echo "New record created successfully";
+    mysqli_query($con,$sqlp);
       mysqli_close($con);   
 
    header('Location:vehicle.php');
+} else {
+  mysqli_query($con,$sqlp);
+      mysqli_close($con);   
+  echo "Error: " . $sqlp . "<br>" . mysqli_error($con);
+}
