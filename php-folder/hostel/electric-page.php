@@ -127,7 +127,8 @@
 
 				
 			if($insert){
-				$result = json_encode(array('success'=>true,'msg'=>'success'));
+				$result = json_encode(array('success'=>true,'msg'=>'success','detail'=>$total));
+
 			}else{
 				$result = json_encode(array('success'=>false,'msg'=>'fail'));
 			}
