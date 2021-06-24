@@ -128,6 +128,7 @@
 <div class="form-group">
       <label for="text">Restaurant Name</label>
       <input type="text" class="form-control" id="foodRes" name="foodRes" value = <?php echo $row['restaurant_name']?> readonly>  
+       <input type="hidden" class="form-control" id="foodResId" name="foodResId" value = <?php echo $row['restaurant_id']?> >
     </div>
 
       <div class="form-group">

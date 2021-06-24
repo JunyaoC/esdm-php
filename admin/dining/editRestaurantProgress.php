@@ -16,8 +16,7 @@
   $restaurant_status = $_POST['restaurantStatus'];
   $restaurant_username = $_POST['restaurantUsername'];
   $restaurant_password = $_POST['restaurantPassword'];
-  $restaurant_userid = $_POST['restaurantId'];
-
+  $restaurant_userid = $_POST['restaurantUId'];
 
   $hashed_password = md5($restaurant_password);
 
@@ -27,7 +26,11 @@
   $sqlUser = "UPDATE tb_user SET u_username='$restaurant_username' , u_password='$hashed_password' WHERE u_id='$restaurant_userid'";
   mysqli_query($con,$sqlUser);
   // //EXECUTE SQL
-  mysqli_query($con,$sql);
+
+  if (!mysqli_query($con,$sql)) {
+  echo("Error description: " . mysqli_error($con));
+}
+
 
   // //CLOSE CONNECTION
   mysqli_close($con);

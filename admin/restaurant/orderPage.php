@@ -103,7 +103,7 @@
         <div class="container">
           <div class="row">
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card-counter info">
               <i class="fa fa-clock-o"></i>
               <span class="count-numbers">
@@ -125,7 +125,7 @@
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card-counter primary">
               <i class="fa fa-cutlery"></i>
               <span class="count-numbers">
@@ -147,7 +147,7 @@
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card-counter danger">
               <i class="fa fa-ban"></i>
               <span class="count-numbers">
@@ -183,14 +183,14 @@
       <table id="program" class="display">
         <thead>
           <tr>
-            <th>Date</th>
+            <th style="width:18%">Date</th>
             <th>Student Name</th>
             <th>Student Matric</th>                     
             <th>Food</th>
             <th>Quantity</th>
             <th>Total Price</th>
             <th>Status</th>
-            <th>Operation</th>
+            <th style="width:25%">Operation</th>
           </tr>
         </thead>
         <tbody>
@@ -207,7 +207,7 @@
               echo"<td>".$row['order_status'] ."</td>";
               echo"<td>";
                 echo "<a href='updateOrder.php?id=".$row['order_id']."' class='btn btn-warning'>Update</a> &nbsp";
-                echo "<a href='deleteOrder.php?id=".$row['order_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a> &nbsp";
+                echo "<a href='deleteOrder.php?id=".$row['order_id']."' class='btn btn-danger' onclick='ConfirmDelete()'>Delete</a>";
               echo"</td>";
               echo"</tr>";
             }
@@ -254,3 +254,17 @@
 </body>
 
 </html>
+
+
+  <script>
+
+    function ConfirmDelete()
+    {
+      var x = confirm("Are you sure you want to delete?");
+      if (x)
+          return true;
+      else
+        return false;
+    }
+
+  </script>
