@@ -8,7 +8,7 @@
 			$read = mysqli_fetch_array($query);	
 			$matric = $read['student_matric'];
 	    	$today = date('Y-m-d');
-	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]',student_id = '$matric',reg_date = '$today',reg_status ='Pending',reg_phase= 1, activity_list='$postjson[activity]', reason='$postjson[reason]'");
+	    	$insert = mysqli_query($conn,"INSERT INTO tb_hostel_reg SET hostel_id = '$postjson[kolej_id]',block_id = '$postjson[block_id]',room_id = '$postjson[room_id]',student_id = '$matric',reg_date = '$today',reg_status ='Pending',reg_phase= 1, activity_list='$postjson[activity]', reason='$postjson[reason]'");
 
 	    	
 	    	if($insert){

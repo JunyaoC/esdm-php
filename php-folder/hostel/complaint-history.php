@@ -5,7 +5,11 @@
 	// $uid = $postjson['u_id'];
 	if($postjson['action'] == 'view_complaint_history') {
 
-		$query = mysqli_query($conn, "SELECT tb_user.u_id,tb_student.*,tb_hos_complaint.* FROM tb_user INNER JOIN tb_student ON tb_user.u_id = tb_student.u_id INNER JOIN tb_hos_complaint ON tb_student.student_matric = tb_hos_complaint.student_id WHERE tb_student.u_id = '2'");
+		$query1 = mysqli_query($conn, "SELECT * FROM tb_student WHERE u_id = '$postjson[student_id]'");
+		$run_q = mysqli_fetch_array($query1);
+		$matric = $run_q['student_matric'];
+
+		$query = mysqli_query($conn, "SELECT * FROM tb_hos_complaint LEFT JOIN tb_hos_technician ON tb_hos_complaint.tech_id = tb_hos_technician.tech_id WHERE student_id = '$matric'");
 
 		$read_data = array();
 
@@ -15,6 +19,7 @@
 				 'complaint_reason'=> $read['complaint_reason'],
 				 'permission'=> $read['permission'],
 				 'complaint_status'=> $read['complaint_status'],
+				 'tech_name' => $read['tech_name'],
 
 			);
 	            array_push($read_data,$data);
