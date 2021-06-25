@@ -148,7 +148,7 @@
 
     <div class="form-group">
       <label for="text">Restaurant Password</label>
-      <input type="text" class="form-control" id="restaurantPassword" name="restaurantPassword" required>
+      <input type="password" class="form-control" id="restaurantPassword" name="restaurantPassword" required>
     </div>
 
 

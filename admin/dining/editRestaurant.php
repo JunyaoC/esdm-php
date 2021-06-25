@@ -133,7 +133,7 @@
     </div>
 
     <div class="form-group">
-      <label for="text">Restaurant Email</label>
+      <label for="text">Restaurant Phone</label>
       <input type="text" class="form-control" id="restaurantPhone" name="restaurantPhone" value= "<?php echo $row['restaurant_phone']?>">
     </div>
 
@@ -148,29 +148,41 @@
 
         echo '<select class="form-control" id="restaurantStatus" name="restaurantStatus" style="min-height:40px;">';
         while($rowstatus=mysqli_fetch_array($resultstatus))
-          {
-            if($rowstatus['restaurant_status']==$row['restaurant_status'])
+        {
+           
+            if($rowstatus['restaurant_status']==1)
             {
-              if($rowstatus['restaurant_status']==1)
-              {
-                echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Active</option>";
-              }
-              else{
-                echo"<option value='".$rowstatus['restaurant_status']."'>Not Active</option>";
-              }
+               echo"<option value='".$rowstatus['restaurant_status']."'>Active</option>";
+            }
+            else
+            {
+              echo"<option value='".$rowstatus['restaurant_status']."'>Not Active</option>";
+            }
+
+            // if($rowstatus['restaurant_status']==$row['restaurant_status'])
+            // {
+            //   if($rowstatus['restaurant_status']==1)
+            //   {
+            //     echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Active</option>";
+            //   }
+            //   else{
+            //     echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Not Active</option>";
+            //   }
               
-            }
-            else{
-              if($rowstatus['restaurant_status']==1)
-                {
-                  echo"<option selected='selected' value='".$rowstatus['restaurant_status']."'>Active</option>";
-                }
-              else{
-                echo"<option value='".$rowstatus['restaurant_status']."'>Not Active</option>";
-              }
-            }
-         
-          }
+            // }
+            // else
+            // {
+            //   if($rowstatus['restaurant_status']==0)
+            //   {
+            //     echo"<option value='".$rowstatus['restaurant_status']."'>Not Active</option>";
+            //   }
+            //   else{
+            //     echo"<option value='".$rowstatus['restaurant_status']."'>Active</option>";
+            //   }
+            // }
+        }
+              
+
 
         echo'</select>';
 
@@ -185,11 +197,11 @@
 
     <div class="form-group">
       <label for="text">Restaurant Password</label>
-      <input type="text" class="form-control" id="restaurantPassword" name="restaurantPassword" placeholder="Update New Password">
+      <input type="password" class="form-control" id="restaurantPassword" required name="restaurantPassword" placeholder="Update New Password">
     </div>
 
 
-    <input hidden class="form-control" id="restaurantId" name="restaurantId" value= "<?php echo $row['u_id']?>">
+    <input hidden class="form-control" id="restaurantUId" name="restaurantUId" value= "<?php echo $row['u_id']?>">
 
    <center><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;">Modify</button></center>
 </div>

@@ -9,10 +9,7 @@
   }
 
   //Check ID in URL
-  if(isset($_GET['id']))
-  {
-  	$food_id=$_GET['id'];
-  }
+  $food_id=$_GET['id']; 
 
   //SQL Delete operation
   $sql="DELETE FROM tb_food WHERE food_id ='$food_id'";
@@ -24,5 +21,5 @@
    mysqli_close($con);
 
   // //Redirect
-   header('Location:menuPage.php');
+    header('Location:menuPage.php');
   ?>
