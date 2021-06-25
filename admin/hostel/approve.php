@@ -2,8 +2,18 @@
   include('../dbconnection.php');
   include('../adminsession.php');
   $reg_id = $_GET['id'];
-  $query = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_student.* FROM tb_hostel_reg INNER JOIN tb_student ON tb_hostel_reg.student_id = tb_student.student_matric WHERE reg_id = '$reg_id' ") or die(mysqli_error());
+  $query = mysqli_query($con,"SELECT * FROM tb_hostel_reg INNER JOIN tb_student ON tb_hostel_reg.student_id = tb_student.student_matric INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id WHERE reg_id = '$reg_id' ") or die(mysqli_error());
     $row = mysqli_fetch_array($query);
+    $block = $row['block_id'];
+    $phase = $row['reg_phase'];
+    $room = $row['room_id'];
+    $hostel = $row['hostel_id'];
+    $bquery = mysqli_query($con,"SELECT * FROM tb_hos_block WHERE block_id = '$block' ") or die(mysqli_error());
+    $brow = mysqli_fetch_array($bquery);
+    $rquery = mysqli_query($con,"SELECT * FROM tb_hos_room WHERE room_id = '$room' ") or die(mysqli_error());
+    $rrow = mysqli_fetch_array($rquery);
+    $ppquery = mysqli_query($con,"SELECT * FROM tb_hos_college WHERE kolej_id = '$hostel' ") or die(mysqli_error());
+    $pprow = mysqli_fetch_array($ppquery);
 ?>
 
 <!DOCTYPE html>
@@ -35,26 +45,12 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-
-            <li>
-            <a href="../hostel/phase.php">
-              <i class="fa fa-bars"></i>
-              <p>Manage Phase</p>
-            </a>
-          </li>
           <li class="active">
             <a href="../hostel/register.php">
               <i class="fa fa-bars"></i>
-              <p>Manage Registration</p>
+              <p>Return</p>
             </a>
           </li>       
-          <li>
-            <a href="../hostel/complaint.php">
-              <i class="fa fa-bars "></i>
-              <p>Manage Complaint</p>
-            </a>
-          </li> 
-
         </ul>
       </div>
     </div>
@@ -70,7 +66,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand">Residential Colleges Management</a>
+            <a class="navbar-brand">Assign Accomodation</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -90,22 +86,44 @@
 <br><br><br><br>
 
 <div class="container" style="padding-left: 20%;padding-bottom: 3%;padding-top: 5%">
-  <a  href="register.php" class="btn btn-secondary">Return</a>
  <div class="row">
   <div class="col-sm-8">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Assign Block & Room for <?php echo $row['student_name'] ?></h4>
+        <h3 class="card-title"><b>Student Information</b></h3>
       </div>
-      <div class="card-text" style="padding-left: 100px;">
+      <div class="card-text" style="text-align: center;">
+        <span style="font-size:14px;color:grey">Student's Name: </span><span style="font-size:16px"><?php echo $row['student_name'] ?></span><br>
+        <span style="font-size:14px;color:grey">Selected Hostel: </span><span style="font-size:16px"><?php echo $row['kolej_name'] ?></span>
+        <br><br>
         <form method="post">
-          <div class="form-group">
-            <h5 ><label class="col-form-label">Select Block:</label>
+                      <div class="form-group">
+            <h5><label class="col-form-label">Select College:</label>
+            <?php
+                  $cquery = mysqli_query($con,"SELECT * FROM tb_hos_college")or die(mysqli_error()); 
+
+                    echo'<select name="getkolej" style="padding-left: 100px;height:30px">';
+                        echo "<option>".$pprow['kolej_name']."</option>";
+                        while ($crow = mysqli_fetch_array($cquery)) {
+                            echo "<option value='".$crow['kolej_id']."'>".$crow['kolej_code']."</option>";
+
+                        }
+                    echo'</select></h5>'; 
+                ?>
+          </div>
+
+                  <div class="form-group">
+            <h5><label class="col-form-label">Select Block:</label>
             <?php
                   $bquery = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.*,tb_hos_block.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id INNER JOIN tb_hos_block ON tb_hos_college.kolej_id = tb_hos_block.hostel_id WHERE tb_hostel_reg.reg_id = '$reg_id' ")or die(mysqli_error()); 
 
-                    echo'<select name="getblock" style="padding-left: 100px;height:40px">
-                    <option> Select block..</option>';
+                    echo'<select name="getblock" style="padding-left: 100px;height:30px">';
+                    if($phase == 1){
+                        echo "<option>".$brow['block_name']."</option>";
+                    }
+                    else{
+                      echo '<option> Select block..</option>';
+                    }
                         while ($brow = mysqli_fetch_array($bquery)) {
                             echo "<option value='".$brow['block_id']."'>".$brow['block_name']."</option>";
 
@@ -117,15 +135,20 @@
             <h5><label class="col-form-label">Select Room:</label>
                         <?php
                   $rquery = mysqli_query($con,"SELECT tb_hostel_reg.*,tb_hos_college.*,tb_hos_block.*,tb_hos_room.* FROM tb_hostel_reg INNER JOIN tb_hos_college ON tb_hostel_reg.hostel_id = tb_hos_college.kolej_id INNER JOIN tb_hos_block ON tb_hos_college.kolej_id = tb_hos_block.hostel_id INNER JOIN tb_hos_room ON tb_hos_block.block_id = tb_hos_room.block_id WHERE tb_hostel_reg.reg_id = '$reg_id' ")or die(mysqli_error());       
-                    echo'<select name="getroom" style="padding-left: 100px;height:40px">
-                    <option> Select room..</option>';
+                    echo'<select name="getroom" style="padding-left: 100px;height:30px">';
+                    if($phase == 1){
+                        echo "<option>".$rrow['room_no']."</option>";
+                    }
+                    else{
+                      echo '<option> Select room..</option>';
+                    }
                         while ($rrow = mysqli_fetch_array($rquery)) {
                             echo "<option value='".$rrow['room_id']."'>".$rrow['room_no']."</option>";
                         }
                     echo'</select></h5>';
                 ?>
           </div>
-          <div style="padding-left: 140px">
+          <div>
         <input type="hidden" name="regid" value="<?php echo $reg_id; ?>">
         <button name="save1" type="submit" class="btn btn-primary btn-lg" >Save</button> 
           </div>
@@ -140,10 +163,11 @@
 <?php 
           if(isset($_POST['save1'])) {
         $reg_id = $_POST['regid'];
+        $kolej = $_POST['getkolej'];
         $block = $_POST['getblock'];
         $room = $_POST['getroom'];
 
-          $sql= "UPDATE tb_hostel_reg SET block_id = '$block', room_id = '$room',reg_status='Accepted' WHERE reg_id = '$reg_id'";
+          $sql= "UPDATE tb_hostel_reg SET block_id = '$block', hostel_id = '$kolej', room_id = '$room',reg_status='Accepted' WHERE reg_id = '$reg_id'";
   
         if(mysqli_query($con, $sql)){
             echo '<script> alert("Assigned successfully !");window.location.href="../hostel/register.php"; </script>';

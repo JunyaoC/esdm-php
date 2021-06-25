@@ -19,6 +19,12 @@ while($row = mysqli_fetch_array($query)){
     $student_id = $row['student_id'];
     $phase_id = $row['reg_phase'];
     $status = $row['reg_status'];
+    $block = $row['block_id'];
+    $room = $row['room_id'];
+    $bquery = mysqli_query($con,"SELECT * FROM tb_hos_block WHERE block_id = '$block' ") or die(mysqli_error());
+    $brow = mysqli_fetch_array($bquery);
+    $rquery = mysqli_query($con,"SELECT * FROM tb_hos_room WHERE room_id = '$room' ") or die(mysqli_error());
+    $rrow = mysqli_fetch_array($rquery);
     $squery = mysqli_query($con,"SELECT * FROM tb_student WHERE student_matric = '$student_id' ") or die(mysqli_error());
     $srow = mysqli_fetch_array($squery);
     $ppquery = mysqli_query($con,"SELECT * FROM tb_hos_phase WHERE phase_id = '$phase_id' ") or die(mysqli_error());
@@ -31,14 +37,16 @@ while($row = mysqli_fetch_array($query)){
         <?php echo $srow['student_name'] ?><br>
         <i style="color:grey;font-size: 14px"><?php echo $row['student_id'] ?></i>
       </td>
-      <td><?php echo $row['kolej_name'] ?></td>
+      <td><?php echo $row['kolej_name'];
+      if($phase_id == 1) {?>
+              <br><i style="color:grey;font-size: 14px"><?php echo $brow['block_name'].' | '; echo $rrow['room_no']  ?></i>
+        <?php }?></td>
       <td><?php echo $pprow['phase_name'] ?></td>
       <td><?php echo $row['activity_list']?></td>
       <td><?php echo $row['reason'] ?></td>
 <?php if($status == "Pending"){ ?>
         <td>
-        <a rel="tooltip"  title="Approve" role="button" href="approve.php?id=<?php echo $reg_id; ?>" class="btn btn-success">Approve</a>
-
+          <a rel="tooltip"  title="Approve" role="button" href="approve.php?id=<?php echo $reg_id; ?>" class="btn btn-success">Approve</a>
         <a rel="tooltip"  title="Rejected" id="r<?php echo $reg_id; ?>" href="#r<?php echo $reg_id; ?>" role="button" data-toggle="modal" class="btn btn-danger">Reject</a>
       </td>
 <?php }else {?>
